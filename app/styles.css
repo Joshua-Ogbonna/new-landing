@@ -1,0 +1,165 @@
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  /* background: #000; */
+}
+ 
+/* Hide scrollbar but keep functionality */
+main {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  perspective: 2px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+@keyframes bounce-x {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 10s linear infinite alternate;
+  min-width: max-content;
+  padding-right: 2rem;
+}
+
+main::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Scroll indicator animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  opacity: 0.7;
+}
+
+/* Section styles */
+.section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: white; */
+  text-align: center;
+  will-change: transform, opacity, background-color;
+  transition: background-color 0.3s ease;
+}
+
+.sticky-section {
+  position: sticky;
+  top: 0;
+}
+
+/* Content wrapper */
+.content {
+  position: relative;
+  padding: 2rem;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  will-change: transform, opacity;
+}
+
+/* Individual sections */
+.hero-section {
+  /* background: #000000; */
+  z-index: 1;
+}
+
+/* Section styles moved to component level */
+
+/* Performance optimizations */
+.section,
+.content {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
+}
+
+.second-section {
+  z-index: 2;
+}
+
+.third-section {
+  z-index: 3;
+}
+
+/* Typography */
+h1,
+h2 {
+  /* font-size: clamp(2rem, 5vw, 4rem); */
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+p {
+  /* font-size: clamp(1rem, 2vw, 1.5rem); */
+  max-width: 600px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation classes */
+.reveal-text {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.reveal-text span {
+  display: inline-block;
+  transform-origin: bottom;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hover effects */
+.content:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* For demo purposes, using placeholder images from Unsplash */
