@@ -5,9 +5,9 @@ import React from "react";
 const Download = () => {
   return (
     <div>
-      <div className="w-full md:max-w-[1440px] mx-auto px-6 pt-[200px] flex items-start justify-between">
-        <div className="flex items-start justify-between flex-col gap-12">
-          <p className="text-white text-[60px]">
+      <div className="w-full md:max-w-[1440px] px-6 my-20 flex flex-col md:flex-row gap-10 md:gap-0 justify-between">
+        <div className="flex items-start justify-between flex-col gap-6">
+          <p className="text-white text-3xl md:text-6xl">
             Come on, join now <br /> and feel the music <br /> events vibe
           </p>
           <div className="flex items-center gap-4">
@@ -23,9 +23,9 @@ const Download = () => {
           </div>
         </div>
 
-        <div className="flex gap-12 flex-col items-start justify-between">
-          <h5 className="text-[60px] text-white font-medium">Download our App</h5>
-          <div className="flex items-center gap-4">
+        <div className="">
+          <h5 className="text-3xl md:text-6xl text-white font-medium">Download our App</h5>
+          <div className="flex items-center">
             <Link href="">
               <Image src="/appp.png" alt="" width={205} height={100} />
             </Link>

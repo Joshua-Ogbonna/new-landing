@@ -55,70 +55,81 @@ const testimonials: Testimonial[] = [
 
 const Trusted = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial>(testimonials[0]);
+  
   return (
-    <div className="w-full md:max-w-[1440px] mx-auto mt-[200px] flex items-center justify-between">
-      {/* left section */}
-      <div className="relative">
-        {/* World image with circular pattern */}
-        <div className="relative">
-          <Image src="/world.png" alt="world" width={521} height={527} className="relative z-10" />
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="w-full h-full border-2 border-[#C2EE03] rounded-full animate-spin-slow opacity-20" />
+    <div className="w-full px-4 sm:px-6 md:px-8">
+      <div className="w-full md:max-w-[1440px] mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-[200px] flex flex-col md:flex-row items-center justify-around">
+        {/* left section */}
+        <div className="relative w-full max-w-[350px] sm:max-w-[450px] md:max-w-[521px] aspect-square">
+          {/* World image with circular pattern */}
+          <div className="relative w-full h-full">
+            <Image 
+              src="/world.png" 
+              alt="world" 
+              width={521} 
+              height={527} 
+              className="relative z-10 w-full h-auto" 
+            />
+            <div className="absolute top-0 left-0 w-full h-full">
+              <div className="w-full h-full border-2 border-[#C2EE03] rounded-full animate-spin-slow opacity-20" />
+            </div>
+          </div>
+
+          {/* Circular profile images - responsive positions */}
+          {testimonials.map((testimonial, index) => {
+            // Responsive positions that work on different screen sizes
+            const positions = [
+              'top-[5%] right-[5%] sm:top-[10%] sm:right-[0%]',
+              'top-[25%] left-[5%] sm:top-[30%] sm:left-[0%]',
+              'top-[40%] left-[40%] sm:top-[30%] sm:left-[50%]',
+              'bottom-[25%] right-[5%] sm:bottom-[30%] sm:right-[0%]',
+              'bottom-[5%] left-[25%] sm:bottom-[0%] sm:left-[30%]'
+            ];
+            
+            return (
+              <div 
+                key={testimonial.id}
+                className={`absolute ${positions[index]} z-20 transition-transform duration-300 hover:scale-110`}
+                onClick={() => setSelectedTestimonial(testimonial)}
+              >
+                <Image 
+                  src={testimonial.image} 
+                  alt={testimonial.name} 
+                  width={80} 
+                  height={80} 
+                  className={`cursor-pointer rounded-full border-2 transition-all duration-300 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-cover ${selectedTestimonial.id === testimonial.id ? 'border-[#C2EE03] scale-110 shadow-[0_0_15px_#C2EE03]' : 'border-white opacity-70'}`} 
+                />
+              </div>
+            );
+          })}
+
+          {/* Decorative circles */}
+          <div className="absolute top-1/4 -left-0 w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 bg-[#C2EE03] rounded-full opacity-30" />
+          <div className="absolute bottom-1/4 -right-0 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-[#C2EE03] rounded-full opacity-30" />
+          <div className="absolute top-1/3 right-0 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 bg-[#C2EE03] rounded-full opacity-30" />
+
+          {/* Line patterns */}
+          <div className="absolute inset-0 z-0">
+            <div className="w-full h-full border-2 border-[#C2EE03] rounded-full opacity-10 animate-pulse" />
           </div>
         </div>
+        
+        {/* right section */}
+        <div className="w-full md:w-1/2 lg:w-[548px]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold leading-[1.1] tracking-[-0.02em] text-[#C2EE03] mb-4 sm:mb-6 md:mb-8 text-center md:text-left">
+            Trusted in Over 5 Countries by over 300+ Users
+          </h2>
 
-        {/* Circular profile images */}
-        {testimonials.map((testimonial, index) => {
-          const positions = [
-            'top-[10%] right-[0%]',
-            'top-[30%] left-[0%]',
-            'top-[30%] left-[50%]',
-            'bottom-[30%] right-[0%]',
-            'bottom-[0%] left-[30%]'
-          ];
-          
-          return (
-            <div 
-              key={testimonial.id}
-              className={`absolute ${positions[index]} z-20 transition-transform duration-300 hover:scale-110`}
-              onClick={() => setSelectedTestimonial(testimonial)}
-            >
-              <Image 
-                src={testimonial.image} 
-                alt={testimonial.name} 
-                width={80} 
-                height={80} 
-                className={`cursor-pointer rounded-full border-2 transition-all duration-300 ${selectedTestimonial.id === testimonial.id ? 'border-[#C2EE03] scale-110 shadow-[0_0_15px_#C2EE03]' : 'border-white opacity-70'}`} 
-              />
-            </div>
-          );
-        })}
+          {/* testimonial section */}
+          <div className="w-full min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[358px] border-solid border border-white rounded-[20px] sm:rounded-[30px] md:rounded-[43px] p-4 sm:p-6 md:p-8 relative">
+            <p className="w-full text-lg sm:text-xl md:text-2xl lg:text-[30px] text-white font-normal mb-12 sm:mb-16">
+              {selectedTestimonial.text}
+            </p>
 
-        {/* Decorative circles */}
-        <div className="absolute top-1/4 -left-0 w-12 h-12 bg-[#C2EE03] rounded-full opacity-30" />
-        <div className="absolute bottom-1/4 -right-0 w-8 h-8 bg-[#C2EE03] rounded-full opacity-30" />
-        <div className="absolute top-1/3 right-0 w-4 h-4 bg-[#C2EE03] rounded-full opacity-30" />
-
-        {/* Line patterns */}
-        <div className="absolute inset-0 z-0">
-          <div className="w-full h-full border-2 border-[#C2EE03] rounded-full opacity-10 animate-pulse" />
-        </div>
-      </div>
-      {/* right section */}
-      <div className="w-full md:w-[548px]">
-        <h2 className="w-full text-[48px] font-bold leading-[1.1] tracking-[-0.02em] text-[#C2EE03] mb-8">
-          Trusted in Over 5 Countries by over 300+ Users
-        </h2>
-
-        {/* testimonial section */}
-        <div className="w-full md:w-[548px] min-h-[358px] border-solid border border-white rounded-[43px] p-8 relative">
-          <p className="w-full text-[30px] text-white font-normal mb-8">
-            {selectedTestimonial.text}
-          </p>
-
-          <h5 className="text-white font-normal text-[24px] absolute bottom-10">
-            {selectedTestimonial.company}
-          </h5>
+            <h5 className="text-white font-normal text-base sm:text-xl md:text-2xl lg:text-[24px] absolute bottom-4 sm:bottom-6 md:bottom-10">
+              {selectedTestimonial.company}
+            </h5>
+          </div>
         </div>
       </div>
     </div>

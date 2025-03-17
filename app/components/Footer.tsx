@@ -3,22 +3,14 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-[#C2EE03] text-[#121617] mt-[200px]">
-      <div className="flex items-center justify-between w-full md:w-[1440px] mx-auto py-12 text-xl">
-        <div>© My Sound {new Date().getFullYear()} all rights reserved</div>
+    <div className="bg-[#C2EE03] text-[#121617] mt-[200px] px-6">
+      <div className="flex flex-col md:flex-row items-center justify-between max-w-[1440px] mx-auto py-6 text-lg  md:text-left">
+        <div>© My Sound {new Date().getFullYear()} All rights reserved</div>
 
-        <div className="flex items-center gap-10">
-          <div>
-            <Link href="/">Terms & Condition</Link>
-          </div>
-
-          <div>
-            <Link href="/">Privacy Policy</Link>
-          </div>
-
-          <div>
-            <Link href="">Cookies</Link>
-          </div>
+        <div className="flex flex-wrap justify-start md:justify-end items-center gap-6 mt-4 md:mt-0">
+          <Link href="/" className="hover:underline">Terms & Condition</Link>
+          <Link href="/" className="hover:underline">Privacy Policy</Link>
+          <Link href="/" className="hover:underline">Cookies</Link>
         </div>
       </div>
     </div>

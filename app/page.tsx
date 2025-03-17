@@ -38,7 +38,7 @@ export default function Home() {
         <PricingSection />
         {/* Container for Grow and Trusted with diagonal lines */}
         <div className="relative">
-          <div className="absolute right-0 top-[-80rem] z-0 w-1/2" style={{ height: '150%' }}>
+          <div className="absolute right-0 top-[-80rem] z-0 w-1/2" style={{ height: '100%' }}>
             <div className="relative w-full h-full">
               <Image 
                 src="/group2.png" 
