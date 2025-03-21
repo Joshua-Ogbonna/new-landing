@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Navbar from "./Navbar";
 import Image from "next/image";
-import Marquee from "./Marquee";
 import Marq2 from "./Marq2";
 import Nav2 from "./Nav2";
 export default function ScrollHead() {

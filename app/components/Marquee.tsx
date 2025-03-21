@@ -3,10 +3,10 @@
 interface MarqueeProps {
   firstBg: string;
   secondBg: string;
-  color: string
+ 
 }
 
-const Marquee = ({ firstBg, secondBg, color }: MarqueeProps) => {
+const Marquee = ({ firstBg, secondBg,  }: MarqueeProps) => {
   return (
     <div className="absolute bottom-0 w-full overflow-hidden h-[700px]">
       {/* Background stripe */}

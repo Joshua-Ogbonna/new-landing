@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Nav2 from "../Nav2";
 import Marq2 from "../Marq2";
-import Marquee from "../Marquee";
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {

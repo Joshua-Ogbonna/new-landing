@@ -10,8 +10,6 @@ import Trusted from "./components/Trusted";
 import Download from "./components/Download";
 import Footer from "./components/Footer";
 import NewHero from "./components/NewHero";
-import ScrollHead from "./components/ScrollHead";
-import HeroSection from "./components/Hero/HeroSection";
 // import Navbar from "./components/Navbar";
 export default function Home() {
   return (

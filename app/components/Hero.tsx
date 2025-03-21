@@ -195,7 +195,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <Marquee firstBg="bg-[#C2EE0382]" secondBg="bg-[#C2EE03]" color="#000000" />
+        <Marquee firstBg="bg-[#C2EE0382]" secondBg="bg-[#C2EE03]"  />
       </section>
     </>
   );
