@@ -18,7 +18,7 @@ const Sec2 = () => {
                 <div className="full md:w-1/2 h-fit">
                     <p className="text-[#CCFF00] text-sm">
                         Welcome to MySounds Global, where music isn&apos;t just streamed—it&apos;s
-                        empowered. We're here to amplify underground voices, push new genres,
+                        empowered. We&apos;re here to amplify underground voices, push new genres,
                         and create space for sounds that deserve to shine.
                         This is more than a platform, it&apos;s a movement. Listeners unlock exclusive
                         tracks, connect with rising stars, and directly support the artists shaping the

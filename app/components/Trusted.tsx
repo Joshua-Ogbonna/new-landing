@@ -82,7 +82,7 @@ const Trusted = () => {
       const centerY = rect.top + rect.height / 2;
       
       // Calculate mouse position relative to the center of the globe
-      const mouseX = e.clientX - centerX;
+      // const mouseX = e.clientX - centerX;
       const mouseY = e.clientY - centerY;
       
       // Calculate rotation angles based on mouse position
