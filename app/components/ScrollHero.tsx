@@ -15,151 +15,195 @@ export default function ScrollHero() {
 
   const Section1 = () => (
     <div>
-      <Navbar
-        background="#000000"
-        color="text-[#515151]"
-        hoverColor="#C2EE03"
-        logo="/brl.png"
-      />
-      <section
-        ref={sectionRef}
-        className="section sticky-section hero-section relative w-full h-screen bg-black overflow-hidden"
-      >
-        <div className="md:w-[1440px] w-full mx-auto px-6 relative flex justify-between items-start">
-          <div>
-            <div className="w-full flex flex-col-reverse lg:flex-row h-full">
-              <div className="relative">
-                <div ref={ringsRef} className="relative h-[1017px]">
-                  {/* Back ring */}
-                  <style jsx>{`
-                    @keyframes reverberate {
-                      0% {
-                        transform: scale(1);
-                        opacity: 1;
-                      }
-                      50% {
-                        transform: scale(1.02);
-                        opacity: 0.9;
-                      }
-                      100% {
-                        transform: scale(1);
-                        opacity: 1;
-                      }
-                    }
+    <Navbar
+    background="#000000"
+    color="text-[#515151]"
+    hoverColor="#C2EE03"
+    logo="/brl.png"
+  />
 
-                    @keyframes pulse {
-                      0% {
-                        transform: scale(1);
-                        opacity: 0.3;
-                      }
-                      50% {
-                        transform: scale(1.05);
-                        opacity: 0.1;
-                      }
-                      100% {
-                        transform: scale(1);
-                        opacity: 0.3;
-                      }
-                    }
+  <section   ref={sectionRef} className="section sticky-section relative w-full min-h-screen bg-black overflow-hidden">
+    <div className="container overflow-hidden mx-auto px-4 h-full flex flex-col md:flex-row justify-center items-center">
+      {/* Left section with animation */}
+      <div className="w-full md:w-1/2 flex justify-center items-center py-8 md:py-0">
+        <style jsx>
+          {`
+            .loader-container {
+              position: relative;
+              width: 280px;
+             
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
 
-                    .reverberate {
-                      animation: reverberate 4s ease-in-out infinite;
-                    }
+            .loader {
+              position: absolute;
+              width: 300px;
+           
+              transform-style: preserve-3d;
+              transform: perspective(500px) rotateX(60deg);
+            }
 
-                    .pulse {
-                      animation: pulse 4s ease-in-out infinite;
-                    }
-                  `}</style>
-                  <div className="absolute top-[100px] w-[905px] h-[531px] z-10 select-none">
-                    {/* Pulse effect layers */}
-                    <div
-                      className="absolute inset-0 pulse"
-                      style={{ animationDelay: "0.5s" }}
-                    >
-                      <Image
-                        src="/rdb.png"
-                        alt="Back Ring Echo 1"
-                        width={1005}
-                        height={631}
-                        className="w-full h-full object-contain pointer-events-none"
-                      />
-                    </div>
-                    <div
-                      className="absolute inset-0 pulse"
-                      style={{ animationDelay: "1s" }}
-                    >
-                      <Image
-                        src="/rdb.png"
-                        alt="Back Ring Echo 2"
-                        width={1005}
-                        height={631}
-                        className="w-full h-full object-contain pointer-events-none"
-                      />
-                    </div>
-                    {/* Main image with reverberation */}
-                    <div className="relative reverberate">
-                      <Image
-                        src="/rdb.png"
-                        alt="Back Ring"
-                        width={1005}
-                        height={631}
-                        className="w-full h-full object-contain pointer-events-none"
-                        draggable={false}
-                        onContextMenu={(e) => e.preventDefault()}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @media (min-width: 768px) {
+              .loader {
+                width: 400px;
+                height: 400px;
+              }
+            }
 
-            {/* Phone - centered */}
-            <div className="absolute top-[100px] left-[300px] z-20 select-none">
-              <div className="relative w-[424px] h-[901px]">
-                <Image
-                  src="/ring.png"
-                  alt="MySound App"
-                  width={424}
-                  height={901}
-                  className="object-contain pointer-events-none"
-                  priority
-                  draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
-                />
-              </div>
-            </div>
+            @media (min-width: 1024px) {
+              .loader {
+                width: 500px;
+                height: 500px;
+              }
+            }
 
-            {/* Front ring - rotating clockwise */}
-            {/* <div className="absolute left-[200px] top-1/2 z-30 w-[188px] h-[188px] select-none">
-              <Image
-                src="/rot.png"
-                alt="Front Ring"
-                width={188}
-                height={188}
-                className="w-full h-full object-contain pointer-events-none"
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div> */}
+            .loader span {
+              position: absolute;
+              display: block;
+              border: 5px solid #c2ee03;
+              box-shadow: 0 5px 0 #000;
+              box-sizing: border-box;
+              border-radius: 50%;
+              animation: pulseWave 4s ease-out infinite;
+              opacity: 0.8;
+            }
+
+            .image-container {
+              position: absolute;
+              z-index: 50;
+              bottom: 20px;
+              right: -90px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 400px;
+              height: 400px;
+            }
+
+            @media (min-width: 768px) {
+              .image-container {
+                width: 300px;
+                height: 300px;
+              }
+            }
+
+            @media (min-width: 1024px) {
+              .image-container {
+                width: 400px;
+                height: 400px;
+              }
+            }
+
+            @keyframes pulseWave {
+              0% {
+                transform: scale(0.95);
+                opacity: 0.8;
+              }
+              50% {
+                transform: scale(1.05);
+                opacity: 1;
+              }
+              100% {
+                transform: scale(0.95);
+                opacity: 0.8;
+              }
+            }
+
+            .loader span:nth-child(1) {
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              animation-delay: 0s;
+            }
+            .loader span:nth-child(2) {
+              top: 10px;
+              bottom: 10px;
+              left: 10px;
+              right: 10px;
+              animation-delay: -0.3s;
+            }
+            .loader span:nth-child(3) {
+              top: 20px;
+              bottom: 20px;
+              left: 20px;
+              right: 20px;
+              animation-delay: -0.6s;
+            }
+            .loader span:nth-child(4) {
+              top: 30px;
+              bottom: 30px;
+              left: 30px;
+              right: 30px;
+              animation-delay: -0.9s;
+            }
+            .loader span:nth-child(5) {
+              top: 40px;
+              bottom: 40px;
+              left: 40px;
+              right: 40px;
+              animation-delay: -1.2s;
+            }
+            .loader span:nth-child(6) {
+              top: 50px;
+              bottom: 50px;
+              left: 50px;
+              right: 50px;
+              animation-delay: -1.5s;
+            }
+            .loader span:nth-child(7) {
+              top: 60px;
+              bottom: 60px;
+              left: 60px;
+              right: 60px;
+              animation-delay: -1.8s;
+            }
+          `}
+        </style>
+
+        <div className="loader-container">
+          <div className="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
 
-          <div className="flex flex-col items-center pt-[13%]" ref={titleRef}>
-            <h1 className="text-[#CCFF00] reveal-text text-7xl lg:text-9xl font-bold text-center lg:text-right leading-none tracking-tight">
-              Stream <br />
-              <span className="text-[white]">out</span>{" "}
-              <br className="hidden lg:block" />
-              <span className="text-[white]">loud</span>
-            </h1>
+          <div className="image-container">
+            <Image
+              src="/ring1.png"
+              alt="person"
+              width={400}
+              height={400}
+              className="object-contain z-10"
+            />
           </div>
         </div>
+      </div>
 
-        <Marquee
-          firstBg="bg-[#C2EE0382]"
-          secondBg="bg-[#C2EE03]"
-          color="#000000"
-        />
-      </section>
+      {/* Right section with text */}
+      <div  className="w-full  md:w-1/2 mt-8 md:mt-0 px-4"  ref={titleRef}>
+        <h1 className="text-[#CCFF00] reveal-text text-4xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
+          Stream <br />
+          <span className="text-white">out</span>{" "}
+          <br className="hidden lg:block" />
+          <span className="text-white">loud</span>
+        </h1>
+      </div>
     </div>
+
+    <Marquee
+      firstBg="bg-[#C2EE0382]"
+      secondBg="bg-[#C2EE03]"
+      color="#000000"
+    />
+  </section>
+</div>
   );
 
   const Section2 = () => (

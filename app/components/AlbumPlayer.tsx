@@ -94,7 +94,13 @@ const AlbumPlayer = () => {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
 
   return (
-    <div className="bg-[#1F201E] w-full md:max-w-[1440px] mx-auto text-white py-20 rounded-[48px]">
+    <div className="bg-[#1F201E] h-fit mt-20  md:max-w-[1440px] text-white py-10 rounded-[48px] mx-6 md:mx-20 ">
+      <div className="">
+            <h2 className="text-[30px] p-6 font-bold leading-[1.1] tracking-[-0.02em] block  text-center md:hidden ">
+              Indulge in Your
+              Favorite Tunes
+            </h2>
+          </div>
       <div className="container mx-auto px-4">
         {/* Album Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 rounded-2xl overflow-hidden">
@@ -122,10 +128,10 @@ const AlbumPlayer = () => {
         </div>
 
         {/* Content Area */}
-        <div className="flex gap-32">
+        <div className="md:flex gap-32">
           {/* Title */}
-          <div className="flex-1">
-            <h2 className="text-[72px] font-bold leading-[1.1] tracking-[-0.02em]">
+          <div className="md:flex-1">
+            <h2 className="text-[52px] font-bold leading-[1.1] tracking-[-0.02em] hidden  md:block">
               Indulge in Your
               <br />
               Favorite Tunes
@@ -133,15 +139,15 @@ const AlbumPlayer = () => {
           </div>
 
           {/* Song List */}
-          <div className="w-[500px] pt-4">
+          <div className="w-full md:w-[500px] pt-4">
             {selectedAlbum && (
               <div className="space-y-10">
                 {/* Currently Playing Song */}
-                <div className="space-y-2">
+                <div className="">
                   <div className="flex items-center gap-4">
                     <span className="text-white/40 text-sm w-8">01</span>
                     <div className="flex-1">
-                      <h3 className="text-[40px] font-medium leading-none mb-3">
+                      <h3 className="text-[20px] font-medium leading-none mb-3">
                         {selectedAlbum.songs[0].title}
                       </h3>
                       <div className="flex items-center gap-4">
@@ -179,7 +185,7 @@ const AlbumPlayer = () => {
                           {String(index + 2).padStart(2, "0")}
                         </span>
                         <div className="flex-1">
-                          <h3 className="text-[32px] text-white/40 group-hover:text-white transition-colors font-medium leading-none">
+                          <h3 className="text-[22px] text-white/40 group-hover:text-white transition-colors font-medium leading-none">
                             {album.title}
                           </h3>
                         </div>

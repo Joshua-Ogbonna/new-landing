@@ -22,21 +22,11 @@ const Marquee = ({ firstBg, secondBg, color }: MarqueeProps) => {
       <div 
         className={`${secondBg} absolute h-[180px] flex items-center w-[120vw] -left-[10vw]`}
         style={{
-          top: '55%',
+          top: '15%',
           transform: 'rotate(-3deg)',
           padding: '1rem 0',
         }}
       >
-        <div className={`animate-bounce-x whitespace-nowrap inline-flex gap-12 text-7xl font-bold ${color}`}>
-          <span>YOUR SOUND YOUR RULE</span>
-          <span>•</span>
-          <span>YOUR SOUND YOUR RULE</span>
-          <span>•</span>
-          <span>YOUR SOUND YOUR RULE</span>
-          <span>•</span>
-          <span>YOUR SOUND YOUR RULE</span>
-          <span>•</span>
-        </div>
       </div>
     </div>
   );

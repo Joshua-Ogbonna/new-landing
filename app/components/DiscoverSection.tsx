@@ -10,9 +10,9 @@ interface Artist {
 export default function DiscoverSection() {
   const [img, setImg] = useState('');
   const artists: Artist[] = [
-    { id: "1", name: "Artist 1", image: "/wizz.png" },
-    { id: "2", name: "Artist 2", image: "/bdd.png" },
-    { id: "3", name: "Artist 3", image: "/bddd.png" },
+    { id: "1", name: "Artist 1", image: "/Edez.jpeg" },
+    { id: "2", name: "Artist 2", image: "/baggenew.jpg" },
+    { id: "3", name: "Artist 3", image: "/deeciennew.jpg" },
   ];
   
   const openArtist = (artistImg: string): void => {
@@ -21,12 +21,12 @@ export default function DiscoverSection() {
   }
   
   return (
-    <div className="mt-12 sm:mt-20 md:mt-32 lg:mt-[200px] relative w-full md:max-w-[1440px] mx-auto min-h-[500px] rounded-lg md:rounded-[32px] overflow-hidden px-4 sm:px-6 md:px-0">
+    <div className="mt-12 sm:mt-20 md:mt-32 lg:mt-[200px] relative w-full md:max-w-[1440px] md:mx-[50px] min-h-[400px] rounded-lg md:rounded-[32px] overflow-hidden px-4 sm:px-6 md:px-0">
       <div className="absolute inset-0">
         {/* Main content */}
-        <div className="flex flex-col md:flex-row h-full">
+        <div className="flex flex-col mx-4 md:mx-0  md:flex-row md:h-full">
           {/* Left side - Image */}
-          <div className="relative w-full md:w-1/2 h-[300px] sm:h-[400px] md:h-full">
+          <div className="relative w-full md:w-1/2 h-[300px] sm:h-[400px]">
             <Image
               src={img ? img : "/ava.png"}
               alt="Discover New Music"
@@ -61,7 +61,7 @@ export default function DiscoverSection() {
           </div>
 
           {/* Right side - Text */}
-          <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center mt-4 md:mt-0">
+          <div className="w-full md:w-1/2 absol  p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center mt-4 md:mt-0">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-white font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
               Discover New Music
             </h2>

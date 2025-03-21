@@ -1,5 +1,5 @@
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import React, { useState } from "react";
 
 interface Testimonial {
   id: number;
@@ -55,24 +55,102 @@ const testimonials: Testimonial[] = [
 
 const Trusted = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial>(testimonials[0]);
+  const globeRef = useRef<HTMLDivElement>(null);
+  const rotationRef = useRef({ x: 0, y: 0 });
+  const animationRef = useRef<number | null>(null);
+
+  // Set up globe rotation
+  useEffect(() => {
+    const rotateGlobe = () => {
+      if (!globeRef.current) return;
+      
+      rotationRef.current.y += 0.2;
+      globeRef.current.style.transform = `rotateX(${rotationRef.current.x}deg) rotateY(${rotationRef.current.y}deg)`;
+      
+      animationRef.current = requestAnimationFrame(rotateGlobe);
+    };
+    
+    animationRef.current = requestAnimationFrame(rotateGlobe);
+    
+    // Handle mouse movement for interactive rotation
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!globeRef.current || !globeRef.current.parentElement) return;
+      
+      const container = globeRef.current.parentElement;
+      const rect = container.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Calculate mouse position relative to the center of the globe
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+      
+      // Calculate rotation angles based on mouse position
+      const rotationY = (mouseX / rect.width) * 20;
+      const rotationX = (mouseY / rect.height) * 20;
+      
+      rotationRef.current = { 
+        x: rotationX, 
+        y: rotationRef.current.y // Keep the automatic rotation for Y axis
+      };
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    
+    // Cleanup
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
   
   return (
     <div className="w-full px-4 sm:px-6 md:px-8">
       <div className="w-full md:max-w-[1440px] mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-[200px] flex flex-col md:flex-row items-center justify-around">
-        {/* left section */}
+        {/* left section - CSS 3D Globe */}
         <div className="relative w-full max-w-[350px] sm:max-w-[450px] md:max-w-[521px] aspect-square">
-          {/* World image with circular pattern */}
-          <div className="relative w-full h-full">
-            <Image 
-              src="/world.png" 
-              alt="world" 
-              width={521} 
-              height={527} 
-              className="relative z-10 w-full h-auto" 
-            />
+          {/* 3D world container with perspective */}
+          <div className="relative w-full h-full" style={{ perspective: "1000px" }}>
+            <div 
+              ref={globeRef} 
+              className="relative w-full h-full transition-transform duration-100 transform-style-preserve-3d"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Front face - the world image */}
+              <div className="absolute inset-0 backface-hidden">
+                <Image 
+                  src="/world.png" 
+                  alt="world" 
+                  width={521} 
+                  height={527} 
+                  className="relative z-10 w-full h-auto" 
+                />
+              </div>
+              
+              {/* Back face - a mirrored world image with different colors */}
+              <div 
+                className="absolute inset-0 backface-hidden"
+                style={{ transform: "rotateY(180deg)" }}
+              >
+                <Image 
+                  src="/world.png" 
+                  alt="world back" 
+                  width={521} 
+                  height={527} 
+                  className="relative z-10 w-full h-auto filter hue-rotate-180" 
+                />
+              </div>
+            </div>
+
+            {/* Animated ring around the globe */}
             <div className="absolute top-0 left-0 w-full h-full">
               <div className="w-full h-full border-2 border-[#C2EE03] rounded-full animate-spin-slow opacity-20" />
             </div>
+
+            {/* 3D glow effect */}
+            <div className="absolute inset-0 z-0 rounded-full bg-[#C2EE03] opacity-10 blur-xl animate-pulse"></div>
           </div>
 
           {/* Circular profile images - responsive positions */}
@@ -116,12 +194,12 @@ const Trusted = () => {
         
         {/* right section */}
         <div className="w-full md:w-1/2 lg:w-[548px]">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold leading-[1.1] tracking-[-0.02em] text-[#C2EE03] mb-4 sm:mb-6 md:mb-8 text-center md:text-left">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-bold leading-[1.1] tracking-[-0.02em] text-[#C2EE03] my-4 sm:my-6 md:mb-8 text-center md:text-left">
             Trusted in Over 5 Countries by over 300+ Users
           </h2>
 
           {/* testimonial section */}
-          <div className="w-full min-h-[200px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[358px] border-solid border border-white rounded-[20px] sm:rounded-[30px] md:rounded-[43px] p-4 sm:p-6 md:p-8 relative">
+          <div className="w-full min-h-[100px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[358px] border-solid border border-white rounded-[20px] sm:rounded-[30px] md:rounded-[43px] p-4 sm:p-6 md:p-8 relative">
             <p className="w-full text-lg sm:text-xl md:text-2xl lg:text-[30px] text-white font-normal mb-12 sm:mb-16">
               {selectedTestimonial.text}
             </p>
@@ -132,6 +210,37 @@ const Trusted = () => {
           </div>
         </div>
       </div>
+
+      {/* Add global styles for 3D transforms */}
+      <style jsx global>{`
+        .backface-hidden {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+        
+        .transform-style-preserve-3d {
+          transform-style: preserve-3d;
+          -webkit-transform-style: preserve-3d;
+        }
+        
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 0.1; }
+          50% { transform: scale(1.05); opacity: 0.2; }
+        }
+        
+        .animate-pulse {
+          animation: pulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+      `}</style>
     </div>
   );
 };

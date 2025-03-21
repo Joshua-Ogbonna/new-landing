@@ -49,13 +49,13 @@ const Navbar = ({
             About us
           </Link>
           <Link
-            href="/courses"
+            href="/"
             className={`${color} hover:text-[${hoverColor}] transition-colors`}
           >
             Course Page
           </Link>
           <Link
-            href="/community"
+            href="/"
             className={`${color} hover:text-[${hoverColor}] transition-colors`}
           >
             Community

@@ -1,0 +1,91 @@
+.loader-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: perspective(500px) rotateX(60deg);
+  }
+  
+  @media (min-width: 768px) {
+    .loader {
+      width: 400px;
+      height: 400px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .loader {
+      width: 500px;
+      height: 500px;
+    }
+  }
+  
+  .loader span {
+    position: absolute;
+    display: block;
+    border: 5px solid #c2ee03;
+    box-shadow: 0 5px 0 #000;
+    box-sizing: border-box;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+  
+  .loader span:nth-child(-n + 4) {
+    animation: waveMotion 4s ease-out infinite;
+  }
+  
+  .image-container {
+    position: absolute;
+    z-index: 50;
+    bottom: 20px;
+    right: -90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+  }
+  
+  @media (min-width: 768px) {
+    .image-container {
+      width: 300px;
+      height: 300px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .image-container {
+      width: 400px;
+      height: 400px;
+    }
+  }
+  
+  @keyframes waveMotion {
+    0% {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+  }
+  
+  .loader span:nth-child(1) { animation-delay: 0s; }
+  .loader span:nth-child(2) { animation-delay: -0.3s; }
+  .loader span:nth-child(3) { animation-delay: -0.6s; }
+  .loader span:nth-child(4) { animation-delay: -0.9s; }
+  

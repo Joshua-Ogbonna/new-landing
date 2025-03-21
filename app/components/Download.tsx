@@ -4,10 +4,17 @@ import React from "react";
 
 const Download = () => {
   return (
-    <div>
+    <div className="mt-20">
+      <div 
+  style={{
+    width: '100%',
+    height: '2px',
+    background: 'linear-gradient(to left, #00131300, #C2EE03, #00131300)'
+  }}
+></div>
       <div className="w-full md:max-w-[1440px] px-6 my-20 flex flex-col md:flex-row gap-10 md:gap-0 justify-between">
         <div className="flex items-start justify-between flex-col gap-6">
-          <p className="text-white text-3xl md:text-6xl">
+          <p className="text-white text-3xl md:text-5xl">
             Come on, join now <br /> and feel the music <br /> events vibe
           </p>
           <div className="flex items-center gap-4">
@@ -24,7 +31,7 @@ const Download = () => {
         </div>
 
         <div className="">
-          <h5 className="text-3xl md:text-6xl text-white font-medium">Download our App</h5>
+          <h5 className="text-3xl md:text-5xl text-white font-medium">Download our App</h5>
           <div className="flex items-center">
             <Link href="">
               <Image src="/appp.png" alt="" width={205} height={100} />
