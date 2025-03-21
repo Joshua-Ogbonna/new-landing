@@ -17,15 +17,15 @@ const Sec2 = () => {
             <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row justify-center items-center relative">
                 <div className="full md:w-1/2 h-fit">
                     <p className="text-[#CCFF00] text-sm">
-                        Welcome to MySounds Global, where music isn`&apos;`t just streamed—it`&apos;`s
+                        Welcome to MySounds Global, where music isn&apos;t just streamed—it&apos;s
                         empowered. We're here to amplify underground voices, push new genres,
                         and create space for sounds that deserve to shine.
-                        This is more than a platform, it`&apos;`s a movement. Listeners unlock exclusive
+                        This is more than a platform, it&apos;s a movement. Listeners unlock exclusive
                         tracks, connect with rising stars, and directly support the artists shaping the
                         future of music.
                     </p>
                     <p className="text-white text-sm pt-5">
-                        Whether you`&apos;`re an artist striving to break through or a listener seeking culture
+                        Whether you&apos;re an artist striving to break through or a listener seeking culture
                         beyond the mainstream, this is your soundscape
                     </p>
                     <button className="rounded-md w-32 h-10 my-5 text-center text-white font-semibold bg-[#CCFF00]">

@@ -86,7 +86,7 @@ const Trusted = () => {
       const mouseY = e.clientY - centerY;
       
       // Calculate rotation angles based on mouse position
-      const rotationY = (mouseX / rect.width) * 20;
+      // const rotationY = (mouseX / rect.width) * 20;
       const rotationX = (mouseY / rect.height) * 20;
       
       rotationRef.current = { 
