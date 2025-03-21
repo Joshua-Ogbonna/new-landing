@@ -78,7 +78,7 @@ const Trusted = () => {
       
       const container = globeRef.current.parentElement;
       const rect = container.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
+      // const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       
       // Calculate mouse position relative to the center of the globe
