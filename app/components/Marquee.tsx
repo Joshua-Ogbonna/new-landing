@@ -3,7 +3,7 @@
 interface MarqueeProps {
   firstBg: string;
   secondBg: string;
- 
+  color?: string
 }
 
 const Marquee = ({ firstBg, secondBg,  }: MarqueeProps) => {
