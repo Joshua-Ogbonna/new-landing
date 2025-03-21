@@ -500,7 +500,7 @@ export default function ScrollHero() {
         <Marquee
           firstBg="bg-[#C2EE0382]"
           secondBg="bg-[#C2EE03]"
-          color="#000000"
+         
         />
       </section>
     </>
