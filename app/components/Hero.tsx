@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Marquee from "./Marquee";
-import Navbar from "./Navbar";
+import Navbar from "./Nav";
 
 gsap.registerPlugin(ScrollTrigger);
 

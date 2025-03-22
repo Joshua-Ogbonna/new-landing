@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Nav";
 import Image from "next/image";
 import Marquee from "./Marquee";
 

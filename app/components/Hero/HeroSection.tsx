@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
   useEffect(() => {
-    const sections = gsap.utils.toArray("section") as HTMLElement[]; // Explicitly type as HTMLElement[]
+    const sections = gsap.utils.toArray("section") as HTMLElement[]; 
 
     sections.forEach((section) => {
       ScrollTrigger.create({
