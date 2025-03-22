@@ -197,10 +197,11 @@ const Slider = () => {
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
           <h1 className="text-[#CCFF00] reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
-            Stream <br />
-            <span className="text-white">out</span>{" "}
+           
+            <span className="text-white font-bold"> Your <br /></span>{" "}
+            <span className="text-white font-bold">music</span>{" "}
             <br className="hidden lg:block" />
-            <span className="text-white">loud</span>
+            <span className="">your way</span>
           </h1>
         </div>
       </div>
@@ -385,10 +386,10 @@ const Slider = () => {
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
           <h1 className="text-black reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
-            Stream <br />
-            <span className="">out</span>{" "}
+            Earn <br />
+            <span className="">as you</span>{" "}
             <br className="hidden lg:block" />
-            <span className="">loud</span>
+            <span className="">Grow</span>
           </h1>
         </div>
       </div>

@@ -4,7 +4,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from '../../assets/logo.png'
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const handleNav = () => {
