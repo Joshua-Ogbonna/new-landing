@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Navbar from "./Nav";
 import Image from "next/image";
 import Marquee from "./Marquee";
 
@@ -15,12 +14,7 @@ export default function ScrollHero() {
 
   const Section1 = () => (
     <div>
-    <Navbar
-    background="#000000"
-    color="text-[#515151]"
-    hoverColor="#C2EE03"
-    logo="/brl.png"
-  />
+    
 
   <section   ref={sectionRef} className="section sticky-section relative w-full min-h-screen bg-black overflow-hidden">
     <div className="container overflow-hidden mx-auto px-4 h-full flex flex-col md:flex-row justify-center items-center">
@@ -208,12 +202,7 @@ export default function ScrollHero() {
 
   const Section2 = () => (
     <>
-      <Navbar
-        background="#C2EE03"
-        color="#515151"
-        hoverColor="#C2EE03"
-        logo="/darkl.png"
-      />
+     
       <section
         ref={sectionRef}
         className="section sticky-section hero-section relative w-full h-screen bg-[#C2EE03] overflow-hidden"
@@ -358,12 +347,7 @@ export default function ScrollHero() {
 
   const Section3 = () => (
     <>
-      <Navbar
-        background="#000000"
-        color="text-[#515151]"
-        hoverColor="#C2EE03"
-        logo="/brl.png"
-      />
+    
       <section
         ref={sectionRef}
         className="section sticky-section hero-section relative w-full h-screen bg-black overflow-hidden"
