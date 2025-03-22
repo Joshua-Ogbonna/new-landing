@@ -22,14 +22,14 @@ interface Album {
 const albums: Album[] = [
   {
     id: "3",
-    cover: "/wiz.png",
+    cover: "/gilly-mu.jpeg",
     title: "Kese",
     artist: "Kese",
     songs: [
       {
         id: "1",
         title: "Kese",
-        artist: "Kese",
+        artist: "Gilly",
         duration: "3:45",
         year: "2024",
       },
@@ -52,21 +52,21 @@ const albums: Album[] = [
   },
   {
     id: "1",
-    cover: "/tems.jpeg",
+    cover: "/L.Christo.jpg",
     title: "Me & U",
-    artist: "Tems",
+    artist: "L Christo",
     songs: [
       {
         id: "1",
-        title: "Me & U",
-        artist: "Tems",
+        title: "Lets dance",
+        artist: "L Christo",
         duration: "3:50",
         year: "2024",
       },
       {
         id: "2",
         title: "Track 2",
-        artist: "Tems",
+        artist: "L Christo",
         duration: "3:30",
         year: "2024",
       },
@@ -75,14 +75,14 @@ const albums: Album[] = [
 
   {
     id: "4",
-    cover: "/burna.png",
-    title: "I Told Them",
-    artist: "Burna Boy",
+    cover: "/mikelnew.jpg",
+    title: "Wrap it up",
+    artist: "Mikel",
     songs: [
       {
         id: "1",
-        title: "I Told Them",
-        artist: "Burna Boy",
+        title: "Wrap it up",
+        artist: "Mikel",
         duration: "3:55",
         year: "2024",
       },
@@ -144,13 +144,13 @@ const AlbumPlayer = () => {
               <div className="space-y-10">
                 {/* Currently Playing Song */}
                 <div className="">
-                  <div className="flex items-center gap-4">
+                  <div className="flex iL Christo-center gap-4">
                     <span className="text-white/40 text-sm w-8">01</span>
                     <div className="flex-1">
                       <h3 className="text-[20px] font-medium leading-none mb-3">
                         {selectedAlbum.songs[0].title}
                       </h3>
-                      <div className="flex items-center gap-4">
+                      <div className="flex iL Christo-center gap-4">
                         <span className="text-[13px] text-white/40">2024</span>
                         <span className="text-[13px] text-[#c2ee03]">
                           {selectedAlbum.artist}
@@ -160,7 +160,7 @@ const AlbumPlayer = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex iL Christo-center gap-2">
                       <button className="text-white/60 hover:text-white transition-colors">
                         ⏸️
                       </button>
@@ -178,7 +178,7 @@ const AlbumPlayer = () => {
                     .map((album, index) => (
                       <div
                         key={album.id}
-                        className="group flex items-center gap-4 cursor-pointer"
+                        className="group flex iL Christo-center gap-4 cursor-pointer"
                         onClick={() => setSelectedAlbum(album)}
                       >
                         <span className="text-white/40 text-sm w-8">

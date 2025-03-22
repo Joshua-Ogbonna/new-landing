@@ -16,7 +16,6 @@ export default function Home() {
     <div className="bg-black h-full">
         {/* <HeroSection /> */}
         <NewHero />
-    {/* <ScrollHead /> */}
       <Sec2 />
       {/* Container for AlbumPlayer and DiscoverSection with background */}
       <div className="relative overflow-hidden">

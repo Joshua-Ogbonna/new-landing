@@ -3,7 +3,6 @@ import Image from "next/image";
 import Marq2 from "./Marq2";
 import Nav2 from "./Nav2";
 const NewHero = () => {
-
   return (
     <div>
     <Nav2 />
@@ -170,7 +169,7 @@ const NewHero = () => {
                 alt="person"
                 width={400}
                 height={400}
-                className="object-contain z-10"
+                className="object-contain z-10 w-[270px] h-[270px] md:w-[400px] md:h-[400px]"
               />
             </div>
           </div>
@@ -178,7 +177,7 @@ const NewHero = () => {
 
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
-          <h1 className="text-[#CCFF00] reveal-text text-4xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
+          <h1 className="text-[#CCFF00] reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
             Stream <br />
             <span className="text-white">out</span>{" "}
             <br className="hidden lg:block" />

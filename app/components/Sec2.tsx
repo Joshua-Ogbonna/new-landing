@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 const Sec2 = () => {
@@ -16,7 +15,7 @@ const Sec2 = () => {
             </div>
             <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row justify-center items-center relative">
                 <div className="full md:w-1/2 h-fit">
-                    <p className="text-[#CCFF00] text-sm">
+                    <p className="text-[#CCFF00] text-sm mt-10">
                         Welcome to MySounds Global, where music isn&apos;t just streamed—it&apos;s
                         empowered. We&apos;re here to amplify underground voices, push new genres,
                         and create space for sounds that deserve to shine.
