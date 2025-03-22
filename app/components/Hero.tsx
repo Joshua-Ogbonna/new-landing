@@ -62,7 +62,6 @@ const Hero = () => {
 
   return (
     <>
-      <Navbar background="#000000" color="#515151" hoverColor="#C2EE03" logo="/brl.png" />
       <section
         ref={sectionRef}
         className="section sticky-section hero-section relative w-full h-screen bg-black overflow-hidden"
