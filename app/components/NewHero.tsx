@@ -66,7 +66,7 @@ const NewHero = () => {
                 position: absolute;
                 z-index: 50;
                 bottom: 20px;
-                right: -90px;
+                right: -70px;
                 display: flex;
                 justify-content: center;
                 align-items: center;

@@ -64,56 +64,41 @@ export default function Nav2() {
         </div>
       </div>
       <div
-        className={`md:hidden flex flex-col absolute mt-4 right-[300px] text-center bg-[#d4ff03] w-full h-fit transition-all duration-300 font-semibold py-8 gap-6 ${
-          nav ? "opacity-100 visible" : "opacity-0 invisible hidden"
-        }`}
+        className={`${
+          nav ? "translate-x-0" : "hidden"
+        } md:hidden flex flex-col absolute bg-[#CCFF00] left-0 top-[-900px] text-center text-black text-[20px] hover:text-yellow pb-4 gap-8 w-full h-fit transition-transform duration-300 font-semibold`}
       >
         {/* mobile nav */}
         <Link
-          href="#"
-          className="text-white text-[20px] hover:text-[#d4ff03] transition-all"
+          href="# "
+          className="text-black text-[20px] hover:text-yellow transition-all "
         >
           About Us
         </Link>
         <Link
           href="#"
-          className="text-white text-[20px] hover:text-[#d4ff03] transition-all"
+          className="text-black text-[20px] hover:text-yellow transition-all "
         >
           Our Objectives
         </Link>
         <Link
-          href="values"
-          className="text-white text-[20px] hover:text-[#d4ff03] transition-all"
+          href="#"
+          className="text-black text-[20px] hover:text-yellow transition-all "
         >
           Our Values
         </Link>
         <Link
           href="#"
-          className="text-white text-[20px] hover:text-[#d4ff03] transition-all"
+          className="text-black text-[20px] hover:text-yellow transition-all"
         >
           Our Team
         </Link>
         <Link
-          href="#"
-          className="text-white text-[20px] hover:text-[#d4ff03] transition-all"
+          href="# "
+          className="text-black text-[20px] hover:text-yellow transition-all"
         >
           Contact Us
         </Link>
-        {/* Added sign up and sign in buttons to mobile menu */}
-        <div className="flex flex-col items-center gap-4 mt-2">
-          <Link
-            href="/#"
-            className={`bg-[#313133] text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity w-32`}
-          >
-            Sign up
-          </Link>
-          <Link
-            href="/#"
-            className={`bg-black text-[#d4ff03] px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity w-32`}
-          >
-            Sign in
-          </Link>
-        </div>
       </div>
     </div>
   );
