@@ -15,7 +15,7 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: "John Doe",
     role: "Marketing Director",
-    company: "Envato Pty Ltd",
+    company: "Music Inc.",
     image: "/per5.avif",
     text: "I'm glad I decided to work with you. The platform is incredibly easy to update and manage. I never have any issues."
   },
@@ -25,7 +25,7 @@ const testimonials: Testimonial[] = [
     role: "Content Creator",
     company: "Creative Studios",
     image: "/woman.avif",
-    text: "The quality of service is exceptional. My audience engagement has increased significantly since using this platform."
+    text: "I never knew I needed MySound until I tried it. The recommendations are spot on, and the behind-the-scenes access makes me feel truly connected to the music I love. Absolutely brilliant."
   },
   {
     id: 3,
@@ -45,11 +45,11 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 5,
-    name: "David Brown",
+    name: "Alex R., London",
     role: "Sound Engineer",
     company: "Audio Excellence",
     image: "/per6.avif",
-    text: "The audio quality and features are top-notch. It's become an essential part of our studio workflow."
+    text: "MySound changed how I find music! Real-time event updates? Absolute game-changer"
   }
 ];
 
