@@ -26,7 +26,7 @@ const Slider = () => {
     <div>
         <section className="section sticky-section relative w-full min-h-screen bg-black overflow-hidden">
         <Nav />
-      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row justify-center items-center ">
+      <div className="container mx-auto px-4 h-[350px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
 
         <div className="w-full md:w-1/2 flex justify-center items-center py-8 md:py-0">
@@ -215,7 +215,7 @@ const Slider = () => {
         {/* slider 2 */}
         <section className="section sticky-section relative w-full min-h-screen bg-[#CCFF00] overflow-hidden">
         <Nav2 />
-      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row justify-center items-center ">
+      <div className="container mx-auto px-4 h-[350px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
 
         <div className="w-full md:w-1/2 flex justify-center items-center py-8 md:py-0">
@@ -403,10 +403,10 @@ const Slider = () => {
         {/* slider 3 */}
         <section className="section sticky-section relative w-full min-h-screen bg-black overflow-hidden">
         <Nav />
-      <div className="container mx-auto px-4 h-full flex flex-col md:flex-row justify-center items-center ">
+      <div className="container mx-auto px-4  md:h-[350px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
 
-        <div className="w-full md:w-1/2 flex justify-center items-center py-8 md:py-0">
+        <div className="w-full md:w-1/2 mb-30 md:mb-0 flex justify-center items-center py-8 md:py-0">
           <style jsx>
             {`
               .loader-container {
@@ -425,7 +425,13 @@ const Slider = () => {
                 transform-style: preserve-3d;
                 transform: perspective(500px) rotateX(60deg);
               }
-
+               @media (max-width: 768px) {
+                .loader{
+                  width: 300px;
+                  height: 300px;
+                  top: 100px;
+                }
+              }
               @media (min-width: 768px) {
                 .loader {
                   width: 400px;
@@ -435,8 +441,10 @@ const Slider = () => {
 
               @media (min-width: 1024px) {
                 .loader {
-                  width: 500px;
-                  height: 500px;
+                  width: 400px;
+                  height: 400px;
+                  top: -30px;
+                  left:-30px;
                 }
               }
 
@@ -469,6 +477,14 @@ const Slider = () => {
                 width: 400px;
                 height: 400px;
               }
+                 @media (max-width: 768px) {
+                .image-container {
+                  width: 300px;
+                  height: 300px;
+                  top:  23px;
+                  right: -20px;
+                }
+              }
 
               @media (min-width: 768px) {
                 .image-container {
@@ -479,8 +495,10 @@ const Slider = () => {
 
               @media (min-width: 1024px) {
                 .image-container {
-                  width: 400px;
-                  height: 400px;
+                  width: 330px;
+                  height: 330px;
+                  bottom: 23px;
+                right: -65px;
                 }
               }
 
@@ -548,7 +566,7 @@ const Slider = () => {
             `}
           </style>
 
-          <div className="loader-container">
+          <div className="loader-container bottom-[30px]">
             <div className="loader">
               <span></span>
               <span></span>
@@ -565,14 +583,14 @@ const Slider = () => {
                 alt="person"
                 width={400}
                 height={400}
-                className="object-contain z-10 w-[270px] h-[270px] md:w-[400px] md:h-[400px]"
+                className="object-contain mt-30 z-10 w-[270px] h-[270px] md:w-[400px] md:h-[400px]"
               />
             </div>
           </div>
         </div>
 
         {/* Right section with text */}
-        <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
+        <div className="w-full  md:w-1/2 mt-28 md:mt-0 px-4">
           <h1 className="text-[#CCFF00] reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
             Stream <br />
             <span className="text-white">out</span>{" "}
@@ -585,7 +603,7 @@ const Slider = () => {
       <Marq2
         text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
         speed={10}
-        className=" bg-[#CCFF00] h-[100px] w-full py-5"
+        className=" bg-[#CCFF00] h-[100px] mt-10 md:mt-[-10px] w-full py-5"
       /> 
     </section>
     </div>

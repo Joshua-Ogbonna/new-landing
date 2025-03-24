@@ -10,13 +10,14 @@ import Trusted from "./components/Trusted";
 import Download from "./components/Download";
 import Footer from "./components/Footer";
 import NewHero from "./components/NewHero";
-// import Navbar from "./components/Navbar";
 export default function Home() {
   return (
     <div className="bg-black h-full">
-        {/* <HeroSection /> */}
-        <NewHero />
-      <Sec2 />
+      <NewHero />
+      <div>
+        <Sec2 />
+        
+      </div>
       {/* Container for AlbumPlayer and DiscoverSection with background */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 z-0">

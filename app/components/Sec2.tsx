@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Sec2 = () => {
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden h-full bg-black border-4 border-violet-600 border-solid">
             <div className="relative">
                 <div className="absolute inset-0 z-0">
                     <Image
@@ -13,7 +13,7 @@ const Sec2 = () => {
                     />
                 </div>
             </div>
-            <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row justify-center items-center relative">
+            <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row justify-center items-center relative h-full">
                 <div className="full md:w-1/2 h-fit">
                     <p className="text-[#CCFF00] text-sm mt-10">
                         Welcome to MySounds Global, where music isn&apos;t just streamed—it&apos;s
@@ -27,7 +27,7 @@ const Sec2 = () => {
                         Whether you&apos;re an artist striving to break through or a listener seeking culture
                         beyond the mainstream, this is your soundscape
                     </p>
-                    <button className="rounded-md w-32 h-10 my-5 text-center text-white font-semibold bg-[#CCFF00]">
+                    <button className="rounded-md w-32 h-10 my-5 text-center text-black font-semibold bg-[#CCFF00]">
                         Learn more
                     </button>
                 </div>

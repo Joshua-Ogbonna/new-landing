@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Stats = () => {
   return (
-    <section
+    <div
       className="relative bg-black text-white pb-20 min-h-[1000px]"
       style={{
         backgroundImage: 'url(/clip.png)',
@@ -73,8 +73,8 @@ const Stats = () => {
   </div>
 </div>
 
-        {/* Bottom stats section */}
-        <div className="absolute  bottom-0 right-0 bg-[#c2ee03] py-12 w-screen -ml-[50vw] left-[50%] z-20">
+        {/* Bottom stats div */}
+        <div className="bottom-0 right-0 top-[80vh]  bg-[#c2ee03] py-12 w-screen -ml-[50vw] left-[50%] z-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-black max-w-[1300px] mx-auto">
               <div>
@@ -101,7 +101,7 @@ const Stats = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
