@@ -16,7 +16,7 @@ const testimonials: Testimonial[] = [
     name: "John Doe",
     role: "Marketing Director",
     company: "Envato Pty Ltd",
-    image: "/man.png",
+    image: "/per5.avif",
     text: "I'm glad I decided to work with you. The platform is incredibly easy to update and manage. I never have any issues."
   },
   {
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
     name: "Sarah Johnson",
     role: "Content Creator",
     company: "Creative Studios",
-    image: "/man.png",
+    image: "/woman.avif",
     text: "The quality of service is exceptional. My audience engagement has increased significantly since using this platform."
   },
   {
@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
     name: "Michael Chen",
     role: "Producer",
     company: "Sound Wave Records",
-    image: "/man.png",
+    image: "/per2.avif",
     text: "An incredible tool for music professionals. The features are exactly what I needed for my production work."
   },
   {
@@ -40,7 +40,7 @@ const testimonials: Testimonial[] = [
     name: "Emma Wilson",
     role: "Artist Manager",
     company: "Stellar Management",
-    image: "/man.png",
+    image: "/per3.avif",
     text: "This platform has revolutionized how we handle our artist promotions. Highly recommended!"
   },
   {
@@ -48,7 +48,7 @@ const testimonials: Testimonial[] = [
     name: "David Brown",
     role: "Sound Engineer",
     company: "Audio Excellence",
-    image: "/man.png",
+    image: "/per6.avif",
     text: "The audio quality and features are top-notch. It's become an essential part of our studio workflow."
   }
 ];
