@@ -6,7 +6,7 @@ export default function PricingSection() {
       <div className="flex flex-col md:flex-row items-start justify-between p-4 sm:p-6 md:p-8 rounded-lg md:rounded-2xl">
         {/* Top/Left side */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-          <h2 className="text-white font-bold text-3xl font-Nebulica sm:text-4xl md:text-3xl lg:text-6xl mb-6 md:mb-8">
+          <h2 className="text-white md:mt-10 font-bold text-3xl font-Nebulica sm:text-4xl md:text-5xl  mb-6 md:mb-8">
             Sign Up.
             <br />
             Discover New Music.

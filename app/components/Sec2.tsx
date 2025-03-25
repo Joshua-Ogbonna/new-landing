@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Sec2 = () => {
     return (
-        <div className="overflow-hidden font-poppins h-full bg-black border-4 border-violet-600 border-solid">
+        <div className="overflow-hidden font-poppins h-full bg-black">
             <div className="relative">
                 <div className="absolute inset-0 z-0">
                     <Image
@@ -15,7 +15,7 @@ const Sec2 = () => {
             </div>
             <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row justify-center items-center relative h-full">
                 <div className="full md:w-1/2 h-fit">
-                    <p className="text-[#CCFF00] text-sm mt-10">
+                    <p className="text-[#CCFF00] text-md md:text-xl mt-10">
                         Welcome to MySounds Global, where music isn&apos;t just streamed—it&apos;s
                         empowered. We&apos;re here to amplify underground voices, push new genres,
                         and create space for sounds that deserve to shine.
@@ -23,7 +23,7 @@ const Sec2 = () => {
                         tracks, connect with rising stars, and directly support the artists shaping the
                         future of music.
                     </p>
-                    <p className="text-white text-sm pt-5">
+                    <p className="text-white text-sm md:text-xl pt-5">
                         Whether you&apos;re an artist striving to break through or a listener seeking culture
                         beyond the mainstream, this is your soundscape
                     </p>
@@ -34,7 +34,7 @@ const Sec2 = () => {
                 <div className="relative w-full h-full">
                     <Image src="/person.png" width={900} height={900} alt="man" />
                 </div>
-                <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[40px]  md:p-4 ">
+                <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[90px]  md:p-4 ">
                     <Image
                         width={150}
                         height={119}
