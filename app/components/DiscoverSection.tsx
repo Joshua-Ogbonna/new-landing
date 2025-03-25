@@ -22,7 +22,7 @@ export default function DiscoverSection() {
   
   return (
     <div className="mt-12 sm:mt-20 md:mt-32 lg:mt-[200px] relative w-full md:max-w-[1440px] md:mx-[50px] min-h-[400px] rounded-lg md:rounded-[32px] overflow-hidden px-4 sm:px-6 md:px-0">
-      <div className="absolute inset-0">
+      <div className="">
         {/* Main content */}
         <div className="flex flex-col mx-4 md:mx-0  md:flex-row md:h-full">
           {/* Left side - Image */}
@@ -61,11 +61,18 @@ export default function DiscoverSection() {
           </div>
 
           {/* Right side - Text */}
-          <div className="w-full md:w-1/2 absol  p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center mt-4 md:mt-0">
+          {/* <div className="w-full md:w-1/2 px-6 mt-10 md:mt-0 md:px-16 text-white ">
+            <h1 className="font-Nebulica text-5xl md:text-7xl font-bold "> Discover New Music</h1>
+            <p className="font-poppins text-base mt-10">  An exhilarating journey into the uncharted realms of sound, inviting you to explore the endless possibilities
+              of the musical landscape. With boundless creativity and innovation at its core, this experience ignites your
+              passion for discovery and sets the stage for unforgettable musical moments.</p>
+          </div> */}
+          
+      <div className="w-full md:w-1/2   p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center mt-4 md:mt-0">
             <h2 className="text-3xl font-Nebulica sm:text-4xl md:text-5xl lg:text-[64px] text-white font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
               Discover New Music
             </h2>
-            <p className="text-base font-poppins sm:text-lg text-white leading-relaxed max-w-full md:max-w-[90%]">
+            <p className="text-base font-poppins sm:text-lg  text-white leading-relaxed max-w-full md:max-w-[90%]">
               An exhilarating journey into the uncharted realms of sound, inviting you to explore the endless possibilities
               of the musical landscape. With boundless creativity and innovation at its core, this experience ignites your
               passion for discovery and sets the stage for unforgettable musical moments.

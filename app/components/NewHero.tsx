@@ -24,7 +24,7 @@ const Slider = () => {
       }, []);
   return (
     <div>
-        <section className="section  sticky-section relative w-full min-h-screen bg-black overflow-hidden">
+        <section className="section font-Nebulica  sticky-section relative w-full min-h-screen bg-black overflow-hidden">
         <Nav />
         <div className="container mx-auto  h-[400px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
@@ -197,7 +197,7 @@ const Slider = () => {
 
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
-          <h1 className="text-[#CCFF00] reveal-text sm:text-2xl lg:text-6xl text-center md:text-left lg:text-right leading-none tracking-tight">
+          <h1 className="text-[#CCFF00] reveal-text text-3xl md:text-6xl text-center md:text-left lg:text-right leading-none tracking-tight">
            
             <span className="text-white font-bold"> For the Culture,
             <br /></span>{" "}
@@ -388,7 +388,7 @@ const Slider = () => {
 
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
-          <h1 className="text-black reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
+          <h1 className="text-black reveal-text text-3xl md:text-6xl text-center md:text-left lg:text-right leading-none tracking-tight">
            
             <span className=" font-bold"> Sign Up Today 
  <br /></span>{" "}
@@ -580,7 +580,7 @@ const Slider = () => {
 
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
-          <h1 className="text-[#CCFF00] reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
+          <h1 className="text-[#CCFF00] reveal-text text-3xl md:text-6xl text-center md:text-left lg:text-right leading-none tracking-tight">
            
             <span className="text-white font-bold"> Empowering Artists.   <br /></span>{" "}
             <span className="text-white font-bold">Engaging Listeners.</span>{" "}
