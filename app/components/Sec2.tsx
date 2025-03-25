@@ -64,19 +64,19 @@ const Sec2 = () => {
                         </div>
                         <div>
                             <p className="text-4xl font-bold">50+</p>
-                            <p className="text-sm mt-2">Our Popular Artist</p>
+                            <p className="text-sm mt-2">Our Popular Artists</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">100+</p>
-                            <p className="text-sm mt-2">Our Business Partner</p>
+                            <p className="text-sm mt-2">Our Business Partners</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">750+</p>
-                            <p className="text-sm mt-2">Our Coming Event</p>
+                            <p className="text-sm mt-2">Our Coming Events</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">20+</p>
-                            <p className="text-sm mt-2">Our Media Partner</p>
+                            <p className="text-sm mt-2">Our Media Partners</p>
                         </div>
                     </div>
                 </div>

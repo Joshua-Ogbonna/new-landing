@@ -10,6 +10,7 @@ import Trusted from "./components/Trusted";
 import Download from "./components/Download";
 import Footer from "./components/Footer";
 import NewHero from "./components/NewHero";
+import AudioPlayer from "./components/AudioPlayer";
 export default function Home() {
   return (
     <div className="bg-black h-full">
@@ -29,7 +30,8 @@ export default function Home() {
           />
         </div>
         <div className="relative z-10">
-          <AlbumPlayer />
+          {/* <AlbumPlayer /> */}
+          <AudioPlayer />
           <DiscoverSection />
         </div>
         <PricingSection />

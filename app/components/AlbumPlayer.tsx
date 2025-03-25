@@ -107,14 +107,14 @@ const AlbumPlayer = () => {
           {albums.map((album) => (
             <div
               key={album.id}
-              className="relative aspect-video rounded-xl overflow-hidden cursor-pointer group"
+              className="relative aspect-video rounded-md overflow-hidden cursor-pointer group"
               onClick={() => setSelectedAlbum(album)}
             >
               <Image
                 src={album.cover}
                 alt={`${album.title} by ${album.artist}`}
                 fill
-                className="object-cover transition-transform group-hover:scale-105"
+                className=" object-center transition-transform group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all">
                 {album === selectedAlbum && (
