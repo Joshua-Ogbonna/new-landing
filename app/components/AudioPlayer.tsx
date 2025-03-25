@@ -37,6 +37,8 @@ export default function AudioPlayer() {
     newAudio.onended = () => {
       setPlayingIndex(null);
       setProgress(0);
+      console.log(progress);
+      
     };
   };
 

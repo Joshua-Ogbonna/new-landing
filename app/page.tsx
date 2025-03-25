@@ -1,6 +1,5 @@
 "use client";
 import "./styles/fonts.css"
-import AlbumPlayer from "./components/AlbumPlayer";
 import Sec2 from "./components/Sec2";
 import Image from "next/image";
 import DiscoverSection from "./components/DiscoverSection";
