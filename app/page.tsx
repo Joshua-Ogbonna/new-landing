@@ -1,5 +1,5 @@
 "use client";
-
+import "./styles/fonts.css"
 import AlbumPlayer from "./components/AlbumPlayer";
 import Sec2 from "./components/Sec2";
 import Image from "next/image";
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="bg-black h-full">
       <NewHero />
-      <div>
+      <div className="relative top-[20px]nnnnn">
         <Sec2 />
         
       </div>

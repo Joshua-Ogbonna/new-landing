@@ -3,7 +3,7 @@ import React from "react";
 
 const Grow = () => {
   return (
-    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10">
+    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10 font-poppins">
       <div className="w-full lg:max-w-[1440px] mx-auto bg-[#D9D9D914] rounded-[20px] sm:rounded-[40px] md:rounded-[67px] flex flex-col md:flex-row items-center justify-between px-6 sm:px-8  py-8 sm:py-10 gap-6 md:gap-12">
         <div className="w-full md:w-auto flex justify-center md:justify-start">
           <Image 
@@ -15,7 +15,7 @@ const Grow = () => {
           />
         </div>
         <div className="text-center">
-          <h2 className="font-normal md:font-medium lg:font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white md:text-left max-w-full">
+          <h2 className="font-normal md:font-medium lg:font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-Nebulica text-white md:text-left max-w-full">
             Grow Revenue <br />as an Artiste
           </h2>
           <div className="flex justify-center md:justify-start">

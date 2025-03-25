@@ -1,3 +1,5 @@
+import { Poppins } from "next/font/google";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 import type { Config } from "tailwindcss";
 
 export default {
@@ -26,6 +28,10 @@ export default {
           from: { transform: 'rotate(360deg)' },
           to: { transform: 'rotate(0deg)' },
         },
+      },
+      fontFamily: {
+          poppins: ["Poppins", ...fontFamily.sans],
+          Nebulica: ["Nebulica", ...fontFamily.sans],
       },
     },
   },

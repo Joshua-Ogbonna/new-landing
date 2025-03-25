@@ -62,10 +62,10 @@ export default function DiscoverSection() {
 
           {/* Right side - Text */}
           <div className="w-full md:w-1/2 absol  p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center mt-4 md:mt-0">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-white font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
+            <h2 className="text-3xl font-Nebulica sm:text-4xl md:text-5xl lg:text-[64px] text-white font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
               Discover New Music
             </h2>
-            <p className="text-base sm:text-lg text-white leading-relaxed max-w-full md:max-w-[90%]">
+            <p className="text-base font-poppins sm:text-lg text-white leading-relaxed max-w-full md:max-w-[90%]">
               An exhilarating journey into the uncharted realms of sound, inviting you to explore the endless possibilities
               of the musical landscape. With boundless creativity and innovation at its core, this experience ignites your
               passion for discovery and sets the stage for unforgettable musical moments.

@@ -12,7 +12,7 @@ const Download = () => {
     background: 'linear-gradient(to left, #00131300, #C2EE03, #00131300)'
   }}
 ></div>
-      <div className="w-full md:max-w-[1440px] px-6 my-20 flex flex-col md:flex-row gap-10 md:gap-0 justify-between">
+      <div className="w-full font-Nebulica md:max-w-[1440px] px-6 my-20 flex flex-col md:flex-row gap-10 md:gap-0 justify-between">
         <div className="flex items-start justify-between flex-col gap-6">
           <p className="text-white text-3xl md:text-5xl">
             Come on, join now <br /> and feel the music <br /> events vibe

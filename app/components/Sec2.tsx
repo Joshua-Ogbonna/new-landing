@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Sec2 = () => {
     return (
-        <div className="overflow-hidden h-full bg-black border-4 border-violet-600 border-solid">
+        <div className="overflow-hidden font-poppins h-full bg-black border-4 border-violet-600 border-solid">
             <div className="relative">
                 <div className="absolute inset-0 z-0">
                     <Image

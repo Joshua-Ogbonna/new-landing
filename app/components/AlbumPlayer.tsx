@@ -94,7 +94,7 @@ const AlbumPlayer = () => {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
 
   return (
-    <div className="bg-[#1F201E] h-fit mt-20  md:max-w-[1440px] text-white py-10 rounded-[48px] mx-6 md:mx-20 ">
+    <div className="bg-[#1F201E] h-fit mt-20 font-Nebulica  md:max-w-[1440px] text-white py-10 rounded-[48px] mx-6 md:mx-20 ">
       <div className="">
             <h2 className="text-[30px] p-6 font-bold leading-[1.1] tracking-[-0.02em] block  text-center md:hidden ">
               Indulge in Your

@@ -6,20 +6,20 @@ export default function PricingSection() {
       <div className="flex flex-col md:flex-row items-start justify-between p-4 sm:p-6 md:p-8 rounded-lg md:rounded-2xl">
         {/* Top/Left side */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-          <h2 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 md:mb-8">
+          <h2 className="text-white font-bold text-3xl font-Nebulica sm:text-4xl md:text-3xl lg:text-6xl mb-6 md:mb-8">
             Sign Up.
             <br />
             Discover New Music.
             <br />
             Empower Artists.
           </h2>
-          <button className="text-white bg-transparent border border-white rounded-full px-6 sm:px-8 h-12 sm:h-14 font-medium hover:bg-white/90 hover:text-black transition-colors text-sm sm:text-base">
+          <button className="text-white bg-transparent border border-white rounded-full px-6 sm:px-8 h-12 sm:h-14 font-medium hover:bg-white/90 hover:text-black transition-colors text-sm sm:text-base font-poppins">
             Continue With Free Plan
           </button>
         </div>
 
         {/* Bottom/Right side */}
-        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row w-full gap-4 items-center justify-center py-4 md:py-6">
+        <div className="flex flex-col font-poppins sm:flex-row md:flex-col lg:flex-row w-full gap-4 items-center justify-center py-4 md:py-6">
           {/* Special Offer Card */}
           <div className="relative h-[240px] sm:h-[270px] w-full sm:w-[230px] max-w-[230px] rounded-[20px] md:rounded-[32px] bg-[#556B2F] p-6 md:p-8 flex flex-col">
             <div>

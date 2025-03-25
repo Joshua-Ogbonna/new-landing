@@ -107,7 +107,7 @@ const Trusted = () => {
   }, []);
   
   return (
-    <div className="w-full px-4 sm:px-6 md:px-8">
+    <div className="w-full px-4 sm:px-6 md:px-8 font-poppins">
       <div className="w-full md:max-w-[1440px] mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-[200px] flex flex-col md:flex-row items-center justify-around">
         {/* left section - CSS 3D Globe */}
         <div className="relative w-full max-w-[350px] sm:max-w-[450px] md:max-w-[521px] aspect-square">

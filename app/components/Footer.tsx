@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-[#C2EE03] text-[#121617] mt-[200px] px-6">
+    <div className="bg-[#C2EE03] text-[#121617] font-poppins mt-[200px] px-6">
       <div className="flex flex-col md:flex-row items-center justify-between max-w-[1440px] mx-auto py-6 text-lg  md:text-left">
         <div>© My Sound {new Date().getFullYear()} All rights reserved</div>
 

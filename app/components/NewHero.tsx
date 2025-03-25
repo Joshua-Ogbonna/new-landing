@@ -24,9 +24,9 @@ const Slider = () => {
       }, []);
   return (
     <div>
-        <section className="section sticky-section relative w-full min-h-screen bg-black overflow-hidden">
+        <section className="section  sticky-section relative w-full min-h-screen bg-black overflow-hidden">
         <Nav />
-        <div className="container mx-auto  h-[500px] flex flex-col md:flex-row justify-center items-center ">
+        <div className="container mx-auto  h-[400px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
 
         <div className="w-full md:w-1/2 flex justify-center items-center py-20 md:py-0">
@@ -197,12 +197,13 @@ const Slider = () => {
 
         {/* Right section with text */}
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
-          <h1 className="text-[#CCFF00] reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
+          <h1 className="text-[#CCFF00] reveal-text sm:text-2xl lg:text-6xl text-center md:text-left lg:text-right leading-none tracking-tight">
            
-            <span className="text-white font-bold"> Your <br /></span>{" "}
-            <span className="text-white font-bold">music</span>{" "}
+            <span className="text-white font-bold"> For the Culture,
+            <br /></span>{" "}
+            <span className="text-white">For the Future,</span>{" "}
             <br className="hidden lg:block" />
-            <span className="">your way</span>
+            <span className="">For the Sound.</span>
           </h1>
         </div>
       </div>
@@ -210,11 +211,11 @@ const Slider = () => {
       <Marq2
         text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
         speed={10}
-        className=" bg-[#CCFF00] h-[100px] mt-[130px] md:mt-[-10px] w-full py-5"
+        className="border-4 border-solid border-[#CCFF00] bg-[#CCFF00] h-[100px] mt-[130px] md:mt-[-10px] w-full py-5"
       /> 
     </section>
         {/* slider 2 */}
-        <section className="section sticky-section relative w-full min-h-screen bg-[#CCFF00] overflow-hidden">
+        <section className="section font-Nebulica sticky-section relative w-full min-h-screen bg-[#CCFF00] overflow-hidden">
         <Nav2 />
         <div className="container mx-auto  h-[500px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
@@ -389,12 +390,12 @@ const Slider = () => {
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
           <h1 className="text-black reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
            
-            <span className=" font-bold"> Earn
+            <span className=" font-bold"> Sign Up Today 
  <br /></span>{" "}
-            <span className=" font-bold">as you</span>{" "}
+            <span className=" ">Start Shaping the </span>{" "}
             <br className="hidden lg:block" />
             <span className="">
-            Grow</span>
+            Future of Music.</span>
           </h1>
         </div>
       </div>
@@ -406,7 +407,7 @@ const Slider = () => {
       /> 
     </section>
         {/* slider 3 */}
-        <section className="section sticky-section relative w-full min-h-screen bg-black overflow-hidden">
+        <section className="section font-Nebulica sticky-section relative w-full min-h-screen bg-black overflow-hidden">
         <Nav />
         <div className="container mx-auto  h-[500px] flex flex-col md:flex-row justify-center items-center ">
         {/* Left section with animation */}
@@ -581,10 +582,10 @@ const Slider = () => {
         <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
           <h1 className="text-[#CCFF00] reveal-text text-7xl sm:text-5xl lg:text-7xl font-bold text-center md:text-left lg:text-right leading-none tracking-tight">
            
-            <span className="text-white font-bold"> Your <br /></span>{" "}
-            <span className="text-white font-bold">music</span>{" "}
+            <span className="text-white font-bold"> Empowering Artists.   <br /></span>{" "}
+            <span className="text-white font-bold">Engaging Listeners.</span>{" "}
             <br className="hidden lg:block" />
-            <span className="">your way</span>
+            <span className="">Building Culture.</span>
           </h1>
         </div>
       </div>
