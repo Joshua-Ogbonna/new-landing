@@ -18,13 +18,13 @@ const Download = () => {
             Come on, <span className="text-[#C2EE03]">Join Now </span><br /> and feel the music <br /> events vibe
           </p>
           <div className="flex items-center gap-4">
-            <Link href={"/"}>
+            <Link href={"https://www.instagram.com/mysoundsglobal?igsh=MWJhdzlzNWVqcmpncw=="} target="_blank">
               <Image src="/ig.png" alt="" width={36} height={36} />
             </Link>
-            <Link href={"/"}>
+            <Link href={"https://www.youtube.com/@MySoundMySound"} target="_blank">
               <Image src="/yt.png" alt="" width={36} height={36} />
             </Link>
-            <Link href={"/"}>
+            <Link href={"https://x.com/mysound_23?s=21&t=Ibogi4ZgED1nWYM_Bug7Tw"} target="_blank">
               <Image src="/tw.png" alt="" width={36} height={36} />
             </Link>
           </div>

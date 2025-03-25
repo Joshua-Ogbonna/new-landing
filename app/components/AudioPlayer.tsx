@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 
 export default function AudioPlayer() {
@@ -74,7 +74,7 @@ export default function AudioPlayer() {
          <div className="w-1/2">
          {audioData.map((item, index) => (
             <div
-              key={index}
+              key={index} 
               className={`flex   justify-between items-center px-auto py-3 rounded-lg cursor-pointer transition-all ${
                 playingIndex === index ? "text-[#c2ee03] " : ""
               }`}
