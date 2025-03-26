@@ -20,7 +20,9 @@ interface ErrorState {
     confirmPassword?: string;
     general?: string;
 }
-
+interface SuccessState {
+    message?: string;
+}
 const SignUp: React.FC = () => {
     // const router = useRouter()
     const [formData, setFormData] = useState<FormData>({
@@ -31,7 +33,9 @@ const SignUp: React.FC = () => {
     });
 
     const [errors, setErrors] = useState<ErrorState>({});
-
+     const [success, setSuccess] = useState<SuccessState>({
+                message: ''
+            })
     const validateForm = (): boolean => {
         const newErrors: ErrorState = {};
 
@@ -155,13 +159,18 @@ const SignUp: React.FC = () => {
             <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold mb-4">Sign Up</h2>
+                        <h2 className="text-3xl font-bold mb-4">Log In</h2>
                         <p className="text-gray-400">Let&apos;s Rock!!! Resume your beats run</p>
                     </div>
 
                     {errors.general && (
                         <div className="bg-red-500 text-white p-3 rounded mb-4">
                             {errors.general}
+                        </div>
+                    )}
+                     {success.message && (
+                        <div className="bg-green-500 text-white p-3 rounded mb-4">
+                            {success.message}
                         </div>
                     )}
 

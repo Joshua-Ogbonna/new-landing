@@ -20,6 +20,9 @@ interface ErrorState {
     confirmPassword?: string;
     general?: string;
 }
+interface SuccessState {
+    message?: string;
+}
 
 const SignUp: React.FC = () => {
     // const router = useRouter()
@@ -29,7 +32,9 @@ const SignUp: React.FC = () => {
         password: '',
         confirmPassword: ''
     });
-
+        const [success, setSuccess] = useState<SuccessState>({
+            message: ''
+        })
     const [errors, setErrors] = useState<ErrorState>({});
 
     const validateForm = (): boolean => {
@@ -107,7 +112,8 @@ const SignUp: React.FC = () => {
             );
 
             // Handle successful registration
-            console.log('Registration successful', result.data);
+            setSuccess(result.data)
+            console.log('Registration successful', success);
             // router.push("/Dashboard")
             // TODO: Add navigation or success state
         }
@@ -162,6 +168,11 @@ const SignUp: React.FC = () => {
                     {errors.general && (
                         <div className="bg-red-500 text-white p-3 rounded mb-4">
                             {errors.general}
+                        </div>
+                    )}
+                     {success.message && (
+                        <div className="bg-green-500 text-white p-3 rounded mb-4">
+                            {success.message}
                         </div>
                     )}
 
