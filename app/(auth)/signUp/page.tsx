@@ -32,7 +32,8 @@ const SignUp = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(formData);
+        formData ? alert('Credentials recieved') : alert('error could not validate')
+        setErrors ?  console.log(setErrors) : console.log(formData);
         
     };
 
