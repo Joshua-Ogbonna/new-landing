@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { FaArrowRightLong } from "react-icons/fa6";
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 
 // Validation Interfaces
