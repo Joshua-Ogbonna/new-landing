@@ -211,7 +211,7 @@ const Slider = () => {
       <Marq2
         text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
         speed={10}
-        className="border-4 border-solid border-[#CCFF00] bg-[#CCFF00] h-[100px] mt-[130px] md:mt-[-10px] w-full py-5"
+        className="border-4 border-solid border-[#CCFF00] bg-[#CCFF00] h-[100px] mt-[130px] md:mt-[-10px] w-full py-5 text-black"
       /> 
     </section>
         {/* slider 2 */}
@@ -593,7 +593,7 @@ const Slider = () => {
       <Marq2
         text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
         speed={10}
-        className=" bg-[#CCFF00] h-[100px] mt-[130px] md:mt-[-10px] w-full py-5"
+        className=" bg-[#CCFF00] text-black h-[100px] mt-[130px] md:mt-[-10px] w-full py-5"
       /> 
     </section>
     </div>

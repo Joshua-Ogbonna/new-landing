@@ -6,7 +6,7 @@ interface MarqueeProps {
   className?: string;
 }
 
-const Marq2: React.FC<MarqueeProps> = ({ text, speed = 20, className = '' }) => {
+const Marq2: React.FC<MarqueeProps> = ({ text, speed = 20, className = 'text-black' }) => {
   return (
     <div className={`marquee-container ${className}`}>
       <div className="marquee-content font-bold text-5xl" style={{ animationDuration: `${speed}s` }}>

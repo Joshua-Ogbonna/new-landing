@@ -3,3 +3,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+    :root {
+      --background: #000000;
+      --foreground: #ededed;
+      --green: #C2EE03;
+      --formBg: #171717;
+    }
+  body {
+    color: var(--green);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  

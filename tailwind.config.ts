@@ -13,6 +13,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        formBg: "#171717",
       },
       animation: {
         'spin-slow': 'spin 20s linear infinite',

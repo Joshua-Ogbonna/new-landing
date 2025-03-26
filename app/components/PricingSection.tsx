@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function PricingSection() {
   return (
-    <div className="relative w-full md:max-w-[1440px] mx-auto py-10 md:py-20 px-4 sm:px-6 md:px-8">
+    <div className="relative w-full md:max-w-[1440px] mx-auto md:mx-0 py-10 md:py-20 px-4 sm:px-6 md:px-8">
       <div className="flex flex-col md:flex-row items-start justify-between p-4 sm:p-6 md:p-8 rounded-lg md:rounded-2xl">
         {/* Top/Left side */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
