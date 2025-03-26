@@ -111,7 +111,9 @@ const SignUp: React.FC = () => {
             );
 
             // Handle successful registration
-            console.log('Registration successful', result.data);
+               // Handle successful registration
+               setSuccess(result.data)
+               console.log('Registration successful', success);
             // router.push('/Dashboard')
             // TODO: Add navigation or success state
         }
