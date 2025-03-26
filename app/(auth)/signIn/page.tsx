@@ -32,8 +32,19 @@ const SignUp = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        formData ? alert('Credentials recieved') : alert('error could not validate')
-        setErrors ?  console.log(setErrors) : console.log(formData);
+     // Replace the problematic conditional expression
+     if (formData) {
+        alert('Credentials received');
+    } else {
+        alert('Error: could not validate');
+    }
+
+    // Replace the ternary with a proper conditional
+    if (setErrors) {
+        console.log(setErrors);
+    } else {
+        console.log(formData);
+    }
     };
 
     return (
