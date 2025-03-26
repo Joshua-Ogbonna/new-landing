@@ -97,7 +97,7 @@ const SignUp: React.FC = () => {
             };
 
             const result = await axios.post(
-                'https://mysounduk-service.com/api/login', 
+                'https://mysounduk-service.com/api/register', 
                 payload,
                 {
                     headers: {
@@ -108,7 +108,7 @@ const SignUp: React.FC = () => {
 
             // Handle successful registration
             console.log('Registration successful', result.data);
-            router.push('/Dashboard')
+            router.push("")
             // TODO: Add navigation or success state
         }
         catch (err) {
@@ -146,7 +146,7 @@ const SignUp: React.FC = () => {
                 <Image 
                     width={800} 
                     height={900} 
-                    src="/signIn.png" 
+                    src="/signup.png" 
                     alt='green woman' 
                     className="object-center md:object-cover w-full md:h-screen h-[400px]"
                 />
@@ -156,7 +156,7 @@ const SignUp: React.FC = () => {
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold mb-4">Sign Up</h2>
-                        <p className="text-gray-400">Let&apos;s Rock!!! Resume your beats run</p>
+                        <p className="text-gray-400">Let&apos;s Rock!!! Begin your listening run.</p>
                     </div>
 
                     {errors.general && (

@@ -50,7 +50,7 @@ export default function Nav() {
         </div>
         <div className="hidden md:flex items-center gap-4 text-base">
           <Link
-            href="/signUp"
+            href="/create"
             className={`bg-[#313133] text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity`}
           >
             Sign up
