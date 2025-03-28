@@ -19,7 +19,7 @@ export default function DashboardLayout({
       <div className="w-[60px] sm:w-[80px] bg-[#121212] border-r border-[#2a2a2a] flex flex-col items-center py-4 sm:py-6 space-y-6 sm:space-y-8">
         <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-400 rounded-full overflow-hidden">
           <Image
-            src={image ?? "/ava.png"}
+            src={image || "/ava.png"}
             alt="Profile"
             width={40}
             height={40}

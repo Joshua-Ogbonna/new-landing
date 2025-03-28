@@ -33,7 +33,7 @@ export default function PricingSection() {
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
             <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-sm sm:text-md font-bold hover:bg-[#d4ff03] transition-colors">
-              $34 USD
+            £23
             </button>
           </div>
 
@@ -50,7 +50,7 @@ export default function PricingSection() {
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20"
             />
             <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-sm sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
-              $34 USD
+            £99 
             </button>
           </div>
 
@@ -61,7 +61,7 @@ export default function PricingSection() {
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
             <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-sm sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
-              $34 USD
+            £ 49 
             </button>
           </div>
         </div>

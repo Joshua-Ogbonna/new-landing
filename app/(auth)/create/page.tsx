@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { FaArrowRightLong } from "react-icons/fa6";
 import axios from 'axios';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 // Validation Interfaces
 interface FormData {
@@ -25,7 +25,7 @@ interface SuccessState {
 }
 
 const SignUp: React.FC = () => {
-    // const router = useRouter()
+    const router = useRouter()
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -107,14 +107,18 @@ const SignUp: React.FC = () => {
                 {
                     headers: {
                         'Content-Type': 'application/json'
+                        
                     }
                 }
             );
 
             // Handle successful registration
             setSuccess(result.data)
-            console.log('Registration successful', success);
-            // router.push("/Dashboard")
+            console.log('Registration successful', result.data);
+            console.log(result?.data?.data.id);
+            
+            localStorage.setItem("userId", result?.data?.data.id)
+            router.push("/artistSignIn")
             // TODO: Add navigation or success state
         }
         catch (err) {

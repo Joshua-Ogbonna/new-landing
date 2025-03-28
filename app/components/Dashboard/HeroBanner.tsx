@@ -6,7 +6,7 @@ export default function HeroBanner() {
       <div 
         className="relative h-[449px] flex items-center p-8"
         style={{
-          backgroundImage: 'url(/bggg.png)',
+          backgroundImage: 'url(/dashhead.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}

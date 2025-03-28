@@ -8,9 +8,9 @@ export default function AudioPlayer() {
 
   const audioData = [
     { image: "/baggenew.jpg", audio: "/songs/NoGood.mp3", title: "No Good", artist: "Bagge" },
-    { image: "/gilly-mu.jpeg", audio: "/songs/Baby.MP3", title: "Baby", artist: "Gilly Mu" },
-    { image: "/deeciennew.jpg", audio: "/songs/Waist.mp3", title: "Waist", artist: "Deecien" },
-    { image: "/CA7DO.jpeg", audio: "/songs/Ripple-Effect.MP3", title: "Ripple Effect", artist: "CA7DO" },
+    { image: "/mikelnew.jpg", audio: "/songs/Get-out-my-house-Mikel-.mp3", title: "Get out my house", artist: "Mikel " },
+    { image: "/king thuna.jpg", audio: "/songs/RIDE OR DIE King thona.wav", title: "Ride or die", artist: "king thuna" },
+    { image: "/bobbie richie.jpg", audio: "/songs/bobby dodo-short.MP3", title: "Ripple Effect", artist: "Bobbie Richie" },
   ];
 
   const handlePlayPause = (audioSrc: string, index: number) => {
@@ -54,7 +54,7 @@ export default function AudioPlayer() {
             <img
               src={item.image}
               alt="Play Music"
-              className={`w-full object-cover rounded-lg cursor-pointer transition-transform hover:scale-105 ${playingIndex === index ? "border-4 border-[#c2ee03] " : ""
+              className={`w-full h-[300px] object-cover rounded-lg cursor-pointer transition-transform hover:scale-105 ${playingIndex === index ? "border-4 border-[#c2ee03] " : ""
                 }`}
               onClick={() => handlePlayPause(item.audio, index)}
             />

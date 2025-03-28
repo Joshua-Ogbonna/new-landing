@@ -13,7 +13,7 @@ const Sec2 = () => {
                     />
                 </div>
             </div>
-            <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row justify-center items-center relative h-full">
+            <div className="md:px-32 px-10 bg-black flex flex-col md:flex-row md:gap-[180px] justify-between items-center  h-full">
                 <div className="full md:w-1/2 h-fit">
                     <p className="text-[#CCFF00] text-md md:text-xl mt-10">
                         Welcome to MySounds Global, where music isn&apos;t just streamed—it&apos;s
@@ -31,10 +31,10 @@ const Sec2 = () => {
                         Learn more
                     </button>
                 </div>
-                <div className="relative w-full h-full">
-                    <Image src="/person.png" width={900} height={900} alt="man" />
+                <div className="relative w-full md:w-1/2 h-full">
+                    <Image src="/couple.png" width={450} height={450} alt="man" />
                 </div>
-                <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[90px]  md:p-4 ">
+                {/* <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[90px]  md:p-4 ">
                     <Image
                         width={150}
                         height={119}
@@ -42,9 +42,9 @@ const Sec2 = () => {
                         alt="card 1"
                         className="w-[50px] md:w-[100px] h-auto"
                     />
-                </div>
+                </div> */}
 
-                <div className="absolute md:bottom-[10%] bottom-[1%] left-[20%] md:left-[55%] p-2 md:p-4 ">
+                {/* <div className="absolute md:bottom-[10%] bottom-[1%] left-[20%] md:left-[55%] p-2 md:p-4 ">
                     <Image
                         width={150}
                         height={119}
@@ -52,31 +52,31 @@ const Sec2 = () => {
                         alt="card 1"
                         className="w-[60px] md:w-[100px]"
                     />
-                </div>
+                </div> */}
             </div>
             {/* Bottom stats section */}
             <div className=" bg-[#c2ee03] py-8 w-screen">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-black max-w-[1300px] mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-black max-w-[1300px] font-Nebulica mx-auto">
                         <div>
                             <p className="text-4xl font-bold">150K+</p>
-                            <p className="text-sm mt-2">Our Happy Visitors</p>
+                            <p className="text-base mt-2 font-poppins">Our Happy Visitors</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">50+</p>
-                            <p className="text-sm mt-2">Our Popular Artists</p>
+                            <p className="text-base mt-2 font-poppins">Our Popular Artists</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">100+</p>
-                            <p className="text-sm mt-2">Our Business Partners</p>
+                            <p className="text-base mt-2 font-poppins">Our Business Partners</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">750+</p>
-                            <p className="text-sm mt-2">Our Coming Events</p>
+                            <p className="text-base mt-2 font-poppins">Our Coming Events</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">20+</p>
-                            <p className="text-sm mt-2">Our Media Partners</p>
+                            <p className="text-base mt-2 font-poppins">Our Media Partners</p>
                         </div>
                     </div>
                 </div>

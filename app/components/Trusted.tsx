@@ -56,56 +56,7 @@ const testimonials: Testimonial[] = [
 const Trusted = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial>(testimonials[0]);
   const globeRef = useRef<HTMLDivElement>(null);
-  const rotationRef = useRef({ x: 0, y: 0 });
-  const animationRef = useRef<number | null>(null);
 
-  // Set up globe rotation
-  useEffect(() => {
-    const rotateGlobe = () => {
-      if (!globeRef.current) return;
-      
-      rotationRef.current.y += 0.2;
-      globeRef.current.style.transform = `rotateX(${rotationRef.current.x}deg) rotateY(${rotationRef.current.y}deg)`;
-      
-      animationRef.current = requestAnimationFrame(rotateGlobe);
-    };
-    
-    animationRef.current = requestAnimationFrame(rotateGlobe);
-    
-    // Handle mouse movement for interactive rotation
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!globeRef.current || !globeRef.current.parentElement) return;
-      
-      const container = globeRef.current.parentElement;
-      const rect = container.getBoundingClientRect();
-      // const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      // Calculate mouse position relative to the center of the globe
-      // const mouseX = e.clientX - centerX;
-      const mouseY = e.clientY - centerY;
-      
-      // Calculate rotation angles based on mouse position
-      // const rotationY = (mouseX / rect.width) * 20;
-      const rotationX = (mouseY / rect.height) * 20;
-      
-      rotationRef.current = { 
-        x: rotationX, 
-        y: rotationRef.current.y // Keep the automatic rotation for Y axis
-      };
-    };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    
-    // Cleanup
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-  
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 font-poppins">
       <div className="w-full md:max-w-[1440px] mx-auto mt-16 sm:mt-24 md:mt-32 lg:mt-[200px] flex flex-col md:flex-row items-center justify-around">
@@ -115,8 +66,7 @@ const Trusted = () => {
           <div className="relative w-full h-full" style={{ perspective: "1000px" }}>
             <div 
               ref={globeRef} 
-              className="relative w-full h-full transition-transform duration-100 transform-style-preserve-3d"
-              style={{ transformStyle: "preserve-3d" }}
+              className="relative w-full h-full"
             >
               {/* Front face - the world image */}
               <div className="absolute inset-0 backface-hidden">
@@ -131,7 +81,7 @@ const Trusted = () => {
               
               {/* Back face - a mirrored world image with different colors */}
               <div 
-                className="absolute inset-0 backface-hidden"
+                className="absolute inset-0"
                 style={{ transform: "rotateY(180deg)" }}
               >
                 <Image 
@@ -139,7 +89,7 @@ const Trusted = () => {
                   alt="world back" 
                   width={521} 
                   height={527} 
-                  className="relative z-10 w-full h-auto filter hue-rotate-180" 
+                  className="relative z-10 w-full h-auto filter" 
                 />
               </div>
             </div>
@@ -216,11 +166,6 @@ const Trusted = () => {
         .backface-hidden {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-        }
-        
-        .transform-style-preserve-3d {
-          transform-style: preserve-3d;
-          -webkit-transform-style: preserve-3d;
         }
         
         @keyframes pulse {

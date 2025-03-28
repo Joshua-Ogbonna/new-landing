@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { FaArrowRightLong } from "react-icons/fa6";
 import axios from 'axios';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 // Validation Interfaces
 interface FormData {
@@ -24,7 +24,7 @@ interface SuccessState {
     message?: string;
 }
 const SignUp: React.FC = () => {
-    // const router = useRouter()
+    const router = useRouter()
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -113,8 +113,12 @@ const SignUp: React.FC = () => {
             // Handle successful registration
                // Handle successful registration
                setSuccess(result.data)
-               console.log('Registration successful', success);
-            // router.push('/Dashboard')
+               console.log('Registration successful', result.data);
+               localStorage.setItem("token", result.data.data.token)
+               console.log(result.data.data.token);
+               
+
+            router.push('/Dashboard')
             // TODO: Add navigation or success state
         }
         catch (err) {

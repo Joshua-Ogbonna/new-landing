@@ -1,6 +1,6 @@
 "use client";
 // import { a } from "react-scroll";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +11,18 @@ export default function Nav() {
   };
   return (
     <div>
-      <div className="flex flex-row justify-between items-center p-2 md:px-32 bg-black text-white sticky shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+      <div 
+        className="flex flex-row justify-between items-center p-2 md:px-32 
+        bg-black/70 text-white fixed top-0 left-0 right-0 z-[1000] 
+        backdrop-blur-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+      >
         <div>
           <Link href="/">
-          <Image src="/brl.png" alt="" width={100} height={100} />
+            <Image src="/brl.png" alt="" width={100} height={100} />
           </Link>
         </div>
+        
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-5 font-medium p-1 cursor-pointer">
           <Link
             href="#"
@@ -43,11 +49,17 @@ export default function Nav() {
             Team
           </Link>
         </nav>
+
+        {/* Mobile Menu Button */}
         <div className="flex md:hidden cursor-pointer" onClick={handleNav}>
-          <div className="p-2">
+          {nav ? (
+            <AiOutlineClose size={30} />
+          ) : (
             <AiOutlineMenu size={30} />
-          </div>
+          )}
         </div>
+
+        {/* Desktop Auth Buttons */}
         <div className="hidden md:flex items-center gap-4 text-base">
           <Link
             href="/create"
@@ -63,39 +75,50 @@ export default function Nav() {
           </Link>
         </div>
       </div>
+
+      {/* Mobile Navigation */}
       <div
-        className={`${
-          nav ? "translate-y-[-100%]" : "hidden"
-        } md:hidden flex flex-col absolute bg-[#CCFF00] left-0 top-0 text-center text-black text-[20px] hover:text-yellow pb-4 gap-8 w-full h-fit transition-transform duration-300 font-semibold`}
+        className={`fixed top-0 left-0 w-full h-screen bg-[#CCFF00] 
+        md:hidden transform transition-transform duration-300 
+        ${nav ? 'translate-y-0' : '-translate-y-full'} 
+        z-[999] flex flex-col items-center justify-center gap-8 pt-20 text-center`}
       >
-        {/* mobile nav */}
+        <div className="absolute top-4 right-4" onClick={handleNav}>
+          <AiOutlineClose size={30} className="text-black" />
+        </div>
+
         <Link
-          href="# "
-          className="text-black text-[20px] hover:text-yellow transition-all "
+          href="#"
+          className="text-black text-[20px] hover:text-yellow transition-all"
+          onClick={handleNav}
         >
           About Us
         </Link>
         <Link
           href="#"
-          className="text-black text-[20px] hover:text-yellow transition-all "
+          className="text-black text-[20px] hover:text-yellow transition-all"
+          onClick={handleNav}
         >
           Our Objectives
         </Link>
         <Link
           href="#"
-          className="text-black text-[20px] hover:text-yellow transition-all "
+          className="text-black text-[20px] hover:text-yellow transition-all"
+          onClick={handleNav}
         >
           Our Values
         </Link>
         <Link
           href="#"
           className="text-black text-[20px] hover:text-yellow transition-all"
+          onClick={handleNav}
         >
           Our Team
         </Link>
         <Link
-          href="# "
+          href="#"
           className="text-black text-[20px] hover:text-yellow transition-all"
+          onClick={handleNav}
         >
           Contact Us
         </Link>
