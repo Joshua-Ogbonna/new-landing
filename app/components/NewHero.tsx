@@ -24,234 +24,90 @@ const Slider = () => {
   }, []);
   return (
     <div>
-      <section className="section font-Nebulica  sticky-section relative w-full min-h-screen bg-black overflow-hidden">
-        <Nav />
-        <div className="container mx-auto  h-[400px] flex flex-col md:flex-row justify-center items-center ">
-          {/* Left section with animation */}
-
-          <div className="w-full md:w-1/2 flex justify-center items-center py-20 md:py-0">
-            <style jsx>
-              {`
-              .loader-container {
-                position: relative;
-                width: 280px;
-                height: 280px;
-                display: flex;
-              
-                justify-content: center;
-                align-items: center;
-              }
-
-              .loader {
-                position: absolute;
-                width: 300px;
-                height: 300px;
-                transform-style: preserve-3d;
-                transform: perspective(500px) rotateX(60deg);
-              }
-
-              @media (min-width: 768px) {
-                .loader {
-                  width: 400px;
-                  height: 400px;
-                }
-              }
-
-              @media (min-width: 1024px) {
-                .loader {
-                  width: 460px;
-                  height: 460px;
-                }
-              }
-
-              .loader span {
-                position: absolute;
-                display: block;
-                border: 5px solid #c2ee03;
-                box-shadow: 0 5px 0 #000;
-                box-sizing: border-box;
-                border-radius: 50%;
-                opacity: 0.8;
-              }
-
-              /* Animation only for the outer 4 rings */
-              .loader span:nth-child(1),
-              .loader span:nth-child(2),
-              .loader span:nth-child(3),
-              .loader span:nth-child(4) {
-                animation: waveMotion 4s ease-out infinite;
-              }
-
-              .image-container {
-                position: absolute;
-                z-index: 50;
-                bottom: 20px;
-                right: -70px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 400px;
-                height: 400px;
-              }
-
-              @media (min-width: 768px) {
-                .image-container {
-                  width: 300px;
-                  height: 300px;
-                }
-              }
-
-              @media (min-width: 1024px) {
-                .image-container {
-                  width: 400px;
-                  height: 400px;
-                }
-              }
-
-              @keyframes waveMotion {
-                0% {
-                  transform: scale(0.95);
-                  opacity: 0.8;
-                }
-                50% {
-                  transform: scale(1.05);
-                  opacity: 1;
-                }
-                100% {
-                  transform: scale(0.95);
-                  opacity: 0.8;
-                }
-              }
-
-              .loader span:nth-child(1) {
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                animation-delay: 0s;
-              }
-              .loader span:nth-child(2) {
-                top: 10px;
-                bottom: 10px;
-                left: 10px;
-                right: 10px;
-                animation-delay: -0.3s;
-              }
-              .loader span:nth-child(3) {
-                top: 20px;
-                bottom: 20px;
-                left: 20px;
-                right: 20px;
-                animation-delay: -0.6s;
-              }
-              .loader span:nth-child(4) {
-                top: 30px;
-                bottom: 30px;
-                left: 30px;
-                right: 30px;
-                animation-delay: -0.9s;
-              }
-              .loader span:nth-child(5) {
-                top: 40px;
-                bottom: 40px;
-                left: 40px;
-                right: 40px;
-              }
-              .loader span:nth-child(6) {
-                top: 50px;
-                bottom: 50px;
-                left: 50px;
-                right: 50px;
-              }
-              .loader span:nth-child(7) {
-                top: 60px;
-                bottom: 60px;
-                left: 60px;
-                right: 60px;
-              }
-            `}
-            </style>
-
-            <div className="loader-container   top-[120px] md:top-0 md:mt-[60px]">
-              <div className="loader">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-
-              <div className="image-container">
-                <Image
-                  src="/ip.png"
-                  alt="person"
-                  width={400}
-                  height={400}
-                  className="object-contain z-10 w-[270px] h-[270px] md:w-[400px] md:h-[400px]"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Right section with text */}
-          <div className="w-full  md:w-1/2 mt-8 md:mt-0 px-4">
-            <h1 className="text-[#CCFF00] reveal-text text-3xl md:text-6xl text-center md:text-left lg:text-right leading-none tracking-tight">
-
-              <span className="text-white font-bold"> For the Culture,
-                <br /></span>{" "}
-              <span className="text-white">For the Future,</span>{" "}
-              <br className="hidden lg:block" />
-              <span className="">For the Sound.</span>
-            </h1>
+      <section className="section font-Nebulica relative w-full min-h-screen bg-black overflow-hidden">
+      <Nav />
+      
+      <div className="container mx-auto px-4 lg:px-8 xl:px-16 flex flex-col lg:flex-row justify-between items-center min-h-[calc(100vh-100px)] space-y-8 lg:space-y-0">
+        {/* Image Section - Desktop Optimization */}
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-start xl:justify-center items-center">
+          <div className="relative w-full max-w-[500px] xl:max-w-[600px] aspect-square">
+            <Image
+              src="/slide2.png"
+              alt="Artist with headphones"
+              fill
+              priority
+              className="object-cover rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500 ease-in-out"
+            />
           </div>
         </div>
 
-        <Marq2
-          text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
-          speed={10}
-          className="border-4 border-solid border-[#CCFF00] bg-[#CCFF00] h-[100px] mt-[130px] md:mt-[-10px] w-full py-5 text-black"
-        />
-      </section>
+        {/* Text Section - Desktop Typography and Alignment */}
+        <div className="w-full lg:w-1/2 text-center lg:text-right space-y-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight leading-none">
+            <span className="block">
+              <span className="text-white font-bold">For the Culture,</span>
+            </span>
+            <span className="block mt-2 lg:mt-4">
+              <span className="text-white">For the Future,</span>
+            </span>
+            <span className="block mt-2 lg:mt-4">
+              <span className="text-[#CCFF00]">For the Sound.</span>
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      {/* Marquee Section - Full Width with Enhanced Styling */}
+      <Marq2
+        text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •"
+        speed={10}
+        className="border-4 border-solid border-[#CCFF00] bg-[#CCFF00] h-[60px] md:h-[100px] w-full py-2 md:py-5 text-black text-lg md:text-xl"
+      />
+    </section>
       {/* slider 2 */}
       <section className="section font-Nebulica sticky-section relative w-full min-h-screen bg-[#CCFF00] overflow-hidden">
-        <Nav2 />
-        <div className="container min-h-screen flex items-center justify-center">
-  <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-16 relative max-w-6xl">
-    {/* Left section with image - hidden on smaller screens */}
-    <div className="hidden lg:flex items-center justify-center relative">
-      <div className="relative">
-        <img
-          src="/womring.png"
-          alt="Artist with headphones"
-          className="w-full h-full object-center"
-        />
-      </div>
-      <div className="absolute">
-        <img
-          src="/slide2.png"
-          alt="Artist with headphones"
-          className="w-[300px] h-[300px] transform hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-    </div>
+      <Nav2 />
+      <div className="container min-h-screen flex items-center justify-center">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-16 relative max-w-7xl">
+          {/* Left section with layered images - precise desktop positioning */}
+          <div className="hidden lg:flex items-center justify-center relative w-full h-[600px] xl:h-[700px]">
+            {/* Background image - full coverage */}
+            <div className="absolute inset-0 z-10">
+              <Image
+                src="/womring.png"
+                alt="Background artist image"
+                fill
+                priority
+                className="object-contain object-center"
+              />
+            </div>
+            
+            {/* Overlay image with enhanced hover effect */}
+            <div className="absolute z-20 bottom-40 right-0 w-[350px] h-[350px] xl:w-[450px] xl:h-[450px]">
+              <Image
+                src="/slide2.png"
+                alt="Foreground artist image"
+                fill
+                priority
+                className="object-cover transform transition-all duration-500 hover:scale-105 hover:rotate-3 "
+              />
+            </div>
+          </div>
 
-    {/* Right section with text */}
-    <div className="flex flex-col text-black justify-center items-end space-y-6 w-full">
-      <h2 className="text-4xl md:text-7xl max-w-lg font-semibold text-right leading-[1.1]">
-        Rhythm<br />
-        Roots<br />
-        Rise
-      </h2>
-      <p className="font-poppins font-semibold text-base text-right max-w-md">
-        Celebrating global beats, honoring heritage, and elevating artists MySoundsglobal connects culture, creativity, and community
-      </p>
-    </div>
-  </div>
-</div>
-
-      </section>
+          {/* Right section with text - precise desktop alignment */}
+          <div className="flex flex-col text-black justify-center items-end space-y-6 w-full px-4 lg:px-0">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-right leading-[0.9] tracking-tighter">
+              <span className="block text-black">Rhythm</span>
+              <span className="block text-black">Roots</span>
+              <span className="block text-[#000]">Rise</span>
+            </h2>
+            <p className="font-poppins font-semibold text-base md:text-lg lg:text-xl text-right max-w-md text-black/80">
+              Celebrating global beats, honoring heritage, and elevating artists. MySoundsglobal connects culture, creativity, and community.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
       {/* slider 3 */}
       <section className="relative font-Nebulica bg-black text-white min-h-screen flex items-center overflow-hidden">
         <Nav />
