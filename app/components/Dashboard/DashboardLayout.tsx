@@ -112,7 +112,8 @@ export default function DashboardLayout({
         <header className="p-4 sm:p-6 pb-0">
           <div className="flex flex-col">
             <h1 className="text-[#C2EE03] text-2xl sm:text-3xl font-bold">
-              Good Morning, {name}
+              Good Morning, Daniel 
+              {/* {name} */}
             </h1>
             <p className="text-gray-400 text-sm sm:text-base mt-1">
               Your overview is here
