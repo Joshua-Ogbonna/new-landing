@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import DashboardLayout from "../components/Dashboard/DashboardLayout";
 import HeroBanner from "../components/Dashboard/HeroBanner";
 import ArtistProfile from "../components/Dashboard/ArtistProfile";

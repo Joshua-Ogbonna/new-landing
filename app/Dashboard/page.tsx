@@ -11,7 +11,7 @@ import TopCountries from "../components/Dashboard/TopCountries";
 
 const page = () => {
   return (
-<DashboardLayout name="John Doe Artist" image="/ava.png">
+<DashboardLayout name="Daniel The Rapper" image="/ava.png">
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left Section - 70% width */}
         <div className="flex-1">

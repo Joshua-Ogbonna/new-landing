@@ -246,6 +246,7 @@ const Id = localStorage.getItem("userId")
                     )}
                     {success.message && (
                         <div className="bg-green-500 text-white p-3 rounded mb-4">
+                            setSuccess(success.message)
                             {success.message}
                         </div>
                     )}
