@@ -78,25 +78,19 @@ const Stats = () => {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-black max-w-[1300px] mx-auto">
               <div>
-                <p className="text-4xl font-bold">150K+</p>
+                <p className="text-4xl font-bold">72K+</p>
                 <p className="text-sm mt-2">Our Happy Visitors</p>
               </div>
               <div>
                 <p className="text-4xl font-bold">50+</p>
-                <p className="text-sm mt-2">Our Popular Artist</p>
+                <p className="text-sm mt-2">Our  Artists</p>
               </div>
+          
               <div>
-                <p className="text-4xl font-bold">100+</p>
-                <p className="text-sm mt-2">Our Business Partner</p>
+                <p className="text-4xl font-bold">30+</p>
+                <p className="text-sm mt-2">Up Coming Events</p>
               </div>
-              <div>
-                <p className="text-4xl font-bold">750+</p>
-                <p className="text-sm mt-2">Our Coming Event</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold">20+</p>
-                <p className="text-sm mt-2">Our Media Partner</p>
-              </div>
+             
             </div>
           </div>
         </div>
