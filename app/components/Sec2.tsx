@@ -32,7 +32,7 @@ const Sec2 = () => {
                     </button>
                 </div>
                 <div className="relative w-full md:w-1/2 h-full">
-                    <Image src="/couple.png" width={450} height={450} alt="man" />
+                    <Image src="/sec2Img.png" width={550} height={550} alt="man" />
                 </div>
                 {/* <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[90px]  md:p-4 ">
                     <Image
@@ -60,23 +60,23 @@ const Sec2 = () => {
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-black max-w-[1300px] font-Nebulica mx-auto">
                         <div>
                             <p className="text-4xl font-bold">150K+</p>
-                            <p className="text-base mt-2 font-poppins">Our Happy Visitors</p>
+                            <p className="text-sm mt-2">Our Happy Visitors</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">50+</p>
-                            <p className="text-base mt-2 font-poppins">Our Popular Artists</p>
+                            <p className="text-sm mt-2">Our Popular Artists</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">100+</p>
-                            <p className="text-base mt-2 font-poppins">Our Business Partners</p>
+                            <p className="text-sm mt-2">Our Business Partners</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">750+</p>
-                            <p className="text-base mt-2 font-poppins">Our Coming Events</p>
+                            <p className="text-sm mt-2">Our Coming Events</p>
                         </div>
                         <div>
                             <p className="text-4xl font-bold">20+</p>
-                            <p className="text-base mt-2 font-poppins">Our Media Partners</p>
+                            <p className="text-sm mt-2">Our Media Partners</p>
                         </div>
                     </div>
                 </div>
