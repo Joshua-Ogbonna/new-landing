@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaArrowRightLong } from "react-icons/fa6";
 import axios from 'axios';
@@ -55,7 +55,16 @@ const ArtistSignUp: React.FC = () => {
         message: ''
     })
     const [errors, setErrors] = useState<ErrorState>({});
-const Id = localStorage.getItem("userId")
+    const [userId, setUserId] = useState<string | null>(null);
+    useEffect(() => {
+        // Only run on client-side
+        if (typeof window !== 'undefined') {
+            const storedUserId = localStorage.getItem("userId");
+            setUserId(storedUserId);
+        }
+    }, []);
+
+
 // console.log(Id);
 
     const validateForm = (): boolean => {
@@ -183,7 +192,7 @@ const Id = localStorage.getItem("userId")
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  user_id: Id,
+                  user_id: userId,
                   name: formData.name,
                   bio: formData.bio,
                  image: formData.profileImage,
