@@ -279,7 +279,7 @@ const Slider = () => {
             <h2 className="text-4xl text-right leading-[90px] md:text-7xl max-w-lg font-semibold text-[#CCFF00]">
               Signup Today
               <br />
-              <span className=" text-white">Shape Music's Future</span>
+              <span className=" text-white">Shape Music&apos;s Future</span>
             </h2>
             <p className="font-poppins text-sm text-right  text-gray-300 max-w-lg">
               Join MySounds today and take part in redefining the future of music—where creativity, culture, and community unite.

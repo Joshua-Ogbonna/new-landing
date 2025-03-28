@@ -4,13 +4,13 @@ import Link from "next/link";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  name: string;
+  // name: string;
   image?: string;
 }
 
 export default function DashboardLayout({
   children,
-  name,
+  // name,
   image,
 }: DashboardLayoutProps) {
   return (

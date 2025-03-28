@@ -23,7 +23,7 @@ export default function Dashboard() {
   const [token, setToken] = useState<string | null>(null);
     const [artist, setArtist] = useState<ArtistData | null>(null);
   const [artistData, setArtistData] = useState(null);
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     // Safely get items from localStorage only once when component mounts

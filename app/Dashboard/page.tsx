@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from "next/image";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import DashboardLayout from "../components/Dashboard/DashboardLayout";
 import HeroBanner from "../components/Dashboard/HeroBanner";
 import ArtistProfile from "../components/Dashboard/ArtistProfile";
