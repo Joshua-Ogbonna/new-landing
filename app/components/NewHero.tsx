@@ -230,7 +230,7 @@ const Slider = () => {
       </div>
       <div className="absolute">
         <img
-          src="/dobscr.png"
+          src="/slide2.png"
           alt="Artist with headphones"
           className="w-[300px] h-[300px] transform hover:scale-105 transition-transform duration-300"
         />

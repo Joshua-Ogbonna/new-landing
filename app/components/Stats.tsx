@@ -41,7 +41,7 @@ const Stats = () => {
   </div>
 
   {/* Right content - Image and floating cards */}
-  <div className="relative w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] mt-8 lg:mt-0">
+  <div className="relative w-full lg:w-1/2 h-[400px] sm:h-[400px] md:h-[500px] lg:h-[600px] mt-8 lg:mt-0">
     <div className="relative w-full h-full">
       <Image
         src="/person.png"
