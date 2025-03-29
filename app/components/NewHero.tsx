@@ -78,7 +78,7 @@ const Slider = () => {
         </div>
         
         {/* Text Content - Maintains right alignment on desktop */}
-        <div className="flex flex-col justify-center space-y-4 md:space-y-6 order-1 lg:order-2">
+        <div className="flex flex-col justify-center mt-7 space-y-4 md:space-y-6 order-1 lg:order-2">
           <h2 className="hidden md:block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center lg:text-right relative bottom-0 lg:bottom-[10px] leading-tight  md:left-[-70px] md:leading-[90px] font-semibold">
             Rhythm
             <br />
