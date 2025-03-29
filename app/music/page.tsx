@@ -1,5 +1,4 @@
-import React from 'react'
-import Slider from '../components/NewHero'
+
 import SideBar from '../components/SideBar'
 
 const page = () => {
