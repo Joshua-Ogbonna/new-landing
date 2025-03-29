@@ -70,7 +70,7 @@ const Slider = () => {
             <img
               src="/slide2.png"
               alt="Artist with headphones"
-              className="w-[450px] h-[500px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              className="w-[450px] h-[500px] transform hover:scale-105 transition-transform duration-300"
             />
           </div>
         </div>

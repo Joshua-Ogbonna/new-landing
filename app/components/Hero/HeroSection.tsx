@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Nav2 from "../Nav2";
-import Marq2 from "../Marq2";
+// import Marq2 from "../Marq2";
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
@@ -212,11 +212,11 @@ const HeroSection = () => {
             secondBg="bg-[#C2EE03]"
             color="#000000"
           /> */}
-            <Marq2
+            {/* <Marq2
               text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
               speed={10}
               className="bg-[#CCFF00] h-[100px] w-full py-5"
-            />
+            /> */}
           </div>
         </div>
       </section>
@@ -408,11 +408,11 @@ const HeroSection = () => {
             secondBg="bg-[#C2EE03]"
             color="#000000"
           /> */}
-            <Marq2
+            {/* <Marq2
               text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •  For the Culture • For the Future • For the Sound •"
               speed={10}
               className="bg-[#CCFF00] h-[100px] w-full py-5"
-            />
+            /> */}
           </div>
         </div>
       </section>
