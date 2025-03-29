@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Nav from "./Nav";
 import Image from "next/image";
 import Nav2 from "./Nav2";
-import MarqueeComp from "./Marq2";
+import MarqueeComp from "./MarqueeComp";
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
