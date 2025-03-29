@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Nav from "./Nav";
 import Image from "next/image";
 import Nav2 from "./Nav2";
-import Marq2 from "./Marq2";
+import MarqueeComp from "./Marq2";
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +30,7 @@ const Slider = () => {
       <div className="container mx-auto px-4 lg:px-8 xl:px-16 flex flex-col lg:flex-row justify-between items-center min-h-[calc(100vh-100px)] space-y-8 lg:space-y-0">
         {/* Image Section - Desktop Optimization */}
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-start xl:justify-center items-center">
-          <div className="relative top-[70px] w-full max-w-[500px] xl:max-w-[470px] aspect-square">
+          <div className="relative top-[100px] w-full max-w-[500px] xl:max-w-[470px] aspect-square">
             <Image
               src="/slider1.png"
               alt="Artist with headphones"
@@ -58,65 +58,45 @@ const Slider = () => {
       </div>
 
       {/* Marquee Section - Full Width with Enhanced Styling */}
-      <Marq2
-        text="For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •"
-        speed={10}
-        className="border-4 border-solid border-[#CCFF00] bg-[#CCFF00] h-[60px] md:h-[100px] w-full py-2 md:py-5 text-black text-lg md:text-xl"
-      />
+    <MarqueeComp />
     </section>
       {/* slider 2 */}
-      <section className="section font-Nebulica sticky-section relative w-full min-h-screen bg-[#CCFF00] overflow-hidden">
+      <section className="relative font-Nebulica bg-[#CCFF00] text-black min-h-screen flex flex-col justify-between overflow-hidden">
       <Nav2 />
-      <div className="container min-h-screen flex items-center justify-center">
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-16 relative max-w-7xl">
-          {/* Left section with layered images - precise desktop positioning */}
-         <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px]">
-  {/* Background image - responsive coverage */}
-  <div className="absolute inset-0 z-10">
-    <Image
-      src="/womring.png"
-      alt="Background artist image"
-      fill
-      priority
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      className="object-contain object-center"
-    />
-  </div>
-  
-  {/* Overlay image with enhanced hover effect */}
-  <div className="absolute z-20 bottom-1/4 md:top-[100px] lg:bottom-0 right-0 
-    w-[250px] h-[250px] 
-    md:w-[300px] md:h-[300px]
-    lg:w-[350px] lg:h-[350px]
-    xl:w-[450px] xl:h-[450px]">
-    <Image
-      src="/slide2.png"
-      alt="Foreground artist image"
-      fill
-      priority
-      sizes="(max-width: 768px) 66vw, (max-width: 1200px) 33vw, 25vw"
-      className="object-cover bg-transparent transform transition-all duration-500 
-        hover:scale-105 hover:rotate-3 hover:shadow-xl"
-    />
-  </div>
-</div>
-
-          {/* Right section with text - precise desktop alignment */}
-          <div className="flex flex-col text-black justify-center items-end space-y-6 w-full px-4 lg:px-0">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-right leading-[0.9] tracking-tighter">
-              <span className="block text-black">Rhythm</span>
-              <span className="block text-black">Roots</span>
-              <span className="block text-[#000]">Rise</span>
-            </h2>
-            <p className="font-poppins font-semibold text-base md:text-lg lg:text-xl text-right max-w-md text-black/80">
-              Celebrating global beats, honoring heritage, and elevating artists. MySoundsglobal connects culture, creativity, and community.
-            </p>
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-16 relative z-10 flex-grow">
+        {/* Image Container */}
+        <div className="hidden lg:flex items-center justify-center relative">
+          <div className="absolute bottom-[-20px]">
+            <img
+              src="/slide2.png"
+              alt="Artist with headphones"
+              className="w-[450px] h-[500px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+            />
           </div>
         </div>
+        {/* Text Content */}
+        <div className="flex flex-col justify-center space-y-6">
+          <h2 className="text-4xl text-right relative bottom-[10px] leading-[90px] md:text-6xl max-w-lg font-semibold">
+            Rhythm
+            <br />
+            Roots <br /> Rise <br />
+            <span className=" text-black">Shape Music&apos;s Future</span>
+          </h2>
+          <p className="font-poppins relative text-sm text-right text-black max-w-lg">
+            Celebrating global beats, honoring heritage, and elevating artists. MySoundsglobal connects culture, creativity, and community.
+          </p>
+        </div>
+      </div>
+      
+      {/* Marquee Section - Stays at the Bottom */}
+      <div className="w-full bg-[#CCFF00] text-black">
+           {/* Marquee Section - Full Width with Enhanced Styling */}
+    <MarqueeComp />
       </div>
     </section>
+
       {/* slider 3 */}
-      <section className="relative font-Nebulica bg-black text-white min-h-screen flex items-center overflow-hidden">
+      <section className="relative font-Nebulica bg-black text-white min-h-screen  items-center overflow-hidden">
         <Nav />
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-16 relative z-10">
           {/* Image Container */}
@@ -150,9 +130,10 @@ const Slider = () => {
 
           </div>
         </div>
-
+        
         {/* Decorative Elements */}
-
+ {/* Marquee Section - Full Width with Enhanced Styling */}
+ <MarqueeComp/>
       </section>
     </div>
   )

@@ -32,7 +32,7 @@ const Sec2 = () => {
                     </button>
                 </div>
                 <div className="relative w-full md:w-1/2 h-full">
-                    <Image src="/sec2Img.png" width={550} height={550} alt="man" />
+                    <Image src="/sec2Img.png" width={550} height={550} alt="man" className="h-[450px] object-center w-full" />
                 </div>
                 {/* <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[90px]  md:p-4 ">
                     <Image
@@ -57,9 +57,9 @@ const Sec2 = () => {
             {/* Bottom stats section */}
             <div className=" bg-[#c2ee03] py-8 w-screen">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center text-black max-w-[1300px] font-Nebulica mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center text-black max-w-[1300px] font-Nebulica mx-auto">
                         <div>
-                            <p className="text-4xl font-bold">150K+</p>
+                            <p className="text-4xl font-bold">72K+</p>
                             <p className="text-sm mt-2">Our Happy Visitors</p>
                         </div>
                         <div>
@@ -67,16 +67,12 @@ const Sec2 = () => {
                             <p className="text-sm mt-2">Our Popular Artists</p>
                         </div>
                         <div>
-                            <p className="text-4xl font-bold">100+</p>
+                            <p className="text-4xl font-bold">20+</p>
                             <p className="text-sm mt-2">Our Business Partners</p>
                         </div>
                         <div>
-                            <p className="text-4xl font-bold">750+</p>
+                            <p className="text-4xl font-bold">30+</p>
                             <p className="text-sm mt-2">Our Coming Events</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-bold">20+</p>
-                            <p className="text-sm mt-2">Our Media Partners</p>
                         </div>
                     </div>
                 </div>

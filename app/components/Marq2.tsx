@@ -1,50 +1,16 @@
-"use client";
+import Marquee from "react-fast-marquee";
 
-interface MarqueeProps {
-  text: string;
-  speed?: number;
-  className?: string;
-}
-
-const Marq2: React.FC<MarqueeProps> = ({ text, speed = 20, className = 'text-black' }) => {
+const MarqueeComp = () => {
   return (
-    <div className={`marquee-container ${className}`}>
-      <div className="marquee-content font-bold text-5xl" style={{ animationDuration: `${speed}s` }}>
-        <span>{text}</span>
-        <span>{text}</span> {/* Duplicate for smooth looping */}
-      </div>
-      
-      <style jsx>{`
-        .marquee-container {
-          width: 100%;
-          overflow: hidden;
-          white-space: nowrap;
-          position: relative;
-        }
-        
-        .marquee-content {
-          display: flex;
-          gap: 2rem;
-          min-width: 200%;
-          animation: marquee ${speed}s linear infinite;
-        }
-        
-        .marquee-content span {
-          flex-shrink: 0;
-          min-width: 100%;
-        }
-
-        @keyframes marquee {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(50%);
-          }
-        }
-      `}</style>
-    </div>
+    <Marquee
+      className="bg-[#CCFF00] text-black py-2 md:py-5 text-lg md:text-xl"
+      speed={80} // Slightly faster speed
+      gradient={false}
+      direction="right"
+    >
+      For the Culture • For the Future • For the Sound • For the Culture • For the Future • For the Sound •
+    </Marquee>
   );
 };
 
-export default Marq2;
+export default MarqueeComp;
