@@ -113,7 +113,7 @@ const Slider = () => {
               <img
                 src="/slider3Per.png"
                 alt="Artist with headphones"
-                className="w-[450px] h-[500px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                className="w-[450px] lg:h-[500px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>
@@ -133,7 +133,9 @@ const Slider = () => {
         
         {/* Decorative Elements */}
  {/* Marquee Section - Full Width with Enhanced Styling */}
- <MarqueeComp/>
+<div className="relative z-30 bottom-[190px]">
+<MarqueeComp />
+</div>
       </section>
     </div>
   )
