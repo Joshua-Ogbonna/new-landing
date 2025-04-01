@@ -17,34 +17,7 @@ export default function DashboardLayout({
   return (
     <div className="flex h-screen bg-[#121212] text-white overflow-hidden">
       {/* Sidebar */}
-      <div className="w-[60px] sm:w-[80px] bg-[#121212] border-r border-[#2a2a2a] flex flex-col items-center py-4 sm:py-6 space-y-6 sm:space-y-8">
-        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-400 rounded-full overflow-hidden">
-          <Image
-            src={image || "/ava.png"}
-            alt="Profile"
-            width={40}
-            height={40}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-      <SideBar />
-
-        <div className="mt-auto">
-          <Link
-            href="/logout"
-            className="p-2 sm:p-3 rounded-lg hover:bg-[#2a2a2a] transition-colors"
-          >
-            <Image
-              src="/logout.svg"
-              alt="Logout"
-              width={24}
-              height={24}
-              className="w-5 h-5 sm:w-6 sm:h-6"
-            />
-          </Link>
-        </div>
-      </div>
+      <SideBar image={image} />
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto bg-[#121212]">
@@ -52,8 +25,7 @@ export default function DashboardLayout({
         <header className="p-4 sm:p-6 pb-0">
           <div className="flex flex-col">
             <h1 className="text-[#C2EE03] text-2xl sm:text-3xl font-bold">
-              Good Morning,  
-              {name}
+              Good Morning, {name}
             </h1>
             <p className="text-gray-400 text-sm sm:text-base mt-1">
               Your overview is here

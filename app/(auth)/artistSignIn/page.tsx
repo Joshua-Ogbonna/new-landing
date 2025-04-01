@@ -65,7 +65,7 @@ const ArtistSignUp: React.FC = () => {
     }, []);
 
 
-// console.log(Id);
+    // console.log(Id);
 
     const validateForm = (): boolean => {
         const newErrors: ErrorState = {};
@@ -145,11 +145,11 @@ const ArtistSignUp: React.FC = () => {
 
     const submitForm = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!validateForm()) {
             return;
         }
-    
+
         try {
             // Add more detailed logging
             console.log('Payload being sent:', {
@@ -164,12 +164,12 @@ const ArtistSignUp: React.FC = () => {
                     personalWebsite: formData.personalLink
                 }
             });
-    
+
             // const result = await axios.post(
             //     'https://mysounduk-service.com/api/register', 
             //     {
-                 
-                   
+
+
             //         user_id: Id,
             //         socialLinks: {
             //             instagram: formData.instagramLink,
@@ -189,54 +189,54 @@ const ArtistSignUp: React.FC = () => {
             const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/artist/register`, {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  user_id: userId,
-                  name: formData.name,
-                  bio: formData.bio,
-                 image: formData.profileImage,
-                  instagram: formData.instagramLink,
-                  facebook: formData.facebookLink,
-                  twitter: formData.twitterLink,
-                  personalWebsite: formData.personalLink
+                    user_id: userId,
+                    name: formData.name,
+                    bio: formData.bio,
+                    image: formData.profileImage,
+                    instagram: formData.instagramLink,
+                    facebook: formData.facebookLink,
+                    twitter: formData.twitterLink,
+                    personalWebsite: formData.personalLink
                 }),
-              });
-    
+            });
+
             // Handle successful registration
             setSuccess({ message: 'Registration successful' })
             console.log('Registration successful', result);
-       
+
             router.push("/signIn")
         }
         catch (err) {
             console.error('Full error object:', err);
-            
+
             if (axios.isAxiosError(err)) {
                 if (err.response) {
                     // Log the full error response for more details
                     console.error('Error response:', err.response);
                     const errorMessage = err.response.data?.message || 'Registration failed';
                     const errorStatus = err.response.status;
-                    
-                    setErrors({ 
-                        general: `${errorMessage} (Status: ${errorStatus})` 
+
+                    setErrors({
+                        general: `${errorMessage} (Status: ${errorStatus})`
                     });
                 } else if (err.request) {
-                    setErrors({ 
-                        general: 'No response from server. Please check your connection.' 
+                    setErrors({
+                        general: 'No response from server. Please check your connection.'
                     });
                 } else {
-                    setErrors({ 
-                        general: 'Error in request setup' 
+                    setErrors({
+                        general: 'Error in request setup'
                     });
                 }
             } else {
-                setErrors({ 
-                    general: 'An unexpected error occurred' 
+                setErrors({
+                    general: 'An unexpected error occurred'
                 });
             }
-        } 
+        }
     };
 
     return (
@@ -255,7 +255,7 @@ const ArtistSignUp: React.FC = () => {
                     )}
                     {success.message && (
                         <div className="bg-green-500 text-white p-3 rounded mb-4">
-                    
+
                             {success.message}
                         </div>
                     )}
@@ -333,7 +333,7 @@ const ArtistSignUp: React.FC = () => {
                                 type="text"
                                 name="profileImage"
                                 value={formData.profileImage}
-                                 pattern="https?://.*\.(jpg|jpeg|png|gif|webp)"
+                                pattern="https?://.*\.(jpg|jpeg|png|gif|webp)"
                                 onChange={handleChange}
                                 placeholder='Profile Image URL'
                                 className={`w-full p-3 bg-formBg text-white rounded 
@@ -404,8 +404,13 @@ const ArtistSignUp: React.FC = () => {
                     </form>
                 </div>
             </div>
-        </div>
-    )
+         
+
+
+
+
+            </div>
+            )
 }
 
-export default ArtistSignUp
+            export default ArtistSignUp
