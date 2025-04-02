@@ -27,7 +27,7 @@ const Slider = () => {
          <section className="section font-Nebulica relative w-full min-h-screen bg-black overflow-hidden">
       <Nav />
       
-      <div className="container  px-4 lg:px-8 xl:px-16 flex flex-col lg:flex-row md:justify-between items-center min-h-screen lg:min-h-[calc(100vh-100px)] space-y-8 lg:space-y-0 py-8 lg:py-0">
+      <div className="container px-4 lg:px-16 xl:px-16 flex flex-col lg:flex-row md:justify-between items-center min-h-screen lg:min-h-[calc(100vh-100px)] space-y-8 lg:space-y-0 py-8 lg:py-0">
       {/* Image Section - Responsive across all devices */}
       <div className="w-full lg:w-1/2 flex justify-center lg:justify-start xl:justify-center items-center">
         <div className="relative w-full max-w-[450px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[470px] aspect-square top-[100px] md:top-[30px] left-[20px] md:left-0">
@@ -42,7 +42,7 @@ const Slider = () => {
       </div>
 
       {/* Text Section - Responsive typography */}
-      <div className="w-full lg:w-1/2 left-[20px] md:left-[90px] text-center lg:text-right  relative  top-[130px] md:top-[90px] sm:space-y-3 lg:space-y-4">
+      <div className="w-full lg:w-1/2 left-[20px] md:left-[20px] text-center lg:text-right  relative  top-[130px] md:top-[90px] sm:space-y-3 lg:space-y-4">
         <h1 className="text-[45px] md:text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight leading-none">
           <span className="block">
             <span className="text-white font-bold">For the Culture,</span>

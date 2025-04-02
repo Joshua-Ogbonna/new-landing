@@ -78,51 +78,65 @@ export default function Nav2() {
 
       {/* Mobile Navigation */}
       <div
-        className={`fixed top-0 left-0 w-full h-screen bg-black 
-        md:hidden transform transition-transform duration-300 
-        ${nav ? 'translate-y-0' : '-translate-y-full'} 
-        z-[999] flex flex-col items-center justify-center gap-8 pt-20 text-center`}
-      >
-        <div className="absolute top-4 right-4" onClick={handleNav}>
-          <AiOutlineClose size={30} className="text-[#CCFF00]" />
-        </div>
+  className={`fixed top-0 left-0 w-full h-screen bg-black 
+  md:hidden transform transition-transform duration-300 
+  ${nav ? 'translate-y-0' : '-translate-y-full'} 
+  z-[999] flex flex-col items-start justify-start gap-6 pt-40 px-8`}
+>
+  <div className="absolute top-4 right-4" onClick={handleNav}>
+    <AiOutlineClose size={30} className="text-[#CCFF00]" />
+  </div>
 
-        <Link
-          href="#"
-          className="text-[#CCFF00] text-[20px] hover:text-yellow transition-all"
-          onClick={handleNav}
-        >
-          About Us
-        </Link>
-        <Link
-          href="#"
-          className="text-[#CCFF00] text-[20px] hover:text-yellow transition-all"
-          onClick={handleNav}
-        >
-          Our Objectives
-        </Link>
-        <Link
-          href="#"
-          className="text-[#CCFF00] text-[20px] hover:text-yellow transition-all"
-          onClick={handleNav}
-        >
-          Our Values
-        </Link>
-        <Link
-          href="#"
-          className="text-[#CCFF00] text-[20px] hover:text-yellow transition-all"
-          onClick={handleNav}
-        >
-          Our Team
-        </Link>
-        <Link
-          href="#"
-          className="text-[#CCFF00] text-[20px] hover:text-yellow transition-all"
-          onClick={handleNav}
-        >
-          Contact Us
-        </Link>
-      </div>
+  <Link
+    href="#"
+    className="text-[#CCFF00] text-3xl font-medium hover:text-yellow transition-all"
+    onClick={handleNav}
+  >
+    About Us
+  </Link>
+  <Link
+    href="#"
+    className="text-[#CCFF00] text-3xl font-medium hover:text-yellow transition-all"
+    onClick={handleNav}
+  >
+    Our Objectives
+  </Link>
+  <Link
+    href="#"
+    className="text-[#CCFF00] text-3xl font-medium hover:text-yellow transition-all"
+    onClick={handleNav}
+  >
+    Our Values
+  </Link>
+  <Link
+    href="#"
+    className="text-[#CCFF00] text-3xl font-medium hover:text-yellow transition-all"
+    onClick={handleNav}
+  >
+    Our Team
+  </Link>
+  <Link
+    href="#"
+    className="text-[#CCFF00] text-3xl font-medium hover:text-yellow transition-all"
+    onClick={handleNav}
+  >
+    Contact Us
+  </Link>
+  <div className="flex flex-col items-start gap-4 mt-6">
+    <Link
+      href="/create"
+      className={`bg-[#313133] text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity text-xl`}
+    >
+      Sign up
+    </Link>
+    <Link
+      href="/signIn"
+      className={`bg-black border-2 border-[#CCFF00] text-[#CCFF00] px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity text-xl`}
+    >
+      Sign in
+    </Link>
+  </div>
+</div>
     </div>
     );
 }
