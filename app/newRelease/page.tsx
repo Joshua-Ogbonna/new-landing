@@ -8,7 +8,9 @@ const page = () => {
       <SideBar />
       <div>
         <div className='w-fit h-full bg-[#161717] text-[#FAFAFA]'>
-        
+        <form action="sumit">
+          <label htmlFor=""></label>
+        </form>
         </div>
       </div>
     </div>

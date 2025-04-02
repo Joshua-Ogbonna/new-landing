@@ -32,7 +32,7 @@ const Sec2 = () => {
                     </button>
                 </div>
                 <div className="relative w-full md:w-1/2 h-full">
-                    <Image src="/sec2Img.png" width={550} height={550} alt="man" className="h-[450px] object-center w-full" />
+                    <Image src="/AboutImg.png" width={550} height={550} alt="man" className="h-[450px] object-center w-full" />
                 </div>
                 {/* <div className="absolute top-[76%] md:top-[26%] md:right-[120px] right-[90px]  md:p-4 ">
                     <Image
