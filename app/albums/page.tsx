@@ -70,7 +70,7 @@ const songs: Song[] = [
     year: '2024'
   }
 ]
-const page = () => {
+const Page = () => {
  //modal 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -110,4 +110,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

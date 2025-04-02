@@ -78,6 +78,7 @@ const Page = () => {
       setUserToken(storedUserToken)
     }
   }, [])
+console.log(userId, userToken);
 
   // Calculate pagination
   const indexOfLastSong = currentPage * songsPerPage;
