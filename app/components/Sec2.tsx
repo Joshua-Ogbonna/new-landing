@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React, { useState } from 'react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 const Sec2 = () => {
