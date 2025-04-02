@@ -12,7 +12,7 @@ const Download = () => {
     background: 'linear-gradient(to left, #00131300, #C2EE03, #00131300)'
   }}
 ></div>
-      <div className="w-full font-Nebulica md:max-w-[1440px] px-6 my-20 flex flex-col md:flex-row gap-10 md:gap-0 justify-between">
+      <div className="w-full font-Nebulica md:max-w-[1440px] px-6 mt-20 flex flex-col md:flex-row gap-10 md:gap-0 justify-between">
         <div className="flex items-start justify-between flex-col gap-6">
           <p className="text-white text-3xl md:text-5xl">
             Come on, <span className="text-[#C2EE03]">Join Now </span><br /> and feel the music <br /> events vibe
@@ -30,8 +30,8 @@ const Download = () => {
           </div>
         </div>
 
-        <div className="">
-          <h5 className="text-3xl md:text-5xl text-white font-medium">Download our App</h5>
+        <div className="mt-20 md:mt-0">
+          <h5 className="text-3xl md:text-5xl text-white font-medium mb-10 md:mb-0">Download our App</h5>
           <div className="flex items-center">
             <Link href="">
               <Image src="/appp.png" alt="" width={205} height={100} />

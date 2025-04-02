@@ -68,7 +68,7 @@ export default function DiscoverSection() {
               passion for discovery and sets the stage for unforgettable musical moments.</p>
           </div> */}
           
-      <div className="w-full md:w-1/2   p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center mt-4 md:mt-0">
+      <div className="w-full md:w-1/2 p-6 sm:p-8 md:px-12 lg:p-16 flex flex-col justify-start mt-4 md:mt-0">
             <h2 className="text-3xl font-Nebulica sm:text-4xl md:text-5xl lg:text-[64px] text-white font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
               Discover New Music
             </h2>

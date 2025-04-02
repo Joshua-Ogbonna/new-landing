@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 3,
-    name: "Michael Chen",
+    name: "Michael Sharma",
     role: "Producer",
     company: "Sound Wave Records",
     image: "/per2.avif",
@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 5,
-    name: "Alex R., London",
+    name: "Justina Mbakwe",
     role: "Sound Engineer",
     company: "Audio Excellence",
     image: "/per6.avif",
@@ -149,13 +149,13 @@ const Trusted = () => {
           </h2>
 
           {/* testimonial section */}
-          <div className="w-full min-h-[100px] sm:min-h-[250px] md:min-h-[300px] lg:min-h-[358px] border-solid border border-white rounded-[20px] sm:rounded-[30px] md:rounded-[43px] p-4 sm:p-6 md:p-8 relative">
+          <div className="w-full min-h-[100px] sm:min-h-[250px] md:min-h-[200px] lg:min-h-[258px] border-solid border border-white rounded-[20px] sm:rounded-[30px] md:rounded-[43px] p-4 sm:p-6 md:p-8 relative">
             <p className="w-full text-lg sm:text-xl md:text-2xl lg:text-[30px] text-white font-normal mb-12 sm:mb-16">
               {selectedTestimonial.text}
             </p>
 
             <h5 className="text-white font-normal text-base sm:text-xl md:text-2xl lg:text-[24px] absolute bottom-4 sm:bottom-6 md:bottom-10">
-              {selectedTestimonial.company}
+              {selectedTestimonial.name}
             </h5>
           </div>
         </div>

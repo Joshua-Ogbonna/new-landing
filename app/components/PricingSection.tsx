@@ -32,11 +32,23 @@ export default function PricingSection() {
               </div>
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
-            <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-sm sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
+            <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-xl sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
             £54
             </button>
           </div>
 
+
+          {/* Monthly Card */}
+          <div className="relative h-[240px] sm:h-[270px] w-full sm:w-[330px] max-w-[230px] rounded-[20px] md:rounded-[32px] bg-[#1A1A1A] p-6 md:p-8 flex flex-col">
+            <div>
+              <div className="text-xl sm:text-[24px] text-white text-center font-medium">Monthly</div>
+            </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
+            <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-xl sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
+            £49 
+            </button>
+          </div>
+          
           {/* Annual Card */}
           <div className="relative h-[240px] sm:h-[270px] w-full sm:w-[230px] max-w-[230px] rounded-[20px] md:rounded-[32px] bg-[#1A1A1A] p-6 md:p-8 flex flex-col">
             <div>
@@ -49,19 +61,8 @@ export default function PricingSection() {
               height={40}
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20"
             />
-            <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-sm sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
+            <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-xl sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
             £99 
-            </button>
-          </div>
-
-          {/* Monthly Card */}
-          <div className="relative h-[240px] sm:h-[270px] w-full sm:w-[230px] max-w-[230px] rounded-[20px] md:rounded-[32px] bg-[#1A1A1A] p-6 md:p-8 flex flex-col">
-            <div>
-              <div className="text-xl sm:text-[24px] text-white text-center font-medium">Month</div>
-            </div>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
-            <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-sm sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
-            £49 
             </button>
           </div>
         </div>

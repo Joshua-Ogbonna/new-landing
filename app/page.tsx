@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="bg-black h-full">
       <NewHero />
-      <div className="relative top-[20px]nnnnn">
+      <div className="relative top-[20px]nnnnn" id="about">
         <Sec2 />
         
       </div>
@@ -31,7 +31,9 @@ export default function Home() {
         <div className="relative z-10">
           {/* <AlbumPlayer /> */}
           <AudioPlayer />
+          <div id="objectives">
           <DiscoverSection />
+          </div>
         </div>
         <PricingSection />
       </div>
@@ -54,7 +56,10 @@ export default function Home() {
         </div>
         <div className="relative z-10">
           <Grow />
+          <div id="values">
           <Trusted />
+
+          </div>
         </div>
       </div>
       <Download />

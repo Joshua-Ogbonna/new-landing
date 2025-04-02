@@ -18,36 +18,36 @@ export default function Nav2() {
       >
         <div>
           <Link href="/">
-            <Image src='/darkl.png' alt="" width={100} height={100} />
+            <Image src='/Newblacklogo.png' alt="" width={100} height={100} />
           </Link>
         </div>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-5 font-medium p-1 cursor-pointer">
           <Link
-            href="#"
+             href="#about"
             className="text-black text-[20px] hover:text-white transition-all"
           >
             About Us
           </Link>
           <Link
-            href="#"
+             href="#objectives"
             className="text-black text-[20px] hover:text-white transition-all"
           >
             Objectives
           </Link>
           <Link
-            href="#"
+              href="#values"
             className="text-black text-[20px] hover:text-white transition-all"
           >
             Values
           </Link>
-          <Link
+          {/* <Link
             href="#"
             className="text-black text-[20px] hover:text-white transition-all"
           >
             Team
-          </Link>
+          </Link> */}
         </nav>
 
         {/* Mobile Menu Button */}
