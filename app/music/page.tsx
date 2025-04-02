@@ -132,9 +132,9 @@ console.log(userId, userToken);
           </div>
           
           {/* cards section */}
-          <div className='grid grid-cols-4 gap-8'>
+          <div className='grid grid-cols-4 gap-28'>
             {currentSongs.map((song) => (
-              <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 hover:scale-105 my-10'>
+              <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-[270px] transition-transform duration-300 hover:scale-105 my-10'>
                 <div className='relative h-60 w-full'>
                   <Image 
                     src={song.cover} 
@@ -156,7 +156,7 @@ console.log(userId, userToken);
               </div>
               
             ))}
-            <div className="relative h-[23rem] w-72 bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center">
+            <div className="relative h-[23rem] w-[250px] bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center">
               <div>
                 <div className='border-4 border-solid border-[#C2EE03] rounded-lg p-10 text-center'>
                   <FaPlus className='font-semibold text-[90px]' />
@@ -203,7 +203,7 @@ console.log(userId, userToken);
           {/* cards section */}
           <div className='grid grid-cols-4 gap-8'>
             {currentSongs.map((song) => (
-              <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 hover:scale-105 my-10'>
+              <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-[250px] transition-transform duration-300 hover:scale-105 my-10'>
                 <div className='relative h-60 w-full'>
                   <Image 
                     src={song.cover} 
@@ -223,7 +223,7 @@ console.log(userId, userToken);
                 </div>
               </div>
             ))}
-            <div className="relative h-[23rem] w-72 bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center">
+            <div className="relative h-[23rem] w-[250px] bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center">
               <div>
                 <div className='border-4 border-solid border-[#C2EE03] rounded-lg p-10 text-center'>
                   <FaPlus className='font-semibold text-[90px]' />

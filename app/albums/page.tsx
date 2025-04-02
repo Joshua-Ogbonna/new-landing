@@ -80,10 +80,14 @@ const Page = () => {
   return (
    <div className="flex gap-8">
     <SideBar />
+  <div>
+    <div>
+      <h1 className="text-4xl text-[#C2EE03] p-3">Albums</h1>
+    </div>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:grid-cols-4 ">
         {
           songs.map((song)=>(
-             <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 hover:scale-105 my-10'>
+             <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-[250px] transition-transform duration-300 hover:scale-105 my-10'>
                             <div className='relative h-60 w-full'>
                               <Image 
                                 src={song.cover} 
@@ -106,6 +110,7 @@ const Page = () => {
           ))
         }
     </div>
+  </div>
    </div>
   )
 }

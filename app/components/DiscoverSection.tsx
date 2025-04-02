@@ -39,7 +39,7 @@ export default function DiscoverSection() {
               {artists.map((artist) => (
                 <button
                   key={artist.id}
-                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden ring-1 ring-white/20 hover:ring-[#c2ee03] transition-colors" 
+                  className="w-10 h-10 sm:w-8 sm:h-8 rounded-full overflow-hidden ring-1 ring-white/20 hover:ring-[#c2ee03] transition-colors" 
                   onClick={() => openArtist(artist.image)}
                 >
                   <Image

@@ -32,7 +32,7 @@ const Download = () => {
 
         <div className="mt-20 md:mt-0">
           <h5 className="text-3xl md:text-5xl text-white font-medium mb-10 md:mb-0">Download our App</h5>
-          <div className="flex items-center">
+          <div className="flex items-center gap-6 mt-3">
             <Link href="">
               <Image src="/appp.png" alt="" width={205} height={100} />
             </Link>

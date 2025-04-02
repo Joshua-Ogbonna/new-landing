@@ -6,7 +6,7 @@ export default function PricingSection() {
       <div className="flex flex-col md:flex-row items-start justify-between p-4 sm:p-6 md:p-8 rounded-lg md:rounded-2xl">
         {/* Top/Left side */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-          <h2 className="text-white md:mt-10 font-bold text-3xl font-Nebulica sm:text-4xl md:text-5xl  mb-6 md:mb-8">
+          <h2 className="text-white md:mt-10 font-bold text-3xl font-Nebulica sm:text-4xl md:text-[45px]  mb-6 md:mb-8">
             Sign Up.
             <br />
             Discover New Music.
@@ -26,6 +26,7 @@ export default function PricingSection() {
               <div className="text-xl sm:text-[26px] text-white text-center font-medium">
                 Special Offer
               </div>
+              
               <div className="text-lg sm:text-[22px] text-white text-center font-bold mt-2 md:mt-4">
                 New Users
                 <br />3 Months
@@ -33,7 +34,7 @@ export default function PricingSection() {
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
             <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-xl sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
-            £54
+            $85.50 USD
             </button>
           </div>
 
@@ -43,9 +44,16 @@ export default function PricingSection() {
             <div>
               <div className="text-xl sm:text-[24px] text-white text-center font-medium">Monthly</div>
             </div>
+            <Image
+              src="/iconn.png"
+              alt=""
+              width={40}
+              height={40}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20"
+            />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20" />
             <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-xl sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
-            £49 
+           $29.99 USD
             </button>
           </div>
           
@@ -62,7 +70,7 @@ export default function PricingSection() {
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-black/20"
             />
             <button className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 h-12 sm:h-14 rounded-full bg-[#C2EE03] text-black text-xl sm:text-lg font-bold hover:bg-[#d4ff03] transition-colors">
-            £99 
+            $320 USD 
             </button>
           </div>
         </div>

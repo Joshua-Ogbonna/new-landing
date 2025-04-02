@@ -7,9 +7,9 @@ export default function AudioPlayer() {
   const [progress, setProgress] = useState(0);
 
   const audioData = [
-    { image: "/baggenew.jpg", audio: "/songs/NoGood.mp3", title: "No Good", artist: "Bagge" },
     { image: "/mikelgreen.jpg", audio: "/songs/Get-out-my-house-Mikel-.mp3", title: "Get out my house", artist: "Mikel " },
-    { image: "/king thuna.jpg", audio: "/songs/RIDE OR DIE King thona.wav", title: "Ride or die", artist: "king Thona" },
+    { image: "/king-thuna-gr.jpg", audio: "/songs/RIDE OR DIE King thona.wav", title: "Ride or die", artist: "King Thona" },
+    { image: "/-gr.jpg", audio: "/songs/NoGood.mp3", title: "No Good", artist: "Bagge" },
     { image: "/bobbie-richie-green.jpg", audio: "/songs/bobby dodo-short.MP3", title: "Ripple Effect", artist: "Bobbie Richie" },
   ];
 
