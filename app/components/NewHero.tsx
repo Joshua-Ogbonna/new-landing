@@ -24,13 +24,13 @@ const Slider = () => {
   }, []);
   return (
     <div>
-      <section className="section font-Nebulica relative w-full min-h-screen bg-black overflow-hidden">
+         <section className="section font-Nebulica relative w-full min-h-screen bg-black overflow-hidden">
       <Nav />
       
       <div className="container  px-4 lg:px-8 xl:px-16 flex flex-col lg:flex-row md:justify-between items-center min-h-screen lg:min-h-[calc(100vh-100px)] space-y-8 lg:space-y-0 py-8 lg:py-0">
       {/* Image Section - Responsive across all devices */}
       <div className="w-full lg:w-1/2 flex justify-center lg:justify-start xl:justify-center items-center">
-        <div className="relative w-full max-w-[350px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[470px] aspect-square top-[100px] left-[30px] md:left-0">
+        <div className="relative w-full max-w-[450px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[470px] aspect-square top-[100px] md:top-[30px] left-[20px] md:left-0">
           <Image
             src="/slider1.png"
             alt="Artist with headphones"
@@ -42,8 +42,8 @@ const Slider = () => {
       </div>
 
       {/* Text Section - Responsive typography */}
-      <div className="w-full lg:w-1/2 left-[20px] md:left-0 text-center lg:text-right  relative right-[180px] top-[130px] sm:space-y-3 lg:space-y-4">
-        <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight leading-none">
+      <div className="w-full lg:w-1/2 left-[20px] md:left-[90px] text-center lg:text-right  relative  top-[130px] md:top-[90px] sm:space-y-3 lg:space-y-4">
+        <h1 className="text-6xl md:text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight leading-none">
           <span className="block">
             <span className="text-white font-bold">For the Culture,</span>
           </span>
@@ -65,7 +65,7 @@ const Slider = () => {
       <section className="relative font-Nebulica bg-[#CCFF00] text-black min-h-screen flex flex-col justify-between overflow-hidden">
       <Nav2 />
       
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-8 md:py-16 relative z-10 flex-grow">
+      <div className="container mx-auto mt-28 grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-8 md:py-16 relative z-10 flex-grow">
         {/* Image Container - Responsive positioning */}
         <div className="flex items-center justify-center relative h-[400px] md:h-[500px] lg:h-auto order-1">
           <div className="absolute bottom-0 lg:bottom-[-20px]">

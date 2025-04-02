@@ -1,8 +1,10 @@
 "use client"
+import { useState } from "react";
 import Image from "next/image";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import SideBar from "../components/SideBar";
+import Modal from "../components/Modal";
 interface Song {
   id: string;
   cover: string;
@@ -69,13 +71,21 @@ const songs: Song[] = [
   }
 ]
 const page = () => {
+   //modal 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+  
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+  
   return (
    <div className="flex gap-8">
     <SideBar />
+    
     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:grid-cols-4 ">
         {
           songs.map((song)=>(
              <div key={song.id} className='bg-[#161717] rounded-lg shadow-md overflow-hidden w-72 transition-transform duration-300 hover:scale-105 my-10'>
+    <Modal  isOpen={isModalOpen} onClose={closeModal} song={song} />
                             <div className='relative h-60 w-full'>
                               <Image 
                                 src={song.cover} 
@@ -86,12 +96,12 @@ const page = () => {
                               />
                             </div>
                             <div className='p-4 font-poppins'>
-                              <p className='font-semibold text-base'>{song.title}</p>
+                              <p className='font-semibold text-base text-white'>{song.title}</p>
                               <p className='text-[#C2EE03]'>{song.year}</p>
                             </div>
                             <div className='flex justify-between p-4'>
                               <FaRegTrashAlt size={20} className='text-red-700'/>
-                              <FaEdit size={20} className='text-[#C2EE03]'/>
+                              <FaEdit  onClick={openModal} size={20} className='text-[#C2EE03]'/>
                             </div>
                           </div>
           ))

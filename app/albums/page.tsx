@@ -3,6 +3,8 @@ import Image from "next/image";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import SideBar from "../components/SideBar";
+import { useState } from "react";
+import Modal from "../components/Modal";
 interface Song {
   id: string;
   cover: string;
@@ -69,6 +71,12 @@ const songs: Song[] = [
   }
 ]
 const page = () => {
+ //modal 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
    <div className="flex gap-8">
     <SideBar />
@@ -91,7 +99,8 @@ const page = () => {
                             </div>
                             <div className='flex justify-between p-4'>
                               <FaRegTrashAlt size={20} className='text-red-700'/>
-                              <FaEdit size={20} className='text-[#C2EE03]'/>
+                              <FaEdit onClick={openModal} size={20} className='text-[#C2EE03]'/>
+                              <Modal  isOpen={isModalOpen} onClose={closeModal} song={song} />
                             </div>
                           </div>
           ))

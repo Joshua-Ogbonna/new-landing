@@ -149,9 +149,11 @@ const Page = () => {
                 </div>
                 <div className='flex justify-between p-4'>
                   <FaRegTrashAlt size={20} className='text-red-700'/>
-                  <FaEdit size={20} className='text-[#C2EE03]'/>
+                  <FaEdit  onClick={openModal} size={20} className='text-[#C2EE03]' />
                 </div>
+                <Modal isOpen={isModalOpen} onClose={closeModal} song={song} />
               </div>
+              
             ))}
             <div className="relative h-[23rem] w-72 bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center">
               <div>
@@ -216,11 +218,11 @@ const Page = () => {
                 </div>
                 <div className='flex justify-between p-4'>
                   <FaRegTrashAlt size={20} className='text-red-700'/>
-                  <FaEdit size={20} className='text-[#C2EE03]'/>
+                  <FaEdit  onClick={openModal} size={20} className='text-[#C2EE03]'/>
                 </div>
               </div>
             ))}
-            <div className="relative h-[23rem] w-72 bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center"   onClick={openModal}>
+            <div className="relative h-[23rem] w-72 bg-[#161717] rounded-lg shadow-md mt-10 flex items-center justify-center">
               <div>
                 <div className='border-4 border-solid border-[#C2EE03] rounded-lg p-10 text-center'>
                   <FaPlus className='font-semibold text-[90px]' />
@@ -230,12 +232,12 @@ const Page = () => {
             </div>
           </div>
 
-          <Modal isOpen={isModalOpen} onClose={closeModal} />
+        
 
     
           
           {/* pagination info */}
-          <div className='flex gap-5 items-center'>
+          <div className='flex gap-5 items-center mb-10'>
             <div className='w-[56vw] h-0 border-t-4 border-solid border-[#161717]'></div>
             <div className='flex gap-5 items-center'>
               <div className=' text-base text-[#C2EE03] font-poppins'>
