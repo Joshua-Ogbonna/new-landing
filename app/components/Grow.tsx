@@ -6,13 +6,13 @@ const Grow = () => {
     <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-10 font-poppins">
      <div className="w-full flex flex-col md:flex-row items-center justify-around
       mx-auto bg-[#D9D9D914] rounded-[20px] sm:rounded-[40px]">
-    <div className="w-full  md:w-auto flex justify-center md:justify-start">
+    <div className="w-full md:w-auto flex justify-center md:justify-start">
          <Image 
-            src="/grow.jpg" 
+            src="/grow2.png" 
             alt="man" 
             width={200} 
             height={200} 
-            className="w-[200px] sm:w-[100px] md:w-[350px] lg:w-[425px] my-10 h-auto md:h-[500px]"
+            className="w-[200px]  sm:w-[100px] md:w-[350px] lg:w-[425px] my-10 h-auto md:h-[500px]"
           />
         </div>
         <div className="text-center">

@@ -116,9 +116,9 @@ const Slider = () => {
             </div>
             <div className="absolute">
               <img
-                src="/slider3Per.png"
+                src="/side3r.png"
                 alt="Artist with headphones"
-                className="w-[280px] h-auto sm:w-[350px] md:w-[400px] lg:w-[450px] lg:h-[500px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                className="w-[280px] h-auto sm:w-[350px] md:w-[400px] lg:w-[400px] lg:h-[500px] rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>
