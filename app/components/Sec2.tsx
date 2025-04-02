@@ -1,6 +1,19 @@
 import Image from "next/image";
-
+import React, { useState } from 'react';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
 const Sec2 = () => {
+        const { ref, inView } = useInView({
+          triggerOnce: true,
+          threshold: 0.1
+        });
+    
+  const statsData = [
+    { value: 72, suffix: 'K+', label: 'Our Happy Visitors' },
+    { value: 50, suffix: '+', label: 'Our Popular Artists' },
+    { value: 20, suffix: '+', label: 'Our Business Partners' },
+    { value: 30, suffix: '+', label: 'Our Coming Events' }
+  ];
     return (
         <div className="overflow-hidden font-poppins h-full bg-black">
             <div className="relative">
@@ -55,28 +68,29 @@ const Sec2 = () => {
                 </div> */}
             </div>
             {/* Bottom stats section */}
-            <div className=" bg-[#c2ee03] py-8 w-screen">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center text-black max-w-[1300px] font-Nebulica mx-auto">
-                        <div>
-                            <p className="text-4xl font-bold">72K+</p>
-                            <p className="text-sm mt-2">Our Happy Visitors</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-bold">50+</p>
-                            <p className="text-sm mt-2">Our Popular Artists</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-bold">20+</p>
-                            <p className="text-sm mt-2">Our Business Partners</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-bold">30+</p>
-                            <p className="text-sm mt-2">Our Coming Events</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="bg-[#c2ee03] py-8 w-screen" ref={ref}>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center text-black max-w-[1300px] font-Nebulica mx-auto">
+          {statsData.map((stat, index) => (
+            <div key={index}>
+              <p className="text-4xl font-bold">
+                {inView ? (
+                  <CountUp
+                    end={stat.value}
+                    duration={2.5}
+                    suffix={stat.suffix}
+                    delay={0.2}
+                  />
+                ) : (
+                  `0${stat.suffix}`
+                )}
+              </p>
+              <p className="text-sm mt-2">{stat.label}</p>
             </div>
+          ))}
+        </div>
+      </div>
+    </div>
         </div>
     );
 };
