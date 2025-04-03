@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { FaArrowRightLong } from "react-icons/fa6";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
+import Link from 'next/link';
 // Validation Interfaces
 interface FormData {
     name: string;
@@ -152,7 +152,31 @@ const SignUp: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-black text-white font-poppins flex flex-col lg:flex-row">
+             {/* Logo section (visible on mobile) */}
+      <div className="lg:hidden flex justify-center p-6">
+        <Link href="/">
+          <Image 
+            src="/Newblacklogo.png" 
+            alt="Company Logo" 
+            width={120} 
+            height={40} 
+            className="h-10 w-auto"
+          />
+        </Link>
+      </div>
             <div className="w-full lg:w-1/2 relative">
+             {/* Logo overlay (visible on desktop) */}
+        <div className="absolute top-8 left-8 z-10 hidden lg:block">
+          <Link href="/">
+            <Image 
+              src="/Newblacklogo.png" 
+              alt="Company Logo" 
+              width={150} 
+              height={50} 
+              className="h-12 w-auto"
+            />
+          </Link>
+        </div>
                 <Image 
                     width={800} 
                     height={900} 
@@ -164,6 +188,22 @@ const SignUp: React.FC = () => {
 
             <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
                 <div className="w-full max-w-md">
+                <div className="text-center mb-8">
+          <div className="flex justify-between">
+            <div></div>
+            <Link href="/">
+            <Image 
+              src="/NewGreenLogo.png" 
+              alt="Company Logo" 
+              width={150} 
+              height={50} 
+              className="h-12 w-auto flex justify-end"
+            />
+          </Link>
+          </div>
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] bg-clip-text text-transparent">Sign Up</h2>
+            <p className="text-gray-400">Let&apos;s Rock!!! Begin your listening run.</p>
+          </div>
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold mb-4">Log In</h2>
                         <p className="text-gray-400">Keep the music alive—log in to continue.</p>
