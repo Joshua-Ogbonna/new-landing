@@ -13,7 +13,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "John Doe",
+    name: "Emma Wilson",
     role: "Marketing Director",
     company: "Music Inc.",
     image: "/per5.avif",
@@ -21,26 +21,26 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: "Sarah Johnson",
+    name: "Priya Sharma",
     role: "Content Creator",
     company: "Creative Studios",
-    image: "/woman.avif",
+    image: "/ind1.avif",
     text: "I never knew I needed MySound until I tried it. The recommendations are spot on, and the behind-the-scenes access makes me feel truly connected to the music I love. Absolutely brilliant."
   },
   {
     id: 3,
-    name: "Michael Sharma",
+    name: "Michael Chen",
     role: "Producer",
     company: "Sound Wave Records",
-    image: "/per2.avif",
+    image: "/asi1.avif",
     text: "An incredible tool for music professionals. The features are exactly what I needed for my production work."
   },
   {
     id: 4,
-    name: "Emma Wilson",
+    name: "Chisom Nnamdi",
     role: "Artist Manager",
     company: "Stellar Management",
-    image: "/per3.avif",
+    image: "/afr1.avif",
     text: "This platform has revolutionized how we handle our artist promotions. Highly recommended!"
   },
   {
