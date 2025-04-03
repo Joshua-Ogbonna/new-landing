@@ -59,13 +59,13 @@ const Slider = () => {
 
 
       {/* Marquee Section - Full Width with Enhanced Styling */}
-    <MarqueeComp />
+      <MarqueeComp background="#CCFF00" textColor="black" />
     </section>
       {/* slider 2 */}
       <section className="relative font-Nebulica bg-[#CCFF00] text-black min-h-screen flex flex-col justify-between overflow-hidden">
       <Nav2 />
       
-      <div className="container mx-auto mt-28 grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-8 md:py-16 relative z-10 flex-grow">
+      <div className="container mx-auto mt-28 md:mt-32 grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 py-8 md:py-16 relative z-10 flex-grow">
         {/* Image Container - Responsive positioning */}
         <div className="flex items-center justify-center relative h-[400px] md:h-[500px] lg:h-auto order-1">
           <div className="absolute bottom-0 lg:bottom-[-20px]">
@@ -96,8 +96,8 @@ const Slider = () => {
       </div>
       
       {/* Marquee Section - Stays at the Bottom */}
-      <div className="w-full bg-[#CCFF00] text-black">
-        <MarqueeComp />
+      <div className="w-full">
+        <MarqueeComp background="black" textColor="#CCFF00" />
       </div>
     </section>
 
@@ -138,7 +138,7 @@ const Slider = () => {
         
         {/* Marquee Section with responsive positioning */}
         <div className="relative z-30 mt-8 lg:mt-0 lg:bottom-[190px] w-full">
-          <MarqueeComp />
+          <MarqueeComp background="#CCFF00" textColor="black"/>
         </div>
       </section>
     </div>
