@@ -10,9 +10,9 @@ interface Artist {
 export default function DiscoverSection() {
   const [img, setImg] = useState('');
   const artists: Artist[] = [
-    { id: "1", name: "Artist 1", image: "/Tomme.jpg" },
-    { id: "2", name: "Artist 2", image: "/Sinamgr.png" },
-    { id: "3", name: "Artist 3", image: "/deeciennew.jpg" },
+    { id: "1", name: "Artist 1", image: "/dis2.jpg" },
+    { id: "2", name: "Artist 2", image: "/dis3.jpg" },
+    { id: "3", name: "Artist 3", image: "/dis4.jpg" },
   ];
   
   const openArtist = (artistImg: string): void => {
@@ -28,7 +28,7 @@ export default function DiscoverSection() {
           {/* Left side - Image */}
           <div className="relative w-full md:w-1/2 h-[300px] sm:h-[400px]">
             <Image
-              src={img ? img : "/princenew-green.jpg"}
+              src={img ? img : "/dis1.jpg"}
               alt="Discover New Music"
               fill
               className="object-cover rounded-[16px] md:rounded-[24px]"

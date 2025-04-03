@@ -166,7 +166,7 @@ const SignUp: React.FC = () => {
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold mb-4">Log In</h2>
-                        <p className="text-gray-400">Let&apos;s Rock!!! Resume your beats run</p>
+                        <p className="text-gray-400">Keep the music alive—log in to continue.</p>
                     </div>
 
                     {errors.general && (

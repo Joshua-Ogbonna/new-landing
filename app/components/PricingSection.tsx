@@ -7,11 +7,11 @@ export default function PricingSection() {
         {/* Top/Left side */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
           <h2 className="text-white md:mt-10 font-bold text-3xl font-Nebulica sm:text-4xl md:text-[45px]  mb-6 md:mb-8">
-            Sign Up.
+          Register as an artist, 
             <br />
-            Discover New Music.
+            Promote great Music,
             <br />
-            Empower Artists.
+            Access courses & webinars
           </h2>
           <button className="text-white bg-transparent border border-white rounded-full px-6 sm:px-8 h-12 sm:h-14 font-medium hover:bg-white/90 hover:text-black transition-colors text-sm sm:text-base font-poppins">
             Continue With Free Plan

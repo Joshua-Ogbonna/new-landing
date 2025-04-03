@@ -122,7 +122,7 @@ export default function Nav2() {
   >
     Contact Us
   </Link>
-  <div className="flex flex-col items-start gap-4 mt-6">
+  <div className="hidden md:flex flex-col items-start gap-4 mt-6">
     <Link
       href="/create"
       className={`bg-[#313133] text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity text-xl`}

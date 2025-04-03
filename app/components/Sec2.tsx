@@ -1,6 +1,7 @@
 import Image from "next/image";
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
+import Link from "next/link";
 const Sec2 = () => {
         const { ref, inView } = useInView({
           triggerOnce: true,
@@ -39,9 +40,12 @@ const Sec2 = () => {
                         Whether you&apos;re an artist striving to break through or a listener seeking culture
                         beyond the mainstream, this is your soundscape
                     </p>
+                    <Link href='/create'>
+                    
                     <button className="rounded-md w-32 h-10 my-5 text-center text-black font-semibold bg-[#CCFF00]">
                         Learn more
                     </button>
+                    </Link>
                 </div>
                 <div className="relative md:px-[63px] md:top-6 w-full md:w-1/2 h-full">
                     <Image src="/AboutImg (1).png" width={550} height={550} alt="man" className="h-[450px] object-center w-full" />
