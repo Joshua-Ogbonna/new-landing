@@ -207,7 +207,8 @@ const SignUp: React.FC = () => {
           </Link>
           </div>
             <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] bg-clip-text text-transparent">Sign Up</h2>
-            <p className="text-gray-400">Let&apos;s Rock!!! Begin your listening run.</p>
+            <p className="text-gray-400">Kickstart your music experience .
+            </p>
           </div>
 
           {errors.general && (
@@ -285,7 +286,7 @@ const SignUp: React.FC = () => {
             <div className="mt-6 text-center">
               <p className="text-gray-400">
                 Already have an account?{' '}
-                <Link href="/login" className="text-green-400 hover:text-green-300 transition-colors">
+                <Link href="/signIn" className="text-green-400 hover:text-green-300 transition-colors">
                   Log In
                 </Link>
               </p>

@@ -188,8 +188,7 @@ const SignUp: React.FC = () => {
 
             <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
                 <div className="w-full max-w-md">
-                <div className="text-center mb-8">
-          <div className="flex justify-between">
+                <div className="flex justify-between">
             <div></div>
             <Link href="/">
             <Image 
@@ -200,9 +199,6 @@ const SignUp: React.FC = () => {
               className="h-12 w-auto flex justify-end"
             />
           </Link>
-          </div>
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] bg-clip-text text-transparent">Sign Up</h2>
-            <p className="text-gray-400">Let&apos;s Rock!!! Begin your listening run.</p>
           </div>
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold mb-4">Log In</h2>
