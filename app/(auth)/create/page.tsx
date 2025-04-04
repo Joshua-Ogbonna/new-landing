@@ -151,9 +151,9 @@ const SignUp: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white font-poppins flex flex-col lg:flex-row">
+      <div className="min-h-screen bg-black text-white font-poppins flex flex-col lg:flex-row relative">
       {/* Logo section (visible on mobile) */}
-      <div className="lg:hidden flex justify-center p-6">
+      {/* <div className="lg:hidden flex justify-center p-6 z-20">
         <Link href="/">
           <Image 
             src="/Newblacklogo.png" 
@@ -163,13 +163,12 @@ const SignUp: React.FC = () => {
             className="h-10 w-auto"
           />
         </Link>
-      </div>
-
+      </div> */}
+    
       {/* Left side - Image */}
-      <div className="w-full lg:w-1/2 relative">
-        {/* Logo overlay (visible on desktop) */}
+      <div className="w-full lg:w-1/2 relative h-[300px] lg:h-auto">
         <div className="absolute top-8 left-8 z-10 hidden lg:block">
-          <Link href="/">
+          {/* <Link href="/">
             <Image 
               src="/Newblacklogo.png" 
               alt="Company Logo" 
@@ -177,40 +176,65 @@ const SignUp: React.FC = () => {
               height={50} 
               className="h-12 w-auto"
             />
-          </Link>
+          </Link> */}
         </div>
-        
-        <Image 
-          width={800} 
-          height={900} 
-          src="/signup.png" 
-          alt='green woman' 
-          className="object-center md:object-cover w-full md:h-screen h-[400px]"
-          priority
-        />
+    
+        <style>{`
+          .container-1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+          }
+    
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+          }
+    
+          .pulsing-image {
+            animation: pulse 3s ease-in-out infinite;
+            width: 400px;
+            height: 400px;
+          }
+        `}</style>
+    
+        <div className="container-1">
+          <Image 
+            width={200} 
+            height={200} 
+            src="/signIn2.png"
+            alt='green woman' 
+            className="pulsing-image object-center md:object-contain w-fit md:h-screen h-[200px]"
+            priority
+          />
+        </div>
       </div>
-
+    
       {/* Right side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
-        <div className="w-full max-w-md">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 
+                      absolute top-0 left-0 h-full z-20 lg:static 
+                      backdrop-blur-md  rounded-none lg:rounded-none">
+        <div className="w-full max-w-md bg-black/30 p-6 rounded-2xl shadow-lg">
           <div className="text-center mb-8">
-          <div className="flex justify-between">
-            <div></div>
-            <Link href="/">
-            <Image 
-              src="/NewGreenLogo.png" 
-              alt="Company Logo" 
-              width={150} 
-              height={50} 
-              className="h-12 w-auto flex justify-end"
-            />
-          </Link>
-          </div>
+            <div className="flex justify-between">
+              <div></div>
+              <Link href="/">
+                <Image 
+                  src="/NewGreenLogo.png" 
+                  alt="Company Logo" 
+                  width={150} 
+                  height={50} 
+                  className="h-12 w-auto flex justify-end"
+                />
+              </Link>
+            </div>
             <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] bg-clip-text text-transparent">Sign Up</h2>
-            <p className="text-gray-400">Kickstart your music experience .
-            </p>
+            <p className="text-gray-300">Kickstart your music experience.</p>
           </div>
-
+    
+          {/* Error / Success messages */}
           {errors.general && (
             <div className="bg-red-500 text-white p-3 rounded mb-4">
               {errors.general}
@@ -221,8 +245,10 @@ const SignUp: React.FC = () => {
               {success.message}
             </div>
           )}
-
-          <form onSubmit={submitForm} className="space-y-4">
+    
+          {/* Form */}
+            {/* Input fields remain unchanged */}
+            <form onSubmit={submitForm} className="space-y-4">
             <div>
               <input
                 type="text"
@@ -230,8 +256,9 @@ const SignUp: React.FC = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder='Enter your name'
-                className={`w-full p-3 bg-formBg text-white rounded-lg
-                  ${errors.name ? 'border-2 border-red-500' : 'border border-gray-700'}`}
+                // className={w-full p-3 bg-formBg text-white rounded-lg
+                //   ${errors.name ? 'border-2 border-red-500' : 'border border-gray-700'}}
+                className='w-full p-3 bg-formBg text-white rounded-lg border border-gray-700'
               />
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
@@ -243,8 +270,9 @@ const SignUp: React.FC = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder='Enter your email'
-                className={`w-full p-3 bg-formBg text-white rounded-lg
-                  ${errors.email ? 'border-2 border-red-500' : 'border border-gray-700'}`}
+                // className={w-full p-3 bg-formBg text-white rounded-lg
+                //   ${errors.email ? 'border-2 border-red-500' : 'border border-gray-700'}}                
+                className='w-full p-3 bg-formBg text-white rounded-lg border border-gray-700'
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
@@ -256,8 +284,10 @@ const SignUp: React.FC = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder='Enter your password'
-                className={`w-full p-3 bg-formBg text-white rounded-lg
-                  ${errors.password ? 'border-2 border-red-500' : 'border border-gray-700'}`}
+                // className={w-full p-3 bg-formBg text-white rounded-lg
+                //   ${errors.password ? 'border-2 border-red-500' : 'border border-gray-700'}}
+                
+                className='w-full p-3 bg-formBg text-white rounded-lg border border-gray-700'
               />
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
             </div>
@@ -269,8 +299,9 @@ const SignUp: React.FC = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder='Confirm your password'
-                className={`w-full p-3 bg-formBg text-white rounded-lg
-                  ${errors.confirmPassword ? 'border-2 border-red-500' : 'border border-gray-700'}`}
+                // className={w-full p-3 bg-formBg text-white rounded-lg
+                //   ${errors.confirmPassword ? 'border-2 border-red-500' : 'border border-gray-700'}}
+                className='w-full p-3 bg-formBg text-white rounded-lg border border-gray-700'
               />
               {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
             </div>
@@ -292,9 +323,13 @@ const SignUp: React.FC = () => {
               </p>
             </div>
           </form>
+            {/* Submit Button and Login link remain unchanged */}
+          
+          
         </div>
       </div>
     </div>
+    
     )
 }
 

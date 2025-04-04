@@ -153,7 +153,7 @@ const SignUp: React.FC = () => {
     return (
         <div className="min-h-screen bg-black text-white font-poppins flex flex-col lg:flex-row">
              {/* Logo section (visible on mobile) */}
-      <div className="lg:hidden flex justify-center p-6">
+      {/* <div className="lg:hidden flex justify-center p-6">
         <Link href="/">
           <Image 
             src="/Newblacklogo.png" 
@@ -163,11 +163,22 @@ const SignUp: React.FC = () => {
             className="h-10 w-auto"
           />
         </Link>
-      </div>
-            <div className="w-full lg:w-1/2 relative">
+      </div> */}
+            {/* <div className="w-full lg:w-1/2 relative"> */}
              {/* Logo overlay (visible on desktop) */}
+       
+                {/* <Image 
+                    width={800} 
+                    height={900} 
+                    src="/signIn.png" 
+                    alt='green woman' 
+                    className="object-center md:object-cover w-full md:h-screen h-[400px]"
+                /> */}
+                    
+      {/* Left side - Image */}
+      <div className="w-full lg:w-1/2 relative h-[300px] lg:h-auto">
         <div className="absolute top-8 left-8 z-10 hidden lg:block">
-          <Link href="/">
+          {/* <Link href="/">
             <Image 
               src="/Newblacklogo.png" 
               alt="Company Logo" 
@@ -175,18 +186,47 @@ const SignUp: React.FC = () => {
               height={50} 
               className="h-12 w-auto"
             />
-          </Link>
+          </Link> */}
         </div>
-                <Image 
-                    width={800} 
-                    height={900} 
-                    src="/signIn.png" 
-                    alt='green woman' 
-                    className="object-center md:object-cover w-full md:h-screen h-[400px]"
-                />
-            </div>
+    
+        <style>{`
+          .container-1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+          }
+    
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+          }
+    
+          .pulsing-image {
+            animation: pulse 3s ease-in-out infinite;
+            width: 400px;
+            height: 400px;
+          }
+        `}</style>
+    
+        <div className="container-1">
+          <Image 
+            width={200} 
+            height={200} 
+            src="/signIn2.png"
+            alt='green woman' 
+            className="pulsing-image object-center md:object-contain w-fit md:h-screen h-[200px]"
+            priority
+          />
+        </div>
+      </div>
+    
+            {/* </div> */}
 
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 
+                      absolute top-0 left-0 h-full z-20 lg:static 
+                      backdrop-blur-md  rounded-none lg:rounded-none">
                 <div className="w-full max-w-md">
                 <div className="flex justify-between">
             <div></div>
