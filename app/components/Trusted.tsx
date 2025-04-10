@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 5,
-    name: "Justina Mbakwe",
+    name: "Desta Tadesse",
     role: "Sound Engineer",
     company: "Audio Excellence",
     image: "/per6.avif",

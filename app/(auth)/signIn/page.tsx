@@ -224,11 +224,11 @@ const SignUp: React.FC = () => {
     
             {/* </div> */}
 
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 
+            <div className="w-full lg:w-1/2 flex items-center justify-center md:mt-28 p-6 lg:p-12 
                       absolute top-0 left-0 h-full z-20 lg:static 
                       backdrop-blur-md  rounded-none lg:rounded-none">
                 <div className="w-full max-w-md">
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
             <div></div>
             <Link href="/">
             <Image 
@@ -239,7 +239,7 @@ const SignUp: React.FC = () => {
               className="h-12 w-auto flex justify-end"
             />
           </Link>
-          </div>
+          </div> */}
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold mb-4">Log In</h2>
                         <p className="text-gray-400">Keep the music alive—log in to continue.</p>
@@ -256,8 +256,8 @@ const SignUp: React.FC = () => {
                         </div>
                     )}
 
-                    <form onSubmit={submitForm} className="space-y-4">
-                        <div>
+                    <form onSubmit={submitForm} className="space-y-8">
+                        {/* <div>
                             <input
                                 type="text"
                                 name="name"
@@ -268,7 +268,7 @@ const SignUp: React.FC = () => {
                                     ${errors.name ? 'border-2 border-red-500' : ''}`}
                             />
                             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                        </div>
+                        </div> */}
 
                         <div>
                             <input
@@ -296,7 +296,7 @@ const SignUp: React.FC = () => {
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
                         </div>
 
-                        <div>
+                        {/* <div>
                             <input
                                 type="password"
                                 name="confirmPassword"
@@ -307,7 +307,7 @@ const SignUp: React.FC = () => {
                                     ${errors.confirmPassword ? 'border-2 border-red-500' : ''}`}
                             />
                             {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
-                        </div>
+                        </div> */}
 
                         <button
                             type="submit"
