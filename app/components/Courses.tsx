@@ -2,6 +2,8 @@ import Image from 'next/image'
 import React from 'react'
 import { RiBookMarkedLine } from "react-icons/ri";
 import { IoMdPerson } from "react-icons/io";
+import { FaAngleRight } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 const Courses = () => {
     const courses = [
         {
@@ -67,32 +69,36 @@ const Courses = () => {
             lesson: 30,
             student: 4587
         },
-        {
-            id: 10,
-            image: '/course2.png',
-            title: 'Digital Marketing Strategy and Implementation',
-            lesson: 26,
-            student: 8240
-        }
+       
     ]
   return (
     <div>
-        <div className='grid grid-cols-3 gap-5 justify-between'>
+        <div className='grid grid-cols-3 gap-5'>
             {
                courses.map((course) => (
                 <div key={course.id} className="mt-10">
                     <Image width={300} height={300} src={course.image} alt='course image'/>
-                    <p className='text-white text-md '>{course.title}</p>
-                   <div className='flex mt-4 w-[280px]'>
-                   <div className='flex items-center gap-1'>
-                   <RiBookMarkedLine size={20} className='text-[#C2EE03]' />
-                   <p className='text-white text-sm'>lessons: {course.lesson}</p>
+                    <p className='text-white text-[16px] font-[500]'>{course.title}</p>
+                   <div className='flex gap-2 mt-4 w-[280px]'>
+                   <div className='flex items-center gap-1 w-[91px]'>
+                   <RiBookMarkedLine  className='text-[#C2EE03] text-[16px]' />
+                   <p className='text-white text-[13px]'>lessons: {course.lesson}</p>
                    </div>
                    <div  className='flex items-center gap-1'>
-                    <IoMdPerson  size={20} className='text-[#C2EE03]' />
-                    <p className='text-white text-sm'>Student: {course.student}</p>
+                    <IoMdPerson className='text-[#C2EE03] text-[16px]' />
+                    <p className='text-white text-[13px]'>Student: {course.student}</p>
                    </div>
                    </div>
+                   <div className="flex items-center mt-8 gap-4">
+      <button className="bg-lime-400 flex items-center justify-center gap-2 py-2 px-4 text-black rounded-xl font-bold text-sm transition-all hover:bg-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 shadow-sm">
+        Start Course
+        <FaAngleRight size={16} className="font-medium" />
+      </button>
+      
+      <button className="bg-lime-400 w-10 h-10 rounded-full flex items-center justify-center text-black transition-all hover:bg-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 shadow-sm">
+        <FaHeart size={16} />
+      </button>
+    </div>
                     </div>
                ))
             }
