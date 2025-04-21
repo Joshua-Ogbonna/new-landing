@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
-import { motion } from 'framer-motion' // Correct import if you want to use framer-motion
 import Image from 'next/image'
 
 const Categories = () => {

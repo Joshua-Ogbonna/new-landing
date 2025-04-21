@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 "use client"
 import { useEffect, useState } from 'react'
-import SideBar from '../components/SideBar'
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import Link from 'next/link';
-import Modal from '../components/Modal';
 
 interface Song {
   id: string;

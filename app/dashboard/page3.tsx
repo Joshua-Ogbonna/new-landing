@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useEffect, useState } from 'react';
 // import { useRouter } from 'next/navigation';
-import DashboardLayout from "../components/Dashboard/DashboardLayout";
-import HeroBanner from "../components/Dashboard/HeroBanner";
-import ArtistProfile from "../components/Dashboard/ArtistProfile";
-import StreamsChart from "../components/Dashboard/StreamsChart";
-import TopCountries from "../components/Dashboard/TopCountries";
+// import DashboardLayout from "../components/Dashboard/DashboardLayout";
+// import HeroBanner from "../components/Dashboard/HeroBanner";
+// import ArtistProfile from "../components/Dashboard/ArtistProfile";
+// import StreamsChart from "../components/Dashboard/StreamsChart";
+// import TopCountries from "../components/Dashboard/TopCountries";
 import Image from 'next/image';
 
 
@@ -71,10 +72,9 @@ export default function Dashboard() {
   return (
     <div>
       {/* Render artist data or loading state */}
-      {artistData ? (
+      {/* {artistData ? (
            <DashboardLayout name={artist ? artist?.name : "David"} image={artist?.image}>
              <div className="flex flex-col lg:flex-row gap-6">
-               {/* Left Section - 70% width */}
                <div className="flex-1">
                  <HeroBanner />
                  <div className="flex flex-col lg:flex-row gap-6 mt-6">
@@ -93,9 +93,7 @@ export default function Dashboard() {
                  </div>
                </div>
        
-               {/* Right Section - 30% width */}
                <div className="lg:w-[30%] space-y-6">
-                 {/* Visitors Analytics */}
                  <div className="bg-[#1F1F1F] rounded-xl p-6">
                    <div className="flex justify-between items-center mb-4">
                      <h3 className="text-lg font-medium">Visitors Analytics</h3>
@@ -111,7 +109,6 @@ export default function Dashboard() {
                            <div className="text-sm text-gray-400">Visitors</div>
                          </div>
                        </div>
-                       {/* Donut chart segments */}
                        <svg
                          viewBox="0 0 100 100"
                          className="absolute inset-0 transform -rotate-90"
@@ -173,7 +170,6 @@ export default function Dashboard() {
                    </div>
                  </div>
        
-                 {/* Sells by State */}
                  <div className="bg-[#1F1F1F] rounded-xl p-6">
                    <div className="flex justify-between items-center mb-4">
                      <h3 className="text-lg font-medium">Sells by State</h3>
@@ -231,7 +227,7 @@ export default function Dashboard() {
            </DashboardLayout>
       ) : (
         <div>Loading...</div>
-      )}
+      )} */}
     </div>
   );
 }

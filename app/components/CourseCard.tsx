@@ -111,7 +111,7 @@ export default function CourseCard() {
 
                   {/* Action Button */}
                   <button className="bg-[#c2ee03] text-black font-medium py-2 px-2 rounded-md flex items-center">
-                    Let's Go
+                    Let&apos;s Go
                     <ArrowRight size={16} className="ml-1" />
                   </button>
                 </div>
