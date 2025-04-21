@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // CourseCard.jsx
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';

@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { FaRegTrashAlt } from "react-icons/fa";
 import SongService from '@/services/SongService';
-import { error } from 'console';
 interface FormData {
   releaseTitle: string;
   artistName: string;
@@ -135,7 +135,7 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
               <li>File must be in RGB mode, even if your image is black and white.</li>
               <li>At least 1600 x 1600 pixels in size.</li>
               <li>No blurriness, pixelation, or white space.</li>
-              <li>No social media links, contact information, store names or logos, pricing information, release dates, "New" stickers, etc.</li>
+              <li>No social media links, contact information, store names or logos, pricing information, release dates, &quot;New&quot; stickers, etc.</li>
             </ul>
 
             <input
