@@ -1,4 +1,3 @@
-import { Poppins } from "next/font/google";
 const { fontFamily } = require("tailwindcss/defaultTheme");
 import type { Config } from "tailwindcss";
 
@@ -31,8 +30,8 @@ export default {
         },
       },
       fontFamily: {
-          poppins: ["Poppins", ...fontFamily.sans],
-          Nebulica: ["Nebulica", ...fontFamily.sans],
+        poppins: ['var(--font-poppins)', ...fontFamily.sans],
+        Nebulica: ["Nebulica", ...fontFamily.sans],
       },
     },
   },

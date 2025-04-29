@@ -8,10 +8,11 @@ interface FormData {
   releaseTitle: string;
   artistName: string;
   featuredArtist: string;
-  genre: string;
   releaseDate: string;
   songwriter: string;
   isCover: string;
+  category: string,
+  contentType: string
 }
 
 interface CompleteFormData extends FormData {
@@ -79,42 +80,47 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!completeFormData.artwork || !completeFormData.musicFile) {
       alert("Please upload both cover art and music file.");
       return;
     }
-    
+
     const payload = {
       releaseTitle: completeFormData.releaseTitle,
       artistName: completeFormData.artistName,
       featuredArtist: completeFormData.featuredArtist,
-      genre: completeFormData.genre,
       releaseDate: completeFormData.releaseDate,
       songwriter: completeFormData.songwriter,
+      category_id: completeFormData.category,
+      content_type_id: completeFormData.contentType,
       isCover: completeFormData.isCover,
       artwork: completeFormData.artwork,
       musicFile: completeFormData.musicFile,
     }
-  
+
     try {
       const response = await SongService.createSong(payload);
+      console.log(payload);
+      
       if (response) {
         // Reset form or redirect as needed
         setCompleteFormData({
           releaseTitle: '',
           artistName: '',
           featuredArtist: '',
-          genre: '',
           releaseDate: '',
           songwriter: '',
           isCover: '',
           artwork: null,
           musicFile: null,
+          category: '',
+          contentType: ''
         });
-        
+
         // You might want to add a success message or redirect here
         alert("Song submitted successfully!");
+
       }
     } catch (error) {
       console.error("Submission error:", error);
@@ -144,7 +150,7 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
               onChange={handleCoverArtUpload}
               accept="image/jpeg,image/png,image/gif"
               className="hidden"
-             
+
             />
 
             <div className="flex flex-wrap items-center">
@@ -156,7 +162,7 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
                 Upload Cover
                 {coverArtFile && "✓"}
               </button>
-              {coverArtFile && <span className="ml-2 text-lime-400 text-sm sm:text-base overflow-hidden text-ellipsis">{}</span>}
+              {coverArtFile && <span className="ml-2 text-lime-400 text-sm sm:text-base overflow-hidden text-ellipsis">{ }</span>}
             </div>
 
             <section>
@@ -167,7 +173,7 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
                 onChange={handleMusicUpload}
                 accept=".wav,.mp3,.flac"
                 className="hidden"
-           
+
               />
               <div className="flex flex-wrap items-center">
                 <button
@@ -199,7 +205,6 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
                 <div className="w-full text-base sm:text-lg">
                   <p className='text-[#C2EE03]'><strong>Title:</strong> {formData.releaseTitle}</p>
                   <p className='text-[#C2EE03]'><strong>Artist:</strong> {formData.artistName}</p>
-                  <p><strong>Genre:</strong> {formData.genre}</p>
                   {formData.featuredArtist && <p><strong>Featured:</strong> {formData.featuredArtist}</p>}
                   <div className='flex items-center gap-3 mt-4'>
                     <FaRegTrashAlt size={18} className='text-red-700' />
@@ -220,7 +225,7 @@ const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) =
               <button
                 type="submit"
                 className="w-full sm:w-40 py-2 sm:py-3 bg-lime-400 text-gray-900 font-bold rounded-3xl hover:bg-lime-500 transition-colors duration-200"
-                // disabled={!coverArtFile || !musicFile}
+              // disabled={!coverArtFile || !musicFile}
               >
                 Submit
               </button>

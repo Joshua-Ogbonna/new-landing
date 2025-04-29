@@ -4,7 +4,8 @@ import SideBar from '../components/SideBar';
 import FirstForm from '../components/Form1';
 import SecondForm from '../components/Form2';
 
-interface FormData {
+// Renamed from FormData to ReleaseFormData to avoid collision
+interface ReleaseFormData {
   releaseTitle: string;
   artistName: string;
   featuredArtist: string;
@@ -12,25 +13,30 @@ interface FormData {
   releaseDate: string;
   songwriter: string;
   isCover: string;
+  category: string,
+  contentType: string
 }
 
-interface CompleteFormData extends FormData {
+// Updated to extend the renamed interface
+interface CompleteReleaseFormData extends ReleaseFormData {
   artwork: File | null;
   musicFile: File | null;
 }
 
 const NewReleasePage: React.FC = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData | null>(null);
-
-  const handleFirstFormSubmit = (data: FormData) => {
+  const [formData, setFormData] = useState<ReleaseFormData | null>(null);
+  
+  // Updated parameter type
+  const handleFirstFormSubmit = (data: ReleaseFormData) => {
     console.log("First form data submitted:", data);
     setFormData(data);
     setStep(2);
   };
-
-  const handleSecondFormSubmit = (completeData: CompleteFormData) => {
-    console.log("Complete submission data:", completeData);
+  
+  // Updated parameter type
+  const handleSecondFormSubmit = (data: CompleteReleaseFormData) => {
+    console.log("Complete submission data:", data);
     
     // Here you would typically send all the data to your API
     // Add your API submission logic here
@@ -38,11 +44,11 @@ const NewReleasePage: React.FC = () => {
     // For demonstration:
     alert("Release submitted successfully!");
   };
-
+  
   const handleBack = () => {
     setStep(1);
   };
-
+  
   return (
     <div className="flex">
       <SideBar />
@@ -51,9 +57,9 @@ const NewReleasePage: React.FC = () => {
           <FirstForm onSubmit={handleFirstFormSubmit} />
         ) : (
           <SecondForm 
-            formData={formData as FormData}
-            onSubmit={handleSecondFormSubmit} 
-            onBack={handleBack} 
+            formData={formData as ReleaseFormData}
+            onSubmit={handleSecondFormSubmit}
+            onBack={handleBack}
           />
         )}
       </div>

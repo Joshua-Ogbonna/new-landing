@@ -10,6 +10,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import Link from 'next/link';
 import Modal from '../components/Modal';
+import axios from 'axios';
 
 interface Song {
   id: string;
@@ -63,23 +64,52 @@ const songs: Song[] = [
     },
   ]
 const Songs = () => {
-
       const [userId, setUserId] = useState<string | null>(null);
       const [userToken, setUserToken] = useState<string | null>(null)
+      useEffect(() => {
+        const storedUserId = localStorage.getItem("userId");
+        const storedUserToken = localStorage.getItem("token")
+        setUserId(storedUserId);
+        setUserToken(storedUserToken)
+    
+        
+       console.log(userId, userToken);
+    }, [])
+
+    
+      //fetch the songs 
+
+   const fetchData = async() =>{
+    console.log('see me ');
+    
+    try {
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_UR}/artist/songs/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+    
+      console.log(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+   }
       
+   useEffect(() => {
+    if (userId && userToken) {
+      fetchData();
+    }
+  }, [userId, userToken]); 
+
+
+
       // Pagination state
       const [currentPage, setCurrentPage] = useState(1);
       const songsPerPage = 3; // Show 3 songs per page
     
-      useEffect(() => {
-        if (typeof window !== 'undefined') {
-          const storedUserId = localStorage.getItem("userId");
-          const storedUserToken = localStorage.getItem("token")
-          setUserId(storedUserId);
-          setUserToken(storedUserToken)
-        }
-      }, [])
-    console.log(userId, userToken);
     
       // Calculate pagination
       const indexOfLastSong = currentPage * songsPerPage;

@@ -43,7 +43,8 @@ class SongService {
         durations: [duration],   // Array
         artist_name: songData.artistName,
         featuredArtist: songData.featuredArtist,
-        genre: songData.genre,
+        content_type_id: songData.content_type_id,  
+        category_id: songData.category_id,      
         artist_id: userId,
         album_id: null,
         release_date: songData.releaseDate,
@@ -51,6 +52,7 @@ class SongService {
         isCover: songData.isCover === "yes",
         lyrics: songData.lyrics ?? "<p>No lyrics provided</p>",
       };
+  console.log(payload);
   
       // Send to backend AS JSON
       const response = await axios.post(
@@ -59,7 +61,7 @@ class SongService {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", // 🚨 Critical change
+            "Content-Type": "application/json", //  Critical change
           },
         }
       );

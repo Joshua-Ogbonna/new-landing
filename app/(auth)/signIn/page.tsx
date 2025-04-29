@@ -5,6 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { log } from 'util';
 
 // Validation Interfaces
 interface FormData {
@@ -96,7 +97,20 @@ const Login: React.FC = () => {
                     }
                 }
             );
-
+            const id1 = result.data.data.user.id
+            console.log(id1);
+            const token = result.data.data.token
+            const result2 = await axios.get(`https://mysounduk-service.com/api/artists/profile/${id1}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            console.log(result2.data.data.id);
+            const ArtistId = result2.data.data.id
+            localStorage.setItem('ArtistId', ArtistId )
             // Handle successful login
             setSuccess({
                 message: 'Login successful!'
