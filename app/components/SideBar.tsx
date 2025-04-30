@@ -2,7 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { FaSignOutAlt, FaTimes, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { 
+  FaSignOutAlt, FaTimes, FaChevronDown, FaChevronUp, 
+  FaHome, FaDollarSign, FaMusic, FaFolderOpen, FaCompactDisc, FaHeadphones, FaPlusCircle, FaUserCircle, FaCog 
+} from "react-icons/fa";
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from "react";
 
@@ -12,24 +15,25 @@ interface SideBarProps {
   onClose: () => void;
 }
 
-// Define navigation items
+// Define navigation items with React Icons
 const primaryNavItems = [
-  { href: "/Dashboard", label: "Dashboard", iconSrc: "/home.svg", alt: "Dashboard" },
-  { href: "/earnings", label: "Earnings", iconSrc: "/stats.svg", alt: "Earnings" },
+  { href: "/Dashboard", label: "Dashboard", icon: FaHome },
+  { href: "/earnings", label: "Earnings", icon: FaDollarSign },
 ];
 
-// Define Music submenu items
+// Define Music submenu items with React Icons
 const musicSubmenuItems = [
-   { href: "/albums", label: "Albums", iconSrc: "/apps.svg", alt: "Albums" },
-   { href: "/singles", label: "Singles", iconSrc: "/music_note.svg", alt: "Singles" },
+   { href: "/albums", label: "Albums", icon: FaCompactDisc },
+   { href: "/singles", label: "Singles", icon: FaHeadphones },
 ];
 
-// Add New Release item
-const newReleaseItem = { href: "/newRelease", label: "New Release", iconSrc: "/add_circle.svg", alt: "New Release" };
+// Add New Release item with React Icons
+const newReleaseItem = { href: "/newRelease", label: "New Release", icon: FaPlusCircle };
 
+// Profile items with React Icons
 const profileNavItems = [
-   { href: "/Dashboard/profile", label: "Profile", iconSrc: "/profile.svg", alt: "Profile" },
-   { href: "/Dashboard/settings", label: "Settings", iconSrc: "/settings.svg", alt: "Settings" },
+   { href: "/Dashboard/profile", label: "Profile", icon: FaUserCircle },
+   { href: "/Dashboard/settings", label: "Settings", icon: FaCog },
 ];
 
 const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
@@ -53,8 +57,16 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
 
   const isActive = (href: string) => {
     if (href === "/Dashboard") return pathname === href; 
-    return pathname.startsWith(href);
+    if (href === "/albums" || href === "/singles" || href === "/newRelease" || href === "/earnings" || href === "/Dashboard/profile" || href === "/Dashboard/settings") {
+        return pathname.startsWith(href);
+    }
+    return false;
   };
+  
+  // Adjusted isActive check specifically for the Music dropdown *trigger*
+  const isMusicTriggerActive = () => {
+      return pathname.startsWith('/albums') || pathname.startsWith('/singles');
+  }
 
   const toggleMusicDropdown = () => {
       setIsMusicOpen(!isMusicOpen);
@@ -79,14 +91,20 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
         
         {/* Profile Section */}
         <div className="flex flex-col items-center mb-8">
-            <div className="w-12 h-12 bg-gray-400 rounded-full overflow-hidden mb-2">
-                <Image 
-                    src={session?.user?.artistImage || ''}
-                    alt="User profile"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-cover"
-                />
+            <div className="w-12 h-12 bg-gray-400 rounded-full overflow-hidden mb-2 relative">
+                {session?.user?.artistImage ? (
+                    <Image 
+                        src={session.user.artistImage}
+                        alt="User profile"
+                        fill
+                        className="w-full h-full object-cover"
+                        sizes="48px"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-600">
+                        <FaUserCircle size={30} className="text-gray-400" />
+                    </div>
+                )}
             </div>
             <span className={`text-white text-sm font-medium truncate ${isOpen ? 'block' : 'hidden'} lg:block`}>
                 {status === 'authenticated' ? (session?.user?.artistName ?? 'User') : 'Loading...'}
@@ -98,6 +116,7 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
           {/* Primary Links */}
           {primaryNavItems.map((item) => {
             const active = isActive(item.href);
+            const IconComponent = item.icon;
             return (
               <Link 
                 key={item.href} 
@@ -106,13 +125,10 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
                            ${active ? 'bg-black' : 'hover:bg-black'}`} 
                 onClick={onClose}
               >
-                <Image 
-                  src={item.iconSrc} 
-                  alt={item.alt} 
-                  width={24} 
-                  height={24} 
-                  className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
-                             ${active ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`} 
+                <IconComponent 
+                  size={22}
+                  className={`flex-shrink-0 transition-colors duration-200 
+                             ${active ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`} 
                 />
                 <span className={`ml-4 transition-colors duration-200 
                                ${active ? 'text-[#C2EE03]' : 'text-white'} 
@@ -127,24 +143,21 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
           <button 
             onClick={toggleMusicDropdown}
             className={`p-3 rounded-lg transition-colors group w-full flex items-center justify-between 
-                       ${isMusicSectionActive ? 'bg-black' : 'hover:bg-black'}`}
+                       ${isMusicTriggerActive() ? 'bg-black' : 'hover:bg-black'}`}
           >
             <div className="flex items-center">
-                <Image 
-                  src="/music_folder.svg"
-                  alt="Music"
-                  width={24} 
-                  height={24} 
-                  className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
-                             ${isMusicSectionActive ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`} 
-                />
+                <FaFolderOpen 
+                   size={22} 
+                   className={`flex-shrink-0 transition-colors duration-200 
+                              ${isMusicTriggerActive() ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`} 
+                 />
                 <span className={`ml-4 transition-colors duration-200 
-                               ${isMusicSectionActive ? 'text-[#C2EE03]' : 'text-white'} 
+                               ${isMusicTriggerActive() ? 'text-[#C2EE03]' : 'text-white'} 
                                ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
                   Music
                 </span> 
             </div>
-            <span className={`${isOpen ? 'inline' : 'hidden'} lg:inline ${isMusicSectionActive ? 'text-[#C2EE03]' : 'text-white'} group-hover:text-white`}>
+            <span className={`${isOpen ? 'inline' : 'hidden'} lg:inline ${isMusicTriggerActive() ? 'text-[#C2EE03]' : 'text-white'} group-hover:text-white`}>
                 {isMusicOpen ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />}
             </span>
           </button>
@@ -154,6 +167,7 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
             <div className="pl-6 space-y-1 w-full mt-1">
               {musicSubmenuItems.map((item) => {
                   const active = isActive(item.href);
+                  const IconComponent = item.icon;
                   return (
                     <Link 
                       key={item.href} 
@@ -162,13 +176,10 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
                                  ${active ? 'bg-black' : 'hover:bg-black'}`} 
                       onClick={onClose}
                     >
-                      <Image 
-                        src={item.iconSrc} 
-                        alt={item.alt} 
-                        width={20}
-                        height={20} 
-                        className={`w-5 h-5 flex-shrink-0 transition-all duration-200 
-                                   ${active ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`} 
+                      <IconComponent 
+                          size={18}
+                          className={`flex-shrink-0 transition-colors duration-200 
+                                     ${active ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`} 
                       />
                       <span className={`ml-3 transition-colors duration-200 text-sm 
                                      ${active ? 'text-[#C2EE03]' : 'text-white'} 
@@ -182,27 +193,30 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
           )}
 
           {/* New Release Link */}
-          <Link
-            key={newReleaseItem.href}
-            href={newReleaseItem.href}
-            className={`p-3 rounded-lg transition-colors group w-full flex items-center 
-                         ${isActive(newReleaseItem.href) ? 'bg-black' : 'hover:bg-black'}`}
-            onClick={onClose} // Close sidebar on mobile when clicked
-          >
-            <Image
-              src={newReleaseItem.iconSrc}
-              alt={newReleaseItem.alt}
-              width={24}
-              height={24}
-              className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
-                             ${isActive(newReleaseItem.href) ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`}
-            />
-            <span className={`ml-4 transition-colors duration-200 
-                             ${isActive(newReleaseItem.href) ? 'text-[#C2EE03]' : 'text-white'} 
-                             ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
-              {newReleaseItem.label}
-            </span>
-          </Link>
+          {(() => {
+            const active = isActive(newReleaseItem.href);
+            const IconComponent = newReleaseItem.icon;
+            return (
+              <Link
+                key={newReleaseItem.href}
+                href={newReleaseItem.href}
+                className={`p-3 rounded-lg transition-colors group w-full flex items-center 
+                            ${active ? 'bg-black' : 'hover:bg-black'}`}
+                onClick={onClose}
+              >
+                <IconComponent 
+                   size={22} 
+                   className={`flex-shrink-0 transition-colors duration-200 
+                              ${active ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`} 
+                 />
+                <span className={`ml-4 transition-colors duration-200 
+                                ${active ? 'text-[#C2EE03]' : 'text-white'} 
+                                ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
+                  {newReleaseItem.label}
+                </span>
+              </Link>
+            );
+          })()}
           
 
           {/* Separator */}
@@ -211,6 +225,7 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
           {/* Profile/Settings Links */}
           {profileNavItems.map((item) => {
              const active = isActive(item.href);
+             const IconComponent = item.icon;
              return (
                <Link 
                  key={item.href} 
@@ -219,13 +234,10 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
                            ${active ? 'bg-black' : 'hover:bg-black'}`} 
                  onClick={onClose}
                >
-                 <Image 
-                   src={item.iconSrc} 
-                   alt={item.alt} 
-                   width={24} 
-                   height={24} 
-                   className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
-                             ${active ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`} 
+                 <IconComponent 
+                    size={22} 
+                    className={`flex-shrink-0 transition-colors duration-200 
+                               ${active ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`} 
                  />
                  <span className={`ml-4 transition-colors duration-200 
                                ${active ? 'text-[#C2EE03]' : 'text-white'} 
@@ -236,7 +248,6 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
              );
            })}
 
-         
         </nav>
       </div>
 
@@ -248,8 +259,10 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
             title="Sign Out"
             className="p-3 rounded-lg hover:bg-red-800/50 transition-colors group w-full flex items-center"
           >
-             <FaSignOutAlt className="w-6 h-6 text-gray-400 group-hover:text-red-400 transition-colors flex-shrink-0" />
-             <span className={`ml-4 text-red-400 ${isOpen ? 'inline' : 'hidden'} lg:inline`}>Sign Out</span>
+            <FaSignOutAlt size={22} className="text-gray-400 group-hover:text-red-400 transition-colors duration-200" />
+            <span className={`ml-4 text-white group-hover:text-red-400 transition-colors duration-200 ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
+              Logout
+            </span>
           </button>
         )}
       </div>

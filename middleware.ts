@@ -1,38 +1,45 @@
-// middleware.ts
 import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
 export default withAuth(
-  // `withAuth` augments your `Request` with the user's token.
-  function middleware(req) {
-    // console.log(req.nextauth.token); // Optional: Log token for debugging
-    // You could add additional logic here based on the token if needed
-    // e.g., role-based authorization
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token, // If there is a token, the user is authorized
+    function middleware(req) {
+        const token = req.nextauth.token;
+        const url = req.nextUrl;
+
+        const artistProfileComplete = token?.artistProfileComplete;
+        const isOnArtistSignInPage = url.pathname.startsWith("/artistSignIn");
+
+        // If user is authenticated but has NOT completed artist profile and is NOT on artistSignIn page
+        if (token && !artistProfileComplete && !isOnArtistSignInPage) {
+            const redirectUrl = new URL("/artistSignIn", req.url);
+            return NextResponse.redirect(redirectUrl);
+        }
+
+        // Otherwise, allow request
+        return NextResponse.next();
     },
-    pages: {
-      signIn: '/signIn', // Redirect to custom sign-in page
-      error: '/signIn', // Redirect errors (e.g., invalid credentials) back to sign-in
-    },
-  }
+    {
+        callbacks: {
+            authorized: ({ token }) => !!token, // Only require that user is logged in
+        },
+        pages: {
+            signIn: '/signIn',
+            error: '/signIn',
+        },
+    }
 );
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    '/Dashboard/:path*', 
-    '/earnings/:path*', 
-    '/courses/:path*', 
-    '/courseDetails/:path*', 
-    '/songs/:path*', 
-    '/newRelease/:path*', 
-    '/albums/:path*', 
-    '/music/:path*', 
-    '/create-artist/:path*', // Protect create-artist route
-    '/artistSignIn/:path*', // Protect artist profile setup route
-    // Add any other specific authenticated API routes if they exist outside /api/auth
-    // Example: '/api/my-protected-endpoint/:path*'
-  ],
-}; 
+    matcher: [
+        '/Dashboard/:path*',
+        '/earnings/:path*',
+        '/courses/:path*',
+        '/courseDetails/:path*',
+        '/songs/:path*',
+        '/newRelease/:path*',
+        '/albums/:path*',
+        '/music/:path*',
+        '/create-artist/:path*',
+        '/artistSignIn/:path*', // Still protect it from unauthenticated users
+    ],
+};

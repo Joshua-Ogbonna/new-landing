@@ -5,16 +5,23 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { FaTimes, FaUpload, FaSpinner, FaMusic, FaImage } from 'react-icons/fa';
-import CloudinaryService from '@/services/cloudinary.services'; // Assuming this handles uploads correctly
+import toast from 'react-hot-toast'; // Import toast
+import DataService from '@/services/DataService'; // Import DataService
+// Remove CloudinaryService import if DataService handles uploads, or keep if needed separately
+// import CloudinaryService from '@/services/cloudinary.services'; 
 
-// Interfaces (assuming defined elsewhere or define here)
+// Interfaces (Make sure these match DataService and API responses)
 interface Category {
-  id: string; name: string; content_type_id: string; 
+  id: string; 
+  name: string; 
+  content_type_id?: string; // Required for filtering
 }
 interface ContentType {
-  id: string; name: string; categories: Category[];
+  id: string; 
+  name: string;
+  // Removed nested categories, assuming fetched separately
 }
-interface Song {
+interface Song { // Keep this as it defines the incoming prop structure
   id: string; title: string; artist_id: string; album_id?: string | null; release_date?: string | null;
   duration?: number; content_type_id?: string | null; category_id?: string | null; isCover?: boolean;
   featuredArtist?: string | null; songwriter?: string | null; file: string; cover_image: string;
@@ -28,7 +35,6 @@ interface EditSingleModalProps {
   onSongUpdated: () => void;
 }
 
-// Rename state interface to avoid collision with native FormData
 interface SongFormData {
   title: string;
   releaseDate: string;
@@ -42,49 +48,72 @@ interface SongFormData {
 
 const EditSingleModal: React.FC<EditSingleModalProps> = ({ isOpen, onClose, song, onSongUpdated }) => {
   const { data: session } = useSession();
-  // Use the renamed interface for state
   const [formData, setFormData] = useState<SongFormData>({
       title: '', releaseDate: '', lyrics: '', contentTypeId: '', categoryId: '',
       isCover: false, featuredArtist: '', songwriter: ''
   });
-  // State for *new* files selected by the user
   const [newAudioFile, setNewAudioFile] = useState<File | null>(null);
   const [newCoverFile, setNewCoverFile] = useState<File | null>(null);
-  // State for previewing the cover (either existing or new)
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
   
+  // State for fetched types/categories
   const [contentTypes, setContentTypes] = useState<ContentType[]>([]);
+  const [allCategories, setAllCategories] = useState<Category[]>([]);
   const [availableCategories, setAvailableCategories] = useState<Category[]>([]);
   
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFetchingTypes, setIsFetchingTypes] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // For submission loading
+  const [isLoadingData, setIsLoadingData] = useState(false); // For initial data fetch
+  // Removed local error state, using toast
   
   const audioInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
 
-  // Fetch Content Types
+  // Fetch Content Types & Categories using DataService when modal opens
   useEffect(() => {
-    const fetchTypes = async () => {
-      if (isOpen && contentTypes.length === 0) {
-        setIsFetchingTypes(true); setError(null);
+    const fetchData = async () => {
+      if (isOpen && contentTypes.length === 0 && allCategories.length === 0) { // Fetch only if needed
+        setIsLoadingData(true); 
         try {
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/content-types-with-categories`);
-          setContentTypes(response.data?.data || []);
+          const [ctResponse, catResponse] = await Promise.allSettled([
+              DataService.fetchContentTypes(),
+              DataService.fetchCategories()
+          ]);
+          
+          let fetchedContentTypes: ContentType[] = [];
+          let fetchedCategories: Category[] = [];
+
+          if (ctResponse.status === 'fulfilled') {
+              fetchedContentTypes = ctResponse.value;
+          } else {
+              console.error("Content Type fetch failed:", ctResponse.reason);
+              toast.error(ctResponse.reason?.message || "Failed to load Content Types");
+          }
+          
+          if (catResponse.status === 'fulfilled') {
+               fetchedCategories = catResponse.value;
+          } else {
+              console.error("Category fetch failed:", catResponse.reason);
+              toast.error(catResponse.reason?.message || "Failed to load Categories");
+          }
+          
+          setContentTypes(fetchedContentTypes);
+          setAllCategories(fetchedCategories);
+
         } catch (err) {
-          console.error("Error fetching content types:", err);
-          setError("Failed to load content options.");
+           console.error("Error fetching initial data:", err);
+           toast.error("An unexpected error occurred loading select options.");
         } finally {
-          setIsFetchingTypes(false);
+           setIsLoadingData(false);
         }
       }
     };
-    fetchTypes();
-  }, [isOpen, contentTypes.length]);
+    fetchData();
+  }, [isOpen]); // Dependency on isOpen to trigger fetch
 
-  // Populate form & reset state when song or modal visibility changes
+  // Populate form & reset state when song prop changes (while modal is open)
   useEffect(() => {
     if (isOpen && song) {
+      console.log("Populating edit form for song:", song);
       const releaseDate = song.release_date ? new Date(song.release_date).toISOString().split('T')[0] : '';
       setFormData({
         title: song.title || '',
@@ -96,43 +125,50 @@ const EditSingleModal: React.FC<EditSingleModalProps> = ({ isOpen, onClose, song
         featuredArtist: song.featuredArtist || '',
         songwriter: song.songwriter || ''
       });
-      setCoverPreview(song.formatted_cover_url || null);
-      setNewAudioFile(null); // Clear any previously selected new files
+      setCoverPreview(song.formatted_cover_url || song.cover_image || null); // Use formatted or original
+      setNewAudioFile(null); 
       setNewCoverFile(null);
-      setError(null);
-    } else if (!isOpen) {
-      // Reset everything when modal closes
-      handleCloseReset();
-    }
+    } 
+    // Reset is handled separately by onClose -> handleCloseReset if needed
   }, [song, isOpen]);
 
-   // Update available categories when content type changes
+   // Update available categories when content type or allCategories changes
    useEffect(() => {
-    if (formData.contentTypeId && contentTypes.length > 0) {
-      const selectedType = contentTypes.find(ct => ct.id === formData.contentTypeId);
-      setAvailableCategories(selectedType?.categories || []);
-      // Check if the current category ID is still valid for the new content type
-      if (!selectedType?.categories.find(cat => cat.id === formData.categoryId)) {
-          setFormData(prev => ({ ...prev, categoryId: '' })); // Reset if invalid
+    if (formData.contentTypeId && allCategories.length > 0) {
+      const filtered = allCategories.filter(cat => cat.content_type_id === formData.contentTypeId);
+      setAvailableCategories(filtered);
+      // Reset category if current selection is no longer valid
+      if (filtered.length > 0 && !filtered.find(cat => cat.id === formData.categoryId)) {
+          console.log("Resetting categoryId because it's no longer valid for content type:", formData.contentTypeId);
+          setFormData(prev => ({ ...prev, categoryId: '' })); 
+      } else if (filtered.length === 0) {
+           console.log("Resetting categoryId because no categories available for content type:", formData.contentTypeId);
+           setFormData(prev => ({ ...prev, categoryId: '' })); 
       }
     } else {
       setAvailableCategories([]);
-      // Don't reset categoryId here if contentTypeId is initially empty, wait for population
+       // Also reset category if content type is cleared
       if (!formData.contentTypeId) {
-          setFormData(prev => ({ ...prev, categoryId: '' }));
+           setFormData(prev => ({ ...prev, categoryId: '' })); 
       }
     }
-  }, [formData.contentTypeId, formData.categoryId, contentTypes]);
+  }, [formData.contentTypeId, formData.categoryId, allCategories]);
 
   // --- Handlers ---
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     let newValue: string | boolean = value;
+
     if (e.target instanceof HTMLInputElement && type === 'checkbox') {
       newValue = e.target.checked;
     }
-    setFormData((prev) => ({ ...prev, [name]: newValue }));
-    setError(null);
+
+    if (name === 'contentTypeId') {
+      // Reset category when content type changes explicitly
+      setFormData((prev) => ({ ...prev, contentTypeId: value, categoryId: '' }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: newValue }));
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileType: 'audio' | 'cover') => {
@@ -145,7 +181,6 @@ const EditSingleModal: React.FC<EditSingleModalProps> = ({ isOpen, onClose, song
         reader.onloadend = () => setCoverPreview(reader.result as string);
         reader.readAsDataURL(file);
       }
-      setError(null);
     } 
   };
 
@@ -158,27 +193,35 @@ const EditSingleModal: React.FC<EditSingleModalProps> = ({ isOpen, onClose, song
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!song || !session?.accessToken) {
-      setError("Cannot update song. Missing data or authentication.");
+      toast.error("Cannot update song. Missing data or authentication.");
       return;
     }
-    if (!formData.title) return setError('Song title is required.');
+    if (!formData.title) {
+        toast.error('Song title is required.');
+        return;
+    }
+    // Add validation for category if content type is selected
+    if (formData.contentTypeId && !formData.categoryId) {
+       toast.error("Please select a category for the chosen content type.");
+       return; 
+    }
 
-    setIsLoading(true); setError(null);
+    setIsLoading(true);
+    const toastId = toast.loading("Updating single...");
 
     try {
+      // Determine if files are being uploaded (requires FormData)
       const useFormData = !!newAudioFile || !!newCoverFile;
-      // Use globalThis.FormData for the native type
-      let requestData: globalThis.FormData | { [key: string]: any }; 
+      let requestData: FormData | { [key: string]: any }; // Use native FormData
       let headers: { [key: string]: string } = {
         'Authorization': `Bearer ${session.accessToken}`,
       };
 
-      // --- Prepare Payload --- 
+      // --- Prepare Payload (Only changed fields) ---
       const changedFields: { [key: string]: any } = {};
-      // Compare and add changed text/boolean fields
       if (formData.title !== song.title) changedFields.title = formData.title;
       const currentReleaseDate = song.release_date ? new Date(song.release_date).toISOString().split('T')[0] : '';
-      if (formData.releaseDate !== currentReleaseDate) changedFields.release_date = formData.releaseDate || null; // Send null to clear? Check API
+      if (formData.releaseDate !== currentReleaseDate) changedFields.release_date = formData.releaseDate || null;
       if (formData.lyrics !== (song.lyrics || '')) changedFields.lyrics = formData.lyrics;
       if (formData.contentTypeId !== (song.content_type_id || '')) changedFields.content_type_id = formData.contentTypeId || null;
       if (formData.categoryId !== (song.category_id || '')) changedFields.category_id = formData.categoryId || null;
@@ -186,183 +229,306 @@ const EditSingleModal: React.FC<EditSingleModalProps> = ({ isOpen, onClose, song
       if (formData.featuredArtist !== (song.featuredArtist || '')) changedFields.featuredArtist = formData.featuredArtist || null;
       if (formData.songwriter !== (song.songwriter || '')) changedFields.songwriter = formData.songwriter || null;
 
-      // --- Handle Request Type (FormData or JSON) ---
       if (useFormData) {
-        console.log("Updating with FormData (file changed)");
-        // Assign native FormData object
-        requestData = new FormData(); 
-        // Append changed text fields
+        requestData = new FormData(); // Native FormData
         Object.entries(changedFields).forEach(([key, value]) => {
           if (value !== null && value !== undefined) {
-             // No type assertion needed here, requestData is correctly typed
-             requestData.append(key, typeof value === 'boolean' ? String(value) : value);
-          } else if (value === null) {
-             requestData.append(key, ''); 
+            requestData.append(key, typeof value === 'boolean' ? String(value) : value);
+          } else {
+             requestData.append(key, ''); // Send empty string for null? Check API handling
           }
         });
-        // Append new files if they exist
         if (newAudioFile) requestData.append('song', newAudioFile);
         if (newCoverFile) requestData.append('cover_image', newCoverFile);
-        // Headers set by axios for FormData
+        // Let axios set Content-Type for FormData
       } else {
-         console.log("Updating with JSON (no file change)");
+        console.log("Updating with JSON (no file change)");
         if (Object.keys(changedFields).length === 0) {
-            setError("No changes detected.");
+            toast.error("No changes detected.", { id: toastId });
             setIsLoading(false);
             return;
         }
-        requestData = changedFields; // Assign JSON object
+        requestData = changedFields; 
         headers['Content-Type'] = 'application/json';
       }
 
-      console.log("Sending update request:", requestData instanceof FormData ? "[FormData]" : requestData);
-
-      // --- Make API Call --- 
-      await axios.post(
+      // --- Make API Call (POST for update according to docs) --- 
+      await axios.post( // Use POST as per documentation
         `${process.env.NEXT_PUBLIC_API_URL}/api/song/update/${song.id}`,
-        requestData, // Pass FormData or JSON object
+        requestData, 
         { headers }
       );
 
-      console.log("Song updated successfully!");
+      toast.success("Single updated successfully!", { id: toastId });
       onSongUpdated();
-      onClose();
+      handleCloseReset(); // Close and reset form
 
     } catch (err: any) {
       console.error("Error updating song:", err);
-      setError(err.response?.data?.message || err.message || 'Failed to update song.');
+      toast.error(err.response?.data?.message || err.message || 'Failed to update single.', { id: toastId });
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Function to reset state without closing
+  // Reset form state when closing
   const handleCloseReset = () => {
     setFormData({ title: '', releaseDate: '', lyrics: '', contentTypeId: '', categoryId: '', isCover: false, featuredArtist: '', songwriter: '' });
     setNewAudioFile(null);
     setNewCoverFile(null);
     setCoverPreview(null);
-    setError(null);
     setIsLoading(false);
-    // Don't reset contentTypes here
+    // Optionally reset fetched data if desired, but maybe keep for faster reopen?
+    // setContentTypes([]);
+    // setAllCategories([]);
+    onClose(); // Call the parent onClose
   };
+
 
   if (!isOpen || !song) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4 font-poppins">
-      <div className="bg-[#1F1F1F] rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 relative">
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-400 hover:text-white disabled:opacity-50" disabled={isLoading}><FaTimes size={20} /></button>
-        <h2 className="text-2xl font-semibold mb-6 text-white">Edit Single: {song.title}</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4">
+      <div className="bg-[#1E1E1E] rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col text-white relative">
+        
+        {/* Header */}
+        <div className="flex justify-between items-center p-5 border-b border-gray-700">
+          <h2 className="text-xl font-semibold">Edit Single</h2>
+          <button 
+            type="button" 
+            onClick={onClose} 
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-300 transition p-1 rounded-full hover:bg-[#161717]" // Added padding and hover bg
+          >
+            <FaTimes size={20} />
+          </button>
+        </div>
 
-        {error && <div className="bg-red-900 border border-red-700 text-red-100 p-3 rounded mb-4 text-sm">{error}</div>}
-        {isFetchingTypes && <div className="text-center text-gray-400 mb-4">Loading content options...</div>}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Title */}
-          <div>
-            <label htmlFor="edit-title" className="block text-sm font-medium text-gray-300 mb-1">Title <span className="text-red-500">*</span></label>
-            <input type="text" id="edit-title" name="title" value={formData.title} onChange={handleInputChange} className="input-style" placeholder="Song Title" disabled={isLoading || isFetchingTypes} required />
+        {/* Form Content */}
+        <form 
+          id="edit-single-form"
+          onSubmit={handleSubmit} 
+          className="p-6 overflow-y-auto flex-grow space-y-6"
+        >
+          {(isLoadingData) && ( // Show loader while fetching types/categories
+            <div className="absolute inset-0 bg-[#1e1e1e] bg-opacity-80 flex items-center justify-center z-10 rounded-lg">
+               <FaSpinner className="animate-spin text-lime-500 mr-2" size={24} /> 
+               <span className="text-white">Loading options...</span>
+            </div>
+          )}
+          
+          {/* Row 1: Title & Release Date */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-1">Song Title <span className="text-red-500">*</span></label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white placeholder-gray-400"
+                placeholder="Enter song title"
+              />
+            </div>
+            <div>
+              <label htmlFor="releaseDate" className="block text-sm font-medium text-gray-300 mb-1">Release Date</label>
+              <input
+                type="date"
+                id="releaseDate"
+                name="releaseDate"
+                value={formData.releaseDate}
+                onChange={handleInputChange}
+                className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white placeholder-gray-400"
+              />
+            </div>
           </div>
 
-          {/* Audio Upload */}
-          <div>
-             <label className="block text-sm font-medium text-gray-300 mb-1">Audio File</label>
-             <div className="file-input-container">
-                <input type="file" ref={audioInputRef} onChange={(e) => handleFileChange(e, 'audio')} accept="audio/*" className="hidden" disabled={isLoading || isFetchingTypes} />
-                <div className="file-preview-placeholder"><FaMusic size={30} /></div>
-                <button type="button" onClick={() => triggerFileInput('audio')} className="file-upload-button" disabled={isLoading || isFetchingTypes}>Change Audio</button>
-                <span className="file-name-display">{newAudioFile ? newAudioFile.name : (song.file?.split('/').pop() || 'Current Audio')}</span>
-             </div>
-             <p className="text-xs text-gray-500 mt-1">Upload a new file to replace the current audio.</p>
-          </div>
-
-          {/* Cover Image Upload */}
-          <div>
-             <label className="block text-sm font-medium text-gray-300 mb-1">Cover Image</label>
-             <div className="file-input-container">
-                <input type="file" ref={coverInputRef} onChange={(e) => handleFileChange(e, 'cover')} accept="image/*" className="hidden" disabled={isLoading || isFetchingTypes} />
-                {coverPreview ? <Image src={coverPreview} alt="Cover preview" width={80} height={80} className="rounded object-cover aspect-square" /> : <div className="file-preview-placeholder"><FaImage size={30}/></div>}
-                <button type="button" onClick={() => triggerFileInput('cover')} className="file-upload-button" disabled={isLoading || isFetchingTypes}>Change Cover</button>
-                <span className="file-name-display">{newCoverFile ? newCoverFile.name : (song.cover_image?.split('/').pop() || 'Current Cover')}</span>
-             </div>
-             <p className="text-xs text-gray-500 mt-1">Upload a new image to replace the current cover.</p>
+          {/* Row 2: Content Type & Category */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="contentTypeId" className="block text-sm font-medium text-gray-300 mb-1">Content Type</label>
+              <select
+                id="contentTypeId"
+                name="contentTypeId"
+                value={formData.contentTypeId}
+                onChange={handleInputChange}
+                disabled={isLoadingData} // Disable while loading
+                className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white"
+              >
+                <option value="">Select Content Type</option>
+                {contentTypes.map(type => (
+                  <option key={type.id} value={type.id}>{type.name}</option>
+                ))}
+              </select>
+            </div>
+             <div>
+              <label htmlFor="categoryId" className="block text-sm font-medium text-gray-300 mb-1">Category {formData.contentTypeId && !isLoadingData && availableCategories.length === 0 ? '(None available)' : ''} {formData.contentTypeId && <span className="text-red-500">*</span>}</label>
+              <select
+                id="categoryId"
+                name="categoryId"
+                value={formData.categoryId}
+                onChange={handleInputChange}
+                disabled={!formData.contentTypeId || isLoadingData || availableCategories.length === 0} // Disable if no content type, loading, or no categories for type
+                required={!!formData.contentTypeId} // Required only if content type is selected
+                className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <option value="">{formData.contentTypeId ? 'Select Category' : 'Select Content Type first'}</option>
+                {availableCategories.map(cat => (
+                  <option key={cat.id} value={cat.id}>{cat.name}</option>
+                ))}
+              </select>
+            </div>
           </div>
           
-          {/* Row for Optional Fields */} 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Release Date */}
-              <div>
-                  <label htmlFor="edit-releaseDate" className="block text-sm font-medium text-gray-300 mb-1">Release Date (Optional)</label>
-                  <input type="date" id="edit-releaseDate" name="releaseDate" value={formData.releaseDate} onChange={handleInputChange} className="input-style" disabled={isLoading || isFetchingTypes} />
-              </div>
-              
-              {/* Songwriter */} 
-              <div>
-                  <label htmlFor="edit-songwriter" className="block text-sm font-medium text-gray-300 mb-1">Songwriter (Optional)</label>
-                  <input type="text" id="edit-songwriter" name="songwriter" value={formData.songwriter} onChange={handleInputChange} className="input-style" placeholder="e.g., John Doe" disabled={isLoading || isFetchingTypes} />
-              </div>
-
-              {/* Featured Artist */}
-              <div>
-                  <label htmlFor="edit-featuredArtist" className="block text-sm font-medium text-gray-300 mb-1">Featured Artist (Optional)</label>
-                  <input type="text" id="edit-featuredArtist" name="featuredArtist" value={formData.featuredArtist} onChange={handleInputChange} className="input-style" placeholder="e.g., Jane Smith" disabled={isLoading || isFetchingTypes} />
-              </div>
-
-              {/* Content Type Dropdown */}
-              <div>
-                  <label htmlFor="edit-contentTypeId" className="block text-sm font-medium text-gray-300 mb-1">Content Type (Optional)</label>
-                  <select id="edit-contentTypeId" name="contentTypeId" value={formData.contentTypeId} onChange={handleInputChange} className="input-style" disabled={isLoading || isFetchingTypes || contentTypes.length === 0}>
-                      <option value="">Select Content Type...</option>
-                      {contentTypes.map(ct => <option key={ct.id} value={ct.id}>{ct.name}</option>)}
-                  </select>
-              </div>
-
-              {/* Category Dropdown */}
-              <div>
-                  <label htmlFor="edit-categoryId" className="block text-sm font-medium text-gray-300 mb-1">Category (Optional)</label>
-                  <select id="edit-categoryId" name="categoryId" value={formData.categoryId} onChange={handleInputChange} className="input-style" disabled={isLoading || isFetchingTypes || availableCategories.length === 0}>
-                      <option value="">Select Category...</option>
-                      {availableCategories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
-                  </select>
-              </div>
-
-               {/* Is Cover Checkbox */}
-              <div className="flex items-center col-span-1 md:col-span-2">
-                <input type="checkbox" id="edit-isCover" name="isCover" checked={formData.isCover} onChange={handleInputChange} className="h-4 w-4 text-greenText focus:ring-greenText border-gray-500 rounded mr-2 bg-formBg" disabled={isLoading || isFetchingTypes} />
-                <label htmlFor="edit-isCover" className="text-sm text-gray-300">This is a cover song</label>
-             </div>
+           {/* Row 3: Featured Artist & Songwriter */}
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="featuredArtist" className="block text-sm font-medium text-gray-300 mb-1">Featured Artist (Optional)</label>
+              <input
+                type="text"
+                id="featuredArtist"
+                name="featuredArtist"
+                value={formData.featuredArtist}
+                onChange={handleInputChange}
+                className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white placeholder-gray-400"
+                placeholder="e.g., Artist Name"
+              />
+            </div>
+             <div>
+              <label htmlFor="songwriter" className="block text-sm font-medium text-gray-300 mb-1">Songwriter (Optional)</label>
+              <input
+                type="text"
+                id="songwriter"
+                name="songwriter"
+                value={formData.songwriter}
+                onChange={handleInputChange}
+                 className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white placeholder-gray-400"
+                placeholder="e.g., Writer Name"
+              />
+            </div>
           </div>
 
-           {/* Lyrics */}
-          <div>
-            <label htmlFor="edit-lyrics" className="block text-sm font-medium text-gray-300 mb-1">Lyrics (Optional)</label>
-            <textarea id="edit-lyrics" name="lyrics" value={formData.lyrics} onChange={handleInputChange} rows={4} className="input-style resize-none" placeholder="Enter song lyrics" disabled={isLoading || isFetchingTypes} />
+          {/* Row 4: Lyrics & Is Cover Checkbox */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+             <div>
+              <label htmlFor="lyrics" className="block text-sm font-medium text-gray-300 mb-1">Lyrics (Optional)</label>
+              <textarea
+                id="lyrics"
+                name="lyrics"
+                rows={4} // Adjust height as needed
+                value={formData.lyrics}
+                onChange={handleInputChange}
+                className="w-full px-4 py-2 bg-[#161717] border border-lime-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-lime-600 text-white placeholder-gray-400 resize-y" // Added resize-y
+                placeholder="Enter song lyrics here..."
+              />
+            </div>
+             <div className="pt-8"> {/* Add padding to align with label */}
+                 <div className="flex items-center">
+                    <input
+                        id="isCover"
+                        name="isCover"
+                        type="checkbox"
+                        checked={formData.isCover}
+                        onChange={handleInputChange}
+                        className="h-4 w-4 text-lime-600 border-gray-500 rounded focus:ring-lime-500" // Adjusted checkbox style
+                    />
+                    <label htmlFor="isCover" className="ml-2 block text-sm text-gray-300">
+                        This song is a cover
+                    </label>
+                </div>
+            </div>
           </div>
+          
+          {/* Row 5: File Uploads */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             {/* Cover Art Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Cover Art (Optional Update)</label>
+              <div className="flex items-center space-x-4">
+                <div className="w-20 h-20 bg-[#161717] rounded border border-dashed border-gray-500 flex items-center justify-center overflow-hidden relative">
+                  {coverPreview ? (
+                    <Image src={coverPreview} alt="Cover preview" layout="fill" objectFit="cover" />
+                  ) : (
+                    <FaImage className="text-gray-500" size={30} />
+                  )}
+                  <input
+                    type="file"
+                    ref={coverInputRef}
+                    onChange={(e) => handleFileChange(e, 'cover')}
+                    accept="image/*"
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    id="cover-upload" // Added id for label association
+                  />
+                </div>
+                 <button 
+                   type="button" 
+                   onClick={() => triggerFileInput('cover')}
+                   className="px-4 py-2 bg-gray-600 border border-lime-700 rounded-md text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-600 focus:ring-offset-gray-800"
+                 >
+                   Change Cover
+                 </button>
+              </div>
+              {newCoverFile && <p className="text-xs text-gray-400 mt-1 truncate">New: {newCoverFile.name}</p>}
+            </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-end pt-4">
-            <button type="submit" className="submit-button" disabled={isLoading || isFetchingTypes}>
-              {isLoading ? <><FaSpinner className="animate-spin" /> Saving...</> : 'Save Changes'}
-            </button>
+            {/* Audio File Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Audio File (Optional Update)</label>
+               <div className="flex items-center space-x-4">
+                  {/* Placeholder/Indicator for audio */}
+                  <div className="w-20 h-20 bg-[#161717] rounded border border-dashed border-gray-500 flex items-center justify-center text-gray-500">
+                      <FaMusic size={30}/>
+                  </div>
+                  <input
+                    type="file"
+                    ref={audioInputRef}
+                    onChange={(e) => handleFileChange(e, 'audio')}
+                    accept="audio/*"
+                    className="hidden" // Visually hide, triggered by button
+                    id="audio-upload" // Added id for label association
+                   />
+                  <button 
+                    type="button" 
+                    onClick={() => triggerFileInput('audio')}
+                    className="px-4 py-2 bg-gray-600 border border-lime-700 rounded-md text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-600 focus:ring-offset-gray-800"
+                   >
+                    Change Audio
+                  </button>
+               </div>
+               {newAudioFile && <p className="text-xs text-gray-400 mt-1 truncate">New: {newAudioFile.name}</p>}
+               {song?.file && !newAudioFile && <p className="text-xs text-gray-400 mt-1 truncate">Current: {song.file.split('/').pop()}</p>}
+            </div>
           </div>
         </form>
+
+        {/* Footer Actions */}
+        <div className="flex justify-end items-center p-5 border-t border-gray-700 space-x-3">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={isLoading}
+            className="px-4 py-2 bg-gray-600 border border-gray-500 rounded-md text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            form="edit-single-form"
+            disabled={isLoading || isLoadingData}
+            className="px-4 py-2 bg-lime-400 border border-transparent rounded-md text-sm font-medium text-black hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center" // Added flex centering
+          >
+            {isLoading ? (
+              <>
+                <FaSpinner className="animate-spin -ml-1 mr-2 h-4 w-4" /> 
+                Updating...
+              </>
+            ) : (
+              'Save Changes'
+            )}
+          </button>
+        </div>
       </div>
-       {/* Reusing styles from CreateSingleModal */}
-       <style jsx>{`
-        .input-style { width: 100%; padding: 0.5rem; background-color: #313133; color: white; border-radius: 0.25rem; border: 1px solid #4B5563; outline: none; }
-        .input-style:focus { border-color: #C2EE03; box-shadow: 0 0 0 3px rgba(194, 238, 3, 0.5); }
-        .input-style:disabled { opacity: 0.7; cursor: not-allowed; }
-        .file-input-container { display: flex; align-items: center; gap: 1rem; padding: 0.75rem; border: 2px dashed #4B5563; border-radius: 0.375rem; }
-        .file-preview-placeholder { width: 5rem; height: 5rem; background-color: #313133; border-radius: 0.25rem; display: flex; align-items: center; justify-content: center; color: #6B7280; }
-        .file-upload-button { padding: 0.375rem 0.75rem; font-size: 0.875rem; background-color: #4B5563; color: white; border-radius: 0.25rem; transition: background-color 150ms; }
-        .file-upload-button:hover { background-color: #6B7280; }
-        .file-upload-button:disabled { opacity: 0.5; cursor: not-allowed; }
-        .file-name-display { font-size: 0.75rem; color: #9CA3AF; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 150px; }
-        .submit-button { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1.5rem; background-color: #C2EE03; color: black; font-weight: 500; border-radius: 0.25rem; transition: background-color 200ms; }
-        .submit-button:hover { background-color: rgba(194, 238, 3, 0.9); }
-        .submit-button:disabled { opacity: 0.7; cursor: not-allowed; }
-      `}</style>
     </div>
   );
 };

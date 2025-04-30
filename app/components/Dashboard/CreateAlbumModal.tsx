@@ -136,17 +136,17 @@ const CreateAlbumModal: React.FC<CreateAlbumModalProps> = ({ isOpen, onClose, on
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4 font-poppins">
-      <div className="bg-[#1F1F1F] rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 relative">
+      <div className="bg-[#1F1F1F] rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative">
         {/* Close Button */}
         <button 
           onClick={handleClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
           disabled={isLoading}
         >
           <FaTimes size={20} />
         </button>
 
-        <h2 className="text-2xl font-semibold mb-6 text-white">Create New Album</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-white">Create New Album</h2>
 
         {/* Error Display */}
         {error && (
@@ -155,19 +155,19 @@ const CreateAlbumModal: React.FC<CreateAlbumModalProps> = ({ isOpen, onClose, on
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Album Name */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="create-name" className="block text-sm font-medium text-gray-300 mb-1">
               Album Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              id="name"
+              id="create-name"
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none"
+              className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none placeholder-gray-500"
               placeholder="Enter album name"
               disabled={isLoading}
               required
@@ -176,16 +176,16 @@ const CreateAlbumModal: React.FC<CreateAlbumModalProps> = ({ isOpen, onClose, on
 
           {/* Description */}
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="create-description" className="block text-sm font-medium text-gray-300 mb-1">
               Description (Optional)
             </label>
             <textarea
-              id="description"
+              id="create-description"
               name="description"
               value={formData.description}
               onChange={handleInputChange}
               rows={3}
-              className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none resize-none"
+              className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none resize-none placeholder-gray-500"
               placeholder="Tell us about the album"
               disabled={isLoading}
             />
@@ -196,10 +196,10 @@ const CreateAlbumModal: React.FC<CreateAlbumModalProps> = ({ isOpen, onClose, on
             <label className="block text-sm font-medium text-gray-300 mb-1">
               Album Cover <span className="text-red-500">*</span>
             </label>
-            <div className="mt-1 flex items-center gap-4 p-3 border-2 border-dashed border-gray-600 rounded-md">
+            <div className="mt-1 flex items-center gap-4 p-3 border-2 border-dashed border-lime-700 rounded-md bg-[#161717]">
                <input
                  type="file"
-                 id="imageFile"
+                 id="create-imageFile"
                  ref={fileInputRef}
                  onChange={handleFileChange}
                  accept="image/*" 
@@ -212,22 +212,24 @@ const CreateAlbumModal: React.FC<CreateAlbumModalProps> = ({ isOpen, onClose, on
                     alt="Album preview"
                     width={80}
                     height={80}
-                    className="rounded object-cover aspect-square"
+                    className="rounded object-cover aspect-square flex-shrink-0"
                  />
                ) : (
-                 <div className="w-20 h-20 bg-formBg rounded flex items-center justify-center text-gray-500">
+                 <div className="w-20 h-20 bg-gray-700 rounded flex items-center justify-center text-gray-500 flex-shrink-0">
                     <FaUpload size={30} />
                  </div>
                )}
-               <button
-                 type="button"
-                 onClick={triggerFileInput}
-                 className="px-3 py-1.5 text-sm bg-gray-600 hover:bg-gray-500 text-white rounded transition duration-150 disabled:opacity-50"
-                 disabled={isLoading}
-               >
-                 {imagePreview ? 'Change Image' : 'Upload Image'}
-               </button>
-               {imageFile && <span className="text-xs text-gray-400 truncate max-w-[150px]">{imageFile.name}</span>}
+               <div className="flex flex-col gap-2">
+                   <button
+                     type="button"
+                     onClick={triggerFileInput}
+                     className="px-3 py-1.5 text-sm bg-gray-600 hover:bg-gray-500 text-white rounded transition duration-150 disabled:opacity-50"
+                     disabled={isLoading}
+                   >
+                     {imagePreview ? 'Change Image' : 'Upload Image'}
+                   </button>
+                   {imageFile && <span className="text-xs text-gray-400 truncate max-w-[150px]">{imageFile.name}</span>}
+               </div>
             </div>
             <p className="text-xs text-gray-500 mt-1">Recommended: Square image (e.g., 500x500px). PNG, JPG, WEBP.</p>
           </div>
@@ -235,44 +237,44 @@ const CreateAlbumModal: React.FC<CreateAlbumModalProps> = ({ isOpen, onClose, on
            {/* Pricing (Optional) */}
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
              <div>
-                <label htmlFor="price_usd" className="block text-sm font-medium text-gray-300 mb-1">
+                <label htmlFor="create-price_usd" className="block text-sm font-medium text-gray-300 mb-1">
                  Price (USD Optional)
                 </label>
                 <input
                  type="number"
-                 id="price_usd"
+                 id="create-price_usd"
                  name="price_usd"
                  value={formData.price_usd}
                  onChange={handleInputChange}
                  min="0" step="0.01"
-                 className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none"
+                 className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none placeholder-gray-500"
                  placeholder="e.g., 2.99"
                  disabled={isLoading}
-                />
+               />
              </div>
              <div>
-                <label htmlFor="price_ngn" className="block text-sm font-medium text-gray-300 mb-1">
+               <label htmlFor="create-price_ngn" className="block text-sm font-medium text-gray-300 mb-1">
                  Price (NGN Optional)
-                </label>
-                <input
+               </label>
+               <input
                  type="number"
-                 id="price_ngn"
+                 id="create-price_ngn"
                  name="price_ngn"
                  value={formData.price_ngn}
                  onChange={handleInputChange}
                  min="0" step="1"
-                 className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none"
-                 placeholder="e.g., 2000"
+                 className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none placeholder-gray-500"
+                 placeholder="e.g., 1500"
                  disabled={isLoading}
-                />
+               />
              </div>
            </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end pt-4">
+          <div className="pt-4 flex justify-end">
             <button
               type="submit"
-                          className="flex items-center justify-center gap-2 px-6 py-2 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] transform hover:scale-105 text-black font-medium rounded-lg hover:bg-opacity-90 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-lime-300 to-lime-500 hover:from-lime-400 hover:to-lime-600 text-black font-semibold rounded-lg transition duration-200 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed"
               disabled={isLoading}
             >
               {isLoading ? (

@@ -2,7 +2,7 @@
 
 export default function HeroBanner() {
   return (
-    <div className="relative rounded-xl overflow-hidden mb-6 sm:mb-8 w-full min-h-[250px]">
+    <div className="relative rounded-xl overflow-hidden mb-6 sm:mb-8 w-full">
       <div 
         className="relative h-full flex items-center p-4 sm:p-8"
         style={{

@@ -179,16 +179,16 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4 font-poppins">
-      <div className="bg-[#1F1F1F] rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 relative">
+      <div className="bg-[#1F1F1F] rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative">
         <button 
-          onClick={onClose} // Just close, useEffect handles reset if needed
-          className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
           disabled={isLoading}
         >
           <FaTimes size={20} />
         </button>
 
-        <h2 className="text-2xl font-semibold mb-6 text-white">Edit Album: {album.name}</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-white truncate">Edit Album: <span className="text-lime-400">{album.name}</span></h2>
 
         {error && (
           <div className="bg-red-900 border border-red-700 text-red-100 p-3 rounded mb-4 text-sm">
@@ -196,7 +196,7 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Album Name */}
           <div>
             <label htmlFor="edit-name" className="block text-sm font-medium text-gray-300 mb-1">
@@ -208,7 +208,7 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none"
+              className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none placeholder-gray-500"
               placeholder="Enter album name"
               disabled={isLoading}
               required
@@ -226,7 +226,7 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
               value={formData.description}
               onChange={handleInputChange}
               rows={3}
-              className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none resize-none"
+              className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none resize-none placeholder-gray-500"
               placeholder="Tell us about the album"
               disabled={isLoading}
             />
@@ -237,7 +237,7 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
             <label className="block text-sm font-medium text-gray-300 mb-1">
               Album Cover
             </label>
-            <div className="mt-1 flex items-center gap-4 p-3 border-2 border-dashed border-gray-600 rounded-md">
+             <div className="mt-1 flex items-center gap-4 p-3 border-2 border-dashed border-lime-700 rounded-md bg-[#161717]">
                <input
                  type="file"
                  id="edit-imageFile"
@@ -249,28 +249,31 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
                />
                {imagePreview ? (
                  <Image 
-                    src={imagePreview} // Shows current or new preview
+                    src={imagePreview}
                     alt="Album preview"
                     width={80}
                     height={80}
-                    className="rounded object-cover aspect-square"
+                    className="rounded object-cover aspect-square flex-shrink-0"
                  />
                ) : (
-                 <div className="w-20 h-20 bg-formBg rounded flex items-center justify-center text-gray-500">
+                 <div className="w-20 h-20 bg-gray-700 rounded flex items-center justify-center text-gray-500 flex-shrink-0">
+                    {/* Placeholder if no initial image and none selected */}
                     <FaUpload size={30} /> 
                  </div>
                )}
-               <button
-                 type="button"
-                 onClick={triggerFileInput}
-                 className="px-3 py-1.5 text-sm bg-gray-600 hover:bg-gray-500 text-white rounded transition duration-150 disabled:opacity-50"
-                 disabled={isLoading}
-               >
-                 Change Image
-               </button>
-               {imageFile && <span className="text-xs text-gray-400 truncate max-w-[150px]">{imageFile.name}</span>}
+               <div className="flex flex-col gap-2">
+                   <button
+                     type="button"
+                     onClick={triggerFileInput}
+                     className="px-3 py-1.5 text-sm bg-gray-600 hover:bg-gray-500 text-white rounded transition duration-150 disabled:opacity-50"
+                     disabled={isLoading}
+                   >
+                     Change Image
+                   </button>
+                   {imageFile && <span className="text-xs text-gray-400 truncate max-w-[150px]">{imageFile.name}</span>}
+               </div>
             </div>
-             <p className="text-xs text-gray-500 mt-1">Upload a new image to replace the current one. Square image recommended.</p>
+            <p className="text-xs text-gray-500 mt-1">Upload a new image to replace the current one.</p>
           </div>
           
            {/* Pricing (Optional) */}
@@ -286,46 +289,46 @@ const EditAlbumModal: React.FC<EditAlbumModalProps> = ({ isOpen, onClose, album,
                  value={formData.price_usd}
                  onChange={handleInputChange}
                  min="0" step="0.01"
-                 className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none"
+                 className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none placeholder-gray-500"
                  placeholder="e.g., 2.99"
                  disabled={isLoading}
-                />
+               />
              </div>
              <div>
-                <label htmlFor="edit-price_ngn" className="block text-sm font-medium text-gray-300 mb-1">
+               <label htmlFor="edit-price_ngn" className="block text-sm font-medium text-gray-300 mb-1">
                  Price (NGN Optional)
-                </label>
-                <input
+               </label>
+               <input
                  type="number"
                  id="edit-price_ngn"
                  name="price_ngn"
                  value={formData.price_ngn}
                  onChange={handleInputChange}
                  min="0" step="1"
-                 className="w-full p-2 bg-formBg text-white rounded border border-gray-600 focus:border-greenText focus:ring focus:ring-greenText focus:ring-opacity-50 outline-none"
-                 placeholder="e.g., 2000"
+                 className="w-full p-2.5 bg-[#161717] text-white rounded-md border border-lime-700 focus:border-lime-500 focus:ring focus:ring-lime-500 focus:ring-opacity-50 outline-none placeholder-gray-500"
+                 placeholder="e.g., 1500"
                  disabled={isLoading}
-                />
+               />
              </div>
            </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-end pt-4">
-            <button
-              type="submit"
-              className="flex items-center justify-center gap-2 px-6 py-2 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] transform hover:scale-105 text-black font-medium rounded-lg hover:bg-opacity-90 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <FaSpinner className="animate-spin" />
-                  Saving...
-                </>
-              ) : (
-                'Save Changes'
-              )}
-            </button>
-          </div>
+           {/* Submit Button */}
+           <div className="pt-4 flex justify-end">
+             <button
+               type="submit"
+               className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-lime-300 to-lime-500 hover:from-lime-400 hover:to-lime-600 text-black font-semibold rounded-lg transition duration-200 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed"
+               disabled={isLoading}
+             >
+               {isLoading ? (
+                 <>
+                   <FaSpinner className="animate-spin" />
+                   Saving...
+                 </>
+               ) : (
+                 'Save Changes'
+               )}
+             </button>
+           </div>
         </form>
       </div>
     </div>
