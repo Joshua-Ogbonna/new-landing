@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { 
   FaSignOutAlt, FaTimes, FaChevronDown, FaChevronUp, 
-  FaHome, FaDollarSign, FaMusic, FaFolderOpen, FaCompactDisc, FaHeadphones, FaPlusCircle, FaUserCircle, FaCog 
+  FaHome, FaDollarSign, FaMusic, FaFolderOpen, FaCompactDisc, FaHeadphones, FaPlusCircle, FaUserCircle, FaCog, 
+  FaShoppingCart
 } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from "react";
+import { FaBook } from "react-icons/fa6";
 
 interface SideBarProps {
   image?: string;
@@ -31,10 +33,10 @@ const musicSubmenuItems = [
 const newReleaseItem = { href: "/newRelease", label: "New Release", icon: FaPlusCircle };
 
 // Add Course item
-const courseItem = { href: "/courses", label: "Courses", iconSrc: "/education.svg", alt: "Courses" };
+const courseItem = { href: "/courses", label: "Courses", icon: FaBook};
 
 // Add Merch item
-const merchItem = { href: "/merch", label: "Merchandise", iconSrc: "/shopping.svg", alt: "Merchandise" };
+const merchItem = { href: "/merch", label: "Merchandise", icon: FaShoppingCart };
 
 // Profile items with React Icons
 const profileNavItems = [
@@ -62,10 +64,26 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
   };
 
   const isActive = (href: string) => {
+    // Handle exact match for the root Dashboard link
     if (href === "/Dashboard") return pathname === href; 
-    if (href === "/albums" || href === "/singles" || href === "/newRelease" || href === "/earnings" || href === "/Dashboard/profile" || href === "/Dashboard/settings") {
+    
+    // Handle prefix matches for all other sections
+    if (
+      href === "/albums" || 
+      href === "/singles" || 
+      href === "/newRelease" || 
+      href === "/earnings" || 
+      href === "/courses" || // Added /courses
+      href === "/merch" ||   // Added /merch
+      href === "/Dashboard/profile" || 
+      href === "/Dashboard/settings"
+    ) {
+        // Check if the current pathname starts with the link's href
+        // This ensures sub-paths like /courses/123 also activate the /courses link
         return pathname.startsWith(href);
     }
+    
+    // Default case: If the href doesn't match any known pattern
     return false;
   };
   
@@ -223,52 +241,59 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
               </Link>
             );
           })()}
-          
+
           {/* Course Link */}
-          <Link
-            key={courseItem.href}
-            href={courseItem.href}
-            className={`p-3 rounded-lg transition-colors group w-full flex items-center 
-                         ${isActive(courseItem.href) ? 'bg-black' : 'hover:bg-black'}`}
-            onClick={onClose}
-          >
-            <Image
-              src={courseItem.iconSrc}
-              alt={courseItem.alt}
-              width={24}
-              height={24}
-              className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
-                             ${isActive(courseItem.href) ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`}
-            />
-            <span className={`ml-4 transition-colors duration-200 
-                             ${isActive(courseItem.href) ? 'text-[#C2EE03]' : 'text-white'} 
-                             ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
-              {courseItem.label}
-            </span>
-          </Link>
+          {(() => {
+            const active = isActive(courseItem.href);
+            const IconComponent = courseItem.icon;
+            return (
+              <Link
+                key={courseItem.href}
+                href={courseItem.href}
+                className={`p-3 rounded-lg transition-colors group w-full flex items-center 
+                            ${active ? 'bg-black' : 'hover:bg-black'}`}
+                onClick={onClose}
+              >
+                <IconComponent
+                  size={22}
+                  className={`flex-shrink-0 transition-colors duration-200 
+                              ${active ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`}
+                />
+                <span className={`ml-4 transition-colors duration-200 
+                                ${active ? 'text-[#C2EE03]' : 'text-white'} 
+                                ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
+                  {courseItem.label}
+                </span>
+              </Link>
+            );
+          })()}
+          
           
           {/* Merch Link */}
-          <Link
-            key={merchItem.href}
-            href={merchItem.href}
-            className={`p-3 rounded-lg transition-colors group w-full flex items-center 
-                         ${isActive(merchItem.href) ? 'bg-black' : 'hover:bg-black'}`}
-            onClick={onClose}
-          >
-            <Image
-              src={merchItem.iconSrc}
-              alt={merchItem.alt}
-              width={24}
-              height={24}
-              className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
-                             ${isActive(merchItem.href) ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`}
-            />
-            <span className={`ml-4 transition-colors duration-200 
-                             ${isActive(merchItem.href) ? 'text-[#C2EE03]' : 'text-white'} 
-                             ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
-              {merchItem.label}
-            </span>
-          </Link>
+          {(() => {
+            const active = isActive(merchItem.href);
+            const IconComponent = merchItem.icon;
+            return (
+              <Link
+                key={merchItem.href}
+                href={merchItem.href}
+                className={`p-3 rounded-lg transition-colors group w-full flex items-center 
+                            ${active ? 'bg-black' : 'hover:bg-black'}`}
+                onClick={onClose}
+              >
+                <IconComponent
+                  size={22}
+                  className={`flex-shrink-0 transition-colors duration-200 
+                              ${active ? 'text-[#C2EE03]' : 'text-gray-400'} group-hover:text-white`}
+                />
+                <span className={`ml-4 transition-colors duration-200 
+                                ${active ? 'text-[#C2EE03]' : 'text-white'} 
+                                ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
+                  {merchItem.label}
+                </span>
+              </Link>
+            );
+          })()}
 
           {/* Separator */}
           <hr className="border-t border-gray-700 my-4" />

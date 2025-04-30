@@ -326,10 +326,10 @@ const ArtistProfileClient: React.FC = () => {
 
                         <button
                             type="submit"
-                            className={`w-full p-3 rounded font-medium text-sm sm:text-base flex items-center justify-center gap-2 
+                            className={`w-full bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] p-3 rounded font-medium text-sm sm:text-base flex items-center justify-center gap-2 
                                   ${isFormDisabled ? 'bg-gray-600 cursor-not-allowed' : 'bg-greenText text-black hover:bg-opacity-90'}`}
                             disabled={isFormDisabled} 
-                        >
+                        > 
                             {isLoading ? 'Submitting...' : 'Complete Profile'}
                             {!isLoading && <FaArrowRightLong />}
                         </button>
