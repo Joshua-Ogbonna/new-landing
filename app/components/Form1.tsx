@@ -7,10 +7,10 @@ import toast from 'react-hot-toast'; // Import toast
 interface ReleaseFormData {
   releaseTitle: string;
   artistName: string;
-  featuredArtist: string; 
+  featuredArtist: string;
   releaseDate: string;
-  songwriter: string; 
-  isCover: string; 
+  songwriter: string;
+  isCover: string;
   category: string; // Stores selected category ID
   contentType: string; // Stores selected content type ID
   genre?: string; 
@@ -35,14 +35,14 @@ interface FirstFormProps {
 const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState<ReleaseFormData>(() => 
     initialData || {
-      releaseTitle: '',
-      artistName: '',
-      featuredArtist: '',
-      releaseDate: '',
-      songwriter: '',
+    releaseTitle: '',
+    artistName: '',
+    featuredArtist: '',
+    releaseDate: '',
+    songwriter: '',
       isCover: 'no', 
-      category: '',    
-      contentType: '' 
+    category: '',
+  contentType: ''
     }
   );
 
@@ -132,8 +132,8 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
       setFormData(prevState => ({ ...prevState, [name]: value }));
     } else if (name === 'contentType') {
       // When content type changes, reset category
-      setFormData(prevState => ({ 
-          ...prevState, 
+      setFormData(prevState => ({
+        ...prevState,
           contentType: value, 
           category: '' // Reset category ID
       }));
@@ -164,11 +164,11 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
         <div className="relative">
           <input type="text" id="releaseTitle" name="releaseTitle" className="input-style peer" placeholder=" " value={formData.releaseTitle} onChange={handleChange} required />
           <label htmlFor="releaseTitle" className="floating-label">Release Title *</label>
-        </div>
+            </div>
         <div className="relative">
           <input type="text" id="artistName" name="artistName" className="input-style peer" placeholder=" " value={formData.artistName} onChange={handleChange} required />
           <label htmlFor="artistName" className="floating-label">Artist Name *</label>
-        </div>
+            </div>
 
         {/* Optional Fields - Grouped */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -180,9 +180,9 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
                     id="contentType"
                     className="input-style select-style w-full"
                     value={formData.contentType}
-                    onChange={handleChange}
+                onChange={handleChange}
                     disabled={isLoadingData}
-                    required 
+            required
                  >
                     <option value="" disabled className="text-gray-500">Select Content Type... *</option>
                     {isLoadingContentTypes ? (
@@ -191,14 +191,14 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
                         <option disabled>No content types found</option>
                     ) : (
                       contentTypes.map((ct) => <option key={ct.id} value={ct.id}>{ct.name}</option>)
-                    )}
-                 </select>
+                )}
+              </select>
             </div>
 
             {/* Category Dropdown (Cascading) */}
             <div className="relative">
                  <label htmlFor="category" className="sr-only">Category</label>
-                 <select
+              <select
                     name="category"
                     id="category"
                     className="input-style select-style w-full"
@@ -219,7 +219,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
                      {availableCategories.map((cat) => (
                          <option key={cat.id} value={cat.id}>{cat.name}</option>
                      ))}
-                 </select>
+              </select>
             </div>
 
              {/* Other optional fields */}
@@ -235,7 +235,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
               <input type="text" id="songwriter" name="songwriter" className="input-style peer" placeholder=" " value={formData.songwriter} onChange={handleChange} />
               <label htmlFor="songwriter" className="floating-label">Songwriter</label>
             </div>
-        </div>
+            </div>
 
         {/* Is Cover Radio Buttons */}
         <div>
@@ -249,20 +249,20 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit, initialData }) => {
                     <input type="radio" id="isCoverNo" name="isCover" value="no" checked={formData.isCover === 'no'} onChange={handleChange} className="h-4 w-4 accent-lime-400 focus:ring-lime-500 focus:ring-offset-gray-800 border-gray-600 bg-gray-700" />
                     <label htmlFor="isCoverNo" className="ml-2 text-sm text-gray-300 cursor-pointer">No</label>
                 </div>
-           </div>
-        </div>
+              </div>
+            </div>
 
         {/* Submit Button */}
         <div className="pt-4 flex justify-end"> 
-          <button
-            type="submit"
+              <button
+                type="submit"
             className="px-6 py-2 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] text-black font-semibold rounded-lg transition duration-200 transform hover:scale-105"
             disabled={isLoadingData} 
-          >
+              >
             {isLoadingData ? 'Loading Data...' : 'Next: Upload Files'}
-          </button>
-        </div>
-      </form>
+              </button>
+            </div>
+          </form>
       
       {/* Styles remain the same */}
       <style jsx>{`

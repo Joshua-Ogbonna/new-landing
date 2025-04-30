@@ -173,20 +173,33 @@ const AlbumsPage = () => {
 
         <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto pt-20 lg:pt-8">
           {/* Header and Create Button */}
-          <div className="flex justify-between items-center mb-6">
-            {/* H1 is now correctly positioned due to parent padding */}
-            <h1 className="hidden md:block text-2xl sm:text-3xl lg:text-4xl font-bold text-[#C2EE03]">Albums</h1>
-            {/* Show Create button only if authenticated */}
+          {/* Breadcrumb and Create Button Row */}
+          <div className="flex justify-between items-center mb-10"> {/* Use flex to position items */}
+            {/* Breadcrumb */}
+            <div className="text-sm text-gray-400">
+              {/* Assuming '/dashboard' is the correct path for the home/base page */}
+              {/* Make sure Link is imported */}
+              <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
+              <span className="mx-2">/</span>
+              <span className="text-white font-medium">Albums</span>
+            </div>
+
+            {/* Create Button - Placed on the right by justify-between */}
+            {/* This button is moved from below */}
             {status === 'authenticated' && (
               <button
                 onClick={openCreateModal}
-                className="flex items-center gap-2 text-black bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] transform hover:scale-105 font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-1 text-black bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] transform hover:scale-105 font-medium text-sm px-3 py-1.5 rounded-md hover:bg-opacity-90 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <FaPlus />
-                <span>Create Album</span>
+                {/* Make sure FaPlus is imported */}
+                <FaPlus size={16} /> {/* Optional: Explicitly size icon if needed */}
+                <span className="hidden sm:inline">Create Album</span> {/* Text for larger screens */}
+                <span className="sm:hidden">New</span> {/* Shorter text for smaller screens */}
               </button>
             )}
           </div>
+
+ 
 
           {isLoading && status === 'authenticated' && (
             <div className="flex justify-center items-center h-64">

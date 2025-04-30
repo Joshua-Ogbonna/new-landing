@@ -21,7 +21,7 @@ interface ApiSong {
   id: string;
   title: string;
   audio_url: string;
-  cover_url: string;
+  cover_image: string;
   is_liked: boolean;
   artist: ApiArtist;
 }
@@ -50,6 +50,7 @@ export default function Songs({ artistId }: SongsProps) {
                 },
             }
           );
+          setSongs(response.data.data);
 
         } catch (err: any) { // Catch specific axios error or generic
           console.error("Error fetching songs:", err);
@@ -117,7 +118,7 @@ export default function Songs({ artistId }: SongsProps) {
               <tr key={song.id} className="border-b border-gray-800 hover:bg-gray-800/30">
                 <td className="py-2 px-2">
                   <Image 
-                    src={song.cover_url || '/placeholder-cover.png'} // Add a fallback image
+                    src={song.cover_image || '/placeholder-cover.png'} // Add a fallback image
                     alt={`${song.title} cover`}
                     width={40} 
                     height={40} 

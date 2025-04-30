@@ -135,7 +135,7 @@ export const authOptions: AuthOptions = {
       if (account?.provider === "credentials" && user) {
         const isProfileComplete = !!user.artistId; // Profile is complete if artistId exists
         if (!isProfileComplete) {
-          return '/artistSignIn'; // Redirect to complete profile
+          return true // Redirect to complete profile
         } 
         return true; // Allow default redirect if profile is complete
       } 

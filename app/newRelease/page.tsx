@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import SideBar from '../components/SideBar';
 import FirstForm from '../components/Form1';
 import SecondForm from '../components/Form2';
-import { FaBars } from 'react-icons/fa'; // Import menu icon for mobile
+import { FaBars } from 'react-icons/fa'; 
+import toast from 'react-hot-toast'; 
+import { useRouter } from 'next/navigation';
+
 
 // Renamed from FormData to ReleaseFormData to avoid collision
 interface ReleaseFormData {
@@ -27,29 +30,20 @@ interface CompleteReleaseFormData extends ReleaseFormData {
 const NewReleasePage: React.FC = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<ReleaseFormData | null>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for mobile sidebar
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
+  const router = useRouter();
   
-  // Updated parameter type
   const handleFirstFormSubmit = (data: ReleaseFormData) => {
-    console.log("First form data submitted:", data);
     setFormData(data);
     setStep(2);
   };
   
-  // Updated parameter type
   const handleSecondFormSubmit = (data: CompleteReleaseFormData) => {
-    console.log("Complete submission data (from Form2 via parent):", data);
-    // The actual API submission is handled within Form2's handleSubmit,
-    // triggered by SongService.createSong.
-    // This handler is mainly for reacting after successful submission in Form2.
-    alert("Release submitted successfully! (Parent notified)");
-    // Optionally redirect or reset the entire flow here
-    // setStep(1);
-    // setFormData(null); // Reset form state
+    toast.success('Release submitted successfully!');
+    router.push('/singles');
   };
   
   const handleBack = () => {
-    // When going back, keep the existing formData
     setStep(1); 
   };
   
