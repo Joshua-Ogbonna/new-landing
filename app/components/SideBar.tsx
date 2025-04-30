@@ -27,6 +27,12 @@ const musicSubmenuItems = [
 // Add New Release item
 const newReleaseItem = { href: "/newRelease", label: "New Release", iconSrc: "/add_circle.svg", alt: "New Release" };
 
+// Add Course item
+const courseItem = { href: "/courses", label: "Courses", iconSrc: "/education.svg", alt: "Courses" };
+
+// Add Merch item
+const merchItem = { href: "/merch", label: "Merchandise", iconSrc: "/shopping.svg", alt: "Merchandise" };
+
 const profileNavItems = [
    { href: "/Dashboard/profile", label: "Profile", iconSrc: "/profile.svg", alt: "Profile" },
    { href: "/Dashboard/settings", label: "Settings", iconSrc: "/settings.svg", alt: "Settings" },
@@ -187,7 +193,7 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
             href={newReleaseItem.href}
             className={`p-3 rounded-lg transition-colors group w-full flex items-center 
                          ${isActive(newReleaseItem.href) ? 'bg-black' : 'hover:bg-black'}`}
-            onClick={onClose} // Close sidebar on mobile when clicked
+            onClick={onClose}
           >
             <Image
               src={newReleaseItem.iconSrc}
@@ -204,6 +210,51 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
             </span>
           </Link>
           
+          {/* Course Link */}
+          <Link
+            key={courseItem.href}
+            href={courseItem.href}
+            className={`p-3 rounded-lg transition-colors group w-full flex items-center 
+                         ${isActive(courseItem.href) ? 'bg-black' : 'hover:bg-black'}`}
+            onClick={onClose}
+          >
+            <Image
+              src={courseItem.iconSrc}
+              alt={courseItem.alt}
+              width={24}
+              height={24}
+              className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
+                             ${isActive(courseItem.href) ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`}
+            />
+            <span className={`ml-4 transition-colors duration-200 
+                             ${isActive(courseItem.href) ? 'text-[#C2EE03]' : 'text-white'} 
+                             ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
+              {courseItem.label}
+            </span>
+          </Link>
+          
+          {/* Merch Link */}
+          <Link
+            key={merchItem.href}
+            href={merchItem.href}
+            className={`p-3 rounded-lg transition-colors group w-full flex items-center 
+                         ${isActive(merchItem.href) ? 'bg-black' : 'hover:bg-black'}`}
+            onClick={onClose}
+          >
+            <Image
+              src={merchItem.iconSrc}
+              alt={merchItem.alt}
+              width={24}
+              height={24}
+              className={`w-6 h-6 flex-shrink-0 transition-all duration-200 
+                             ${isActive(merchItem.href) ? '[filter:invert(100%)]' : '[filter:invert(55%)]'} group-hover:[filter:invert(100%)]`}
+            />
+            <span className={`ml-4 transition-colors duration-200 
+                             ${isActive(merchItem.href) ? 'text-[#C2EE03]' : 'text-white'} 
+                             ${isOpen ? 'inline' : 'hidden'} lg:inline`}>
+              {merchItem.label}
+            </span>
+          </Link>
 
           {/* Separator */}
           <hr className="border-t border-gray-700 my-4" />
@@ -235,8 +286,6 @@ const SideBar: React.FC<SideBarProps> = ({ image, isOpen, onClose }) => {
                </Link>
              );
            })}
-
-         
         </nav>
       </div>
 
