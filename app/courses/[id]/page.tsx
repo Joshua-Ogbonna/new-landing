@@ -96,7 +96,7 @@ export default function Home() {
                         >
                             <IoClose size={24} />
                         </button>
-                        <SideBar />
+                        {/* <SideBar /> */}
                     </div>
                 </div>
 

@@ -17,7 +17,7 @@ export default function DashboardLayout({
   return (
     <div className="flex h-screen bg-[#121212] text-white overflow-hidden">
       {/* Sidebar */}
-      <SideBar image={image} />
+      {/* <SideBar image={image} isOpen={true} onClose={() => {}} /> */}
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto bg-[#121212]">

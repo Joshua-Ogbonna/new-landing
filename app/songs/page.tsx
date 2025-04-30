@@ -126,7 +126,7 @@ const Page = () => {
 
   return (
     <div className="flex gap-8">
-      <SideBar />
+      <SideBar isOpen={true} onClose={() => {}} />
 
       <div>
         <div>
