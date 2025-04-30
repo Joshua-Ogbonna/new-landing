@@ -45,7 +45,7 @@ const Slider = () => {
       <div className="w-full lg:w-1/2 left-[20px] md:left-[20px] text-center lg:text-right  relative  top-[130px] md:top-[90px] sm:space-y-3 lg:space-y-4">
         <h1 className="text-[45px] md:text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight leading-none">
           <span className="block">
-            <span className="text-white ">For the <span className="font-bold">Culture,</span></span>
+            <span className="text-white">For the <span className="font-bold">Culture,</span></span>
           </span>
           <span className="block mt-1 sm:mt-2 lg:mt-4">
             <span className="text-white">For the 

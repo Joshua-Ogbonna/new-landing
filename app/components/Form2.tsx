@@ -1,13 +1,17 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { FaRegTrashAlt } from "react-icons/fa";
+// import { FaRegTrashAlt } from "react-icons/fa"; // Removed unused import
 import SongService from '@/services/SongService';
-import { error } from 'console';
-interface FormData {
+import { useSession } from 'next-auth/react'; // Import useSession
+import toast from 'react-hot-toast'; // Import toast
+// import { error } from 'console'; // Removed unused import
+
+interface ReleaseFormData {
   releaseTitle: string;
   artistName: string;
   featuredArtist: string;
+  genre?: string;
   releaseDate: string;
   songwriter: string;
   isCover: string;
@@ -15,224 +19,282 @@ interface FormData {
   contentType: string
 }
 
-interface CompleteFormData extends FormData {
+interface CompleteReleaseFormData extends ReleaseFormData {
   artwork: File | null;
   musicFile: File | null;
 }
 
 interface SecondFormProps {
-  formData: FormData;
-  onSubmit: (data: CompleteFormData) => void;
+  formData: ReleaseFormData;
+  onSubmit: (data: CompleteReleaseFormData) => void;
   onBack: () => void;
 }
 
 const SecondForm: React.FC<SecondFormProps> = ({ formData, onSubmit, onBack }) => {
+  const { data: session, status } = useSession(); // Get session data
   const [coverArtFile, setCoverArtFile] = useState<string | null>(null);
   const [musicFile, setMusicFile] = useState<File | null>(null);
   const coverArtInputRef = useRef<HTMLInputElement>(null);
   const musicInputRef = useRef<HTMLInputElement>(null);
-  const [completeFormData, setCompleteFormData] = useState<CompleteFormData>({
+  const [completeFormData, setCompleteFormData] = useState<CompleteReleaseFormData>({
     ...formData,
     artwork: null,
     musicFile: null
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Update completeFormData when props.formData changes (on navigating back/forth)
+  useEffect(() => {
+    setCompleteFormData(prev => ({
+        ...prev, // Keep existing files if any
+        ...formData // Update text fields from props
+    }));
+  }, [formData]);
 
   const handleCoverArtUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-
     const file = files[0];
-    const url = URL.createObjectURL(file)
+
+    // Basic validation (example: size limit 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        toast.error("Cover art file size exceeds 10MB limit."); // Use toast
+        return;
+    }
+
+    const url = URL.createObjectURL(file);
     setCoverArtFile(url);
     setCompleteFormData(prevState => ({
       ...prevState,
       artwork: file
     }));
-    // console.log(url);
-
+    e.target.value = ''; // Reset file input
   };
-
-
 
   const handleMusicUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-
     const file = files[0];
+
+    // Basic validation (example: file type)
+    const allowedTypes = ['audio/wav', 'audio/mpeg', 'audio/flac', 'audio/x-wav'];
+    if (!allowedTypes.includes(file.type)) {
+        toast.error(`Invalid music file type: ${file.type}. Allowed types: WAV, MP3, FLAC.`); // Use toast
+        return;
+    }
+
     setMusicFile(file);
     setCompleteFormData(prevState => ({
       ...prevState,
       musicFile: file
     }));
+    e.target.value = ''; // Reset file input
   };
 
-  const triggerCoverArtInput = () => {
-    if (coverArtInputRef.current) {
-      coverArtInputRef.current.click();
-    }
-  };
-
-  const triggerMusicInput = () => {
-    if (musicInputRef.current) {
-      musicInputRef.current.click();
-    }
-  };
+  const triggerCoverArtInput = () => coverArtInputRef.current?.click();
+  const triggerMusicInput = () => musicInputRef.current?.click();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // toast.dismiss(); // Optional: Clear previous toasts
 
-    if (!completeFormData.artwork || !completeFormData.musicFile) {
-      alert("Please upload both cover art and music file.");
+    if (status !== 'authenticated' || !session?.accessToken || !session?.user?.artistId) {
+        toast.error("Authentication error. Please sign in again.");
+        return;
+    }
+
+    if (!completeFormData.musicFile) { // Artwork is optional based on service logic
+      toast.error("Please upload a music file.");
       return;
     }
 
-    const payload = {
-      releaseTitle: completeFormData.releaseTitle,
-      artistName: completeFormData.artistName,
-      featuredArtist: completeFormData.featuredArtist,
-      releaseDate: completeFormData.releaseDate,
-      songwriter: completeFormData.songwriter,
-      category_id: completeFormData.category,
-      content_type_id: completeFormData.contentType,
-      isCover: completeFormData.isCover,
-      artwork: completeFormData.artwork,
-      musicFile: completeFormData.musicFile,
-    }
+    setIsSubmitting(true);
+    const toastId = toast.loading('Submitting release...'); // Show loading toast
 
     try {
-      const response = await SongService.createSong(payload);
-      console.log(payload);
-      
-      if (response) {
-        // Reset form or redirect as needed
-        setCompleteFormData({
-          releaseTitle: '',
-          artistName: '',
-          featuredArtist: '',
-          releaseDate: '',
-          songwriter: '',
-          isCover: '',
-          artwork: null,
-          musicFile: null,
-          category: '',
-          contentType: ''
-        });
+      // Pass the combined form data and auth details to the service
+      // SongService now handles uploads and duration internally
+      const response = await SongService.createSong(
+          completeFormData, 
+          session.accessToken, 
+          session.user.artistId
+      );
+      console.log("Submission response:", response);
 
-        // You might want to add a success message or redirect here
-        alert("Song submitted successfully!");
-
+      // Assuming response indicates success (adjust as needed based on actual API response)
+      if (response) { 
+        toast.success("Release submitted successfully!", { id: toastId }); // Update loading toast on success
+        onSubmit(completeFormData); // Notify parent component
+        // Optionally reset local state 
+        setCoverArtFile(null);
+        setMusicFile(null);
+        // completeFormData will reset if parent changes step/formData
+      } else {
+          // If response doesn't confirm success explicitly
+          throw new Error("Submission failed. Unexpected response from server.");
       }
-    } catch (error) {
-      console.error("Submission error:", error);
-      alert("Failed to submit song. Please check console for details.");
+    } catch (err: any) {
+      console.error("Submission error in Form2:", err);
+      toast.error(err.message || "Failed to submit release. Please try again.", { id: toastId });
+    } finally {
+      setIsSubmitting(false);
+      // Loading toast is dismissed/updated above
     }
   };
 
+  // Cleanup object URLs on component unmount
+  useEffect(() => {
+    const currentCoverArtUrl = coverArtFile; // Capture value for cleanup function
+    return () => {
+      if (currentCoverArtUrl) {
+        URL.revokeObjectURL(currentCoverArtUrl);
+      }
+    };
+  }, [coverArtFile]);
+
   return (
-    <div className='w-full px-4 sm:px-6 md:w-[900px] md:mx-auto lg:mx-32 my-10'>
-      <div className='w-full bg-[#161717] rounded-3xl p-4 sm:p-6 '>
-        <div className="w-full max-w-md mx-auto">
-          <h2 className="text-xl sm:text-2xl mb-4 sm:mb-8">Add Cover Art</h2>
-          <p className='italic text-xs sm:text-sm'>Upload your artwork or design. Make sure your artwork meets our guidelines to avoid delays during distribution.</p>
+    // Removed outer div with fixed width/margins
+    // Form container with background, padding, rounded corners
+    <div className='w-full bg-[#161717] rounded-2xl p-6 md:p-8 lg:p-10'>
+      {/* Removed inner max-w-md container */} 
+      <form onSubmit={handleSubmit} className="space-y-8"> {/* Increased spacing */}
 
-          <form onSubmit={handleSubmit}>
-            <ul className='list-disc ml-4 sm:ml-5 my-3 sm:my-4 text-sm'>
-              <li>JPG, PNG or GIF image file smaller than 10MB.</li>
-              <li>File must be in RGB mode, even if your image is black and white.</li>
-              <li>At least 1600 x 1600 pixels in size.</li>
-              <li>No blurriness, pixelation, or white space.</li>
-              <li>No social media links, contact information, store names or logos, pricing information, release dates, "New" stickers, etc.</li>
-            </ul>
+        {/* Cover Art Section */}
+        <section className="space-y-4"> 
+          <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-white mb-2">Add Cover Art</h2>
+              <p className='text-sm text-gray-400'>Upload your artwork or design. Make sure it meets our guidelines.</p>
+          </div>
+          
+          <ul className='list-disc ml-5 space-y-1 text-xs text-gray-400'>
+            <li>JPG, PNG or GIF image file smaller than 10MB.</li>
+            <li>File must be in RGB mode.</li>
+            <li>At least 1600 x 1600 pixels.</li>
+            <li>No blurriness, pixelation, or excess white space.</li>
+            <li>No social media links, contact info, store names, pricing, dates, etc.</li>
+          </ul>
 
-            <input
-              type="file"
-              ref={coverArtInputRef}
-              onChange={handleCoverArtUpload}
-              accept="image/jpeg,image/png,image/gif"
-              className="hidden"
+          <input
+            type="file"
+            ref={coverArtInputRef}
+            onChange={handleCoverArtUpload}
+            accept="image/jpeg,image/png,image/gif"
+            className="hidden"
+            disabled={isSubmitting}
+          />
 
-            />
-
-            <div className="flex flex-wrap items-center">
-              <button
-                type="button"
-                className='bg-[#C2EE03] w-[150px] sm:w-[170px] my-4 sm:my-8 rounded-3xl py-2 sm:py-3 px-4 sm:px-5 font-bold text-center text-black'
-                onClick={triggerCoverArtInput}
-              >
-                Upload Cover
-                {coverArtFile && "✓"}
-              </button>
-              {coverArtFile && <span className="ml-2 text-lime-400 text-sm sm:text-base overflow-hidden text-ellipsis">{ }</span>}
-            </div>
-
-            <section>
-              <h2 className='my-3 text-lg sm:text-xl'>Upload music</h2>
-              <input
-                type="file"
-                ref={musicInputRef}
-                onChange={handleMusicUpload}
-                accept=".wav,.mp3,.flac"
-                className="hidden"
-
-              />
-              <div className="flex flex-wrap items-center">
-                <button
-                  type="button"
-                  className='bg-[#C2EE03] w-[150px] sm:w-[170px] my-3 sm:my-5 rounded-3xl py-2 sm:py-3 px-4 sm:px-5 font-bold text-center text-black'
-                  onClick={triggerMusicInput}
-                >
-                  Upload Music
-                  {musicFile && "✓"}
-                </button>
-                {musicFile && <span className="ml-2 text-lime-400 text-sm sm:text-base overflow-hidden text-ellipsis">{musicFile.name}</span>}
-              </div>
-            </section>
-
-            <section className="mt-6 w-full">
-              <h2 className="text-lg sm:text-xl mb-3">Release Details</h2>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8  p-3 rounded-lg w-full">
-                {coverArtFile && (
-                  <div className="w-full sm:w-auto">
-                    <Image
-                      width={300}
-                      height={300}
-                      alt={`${formData.releaseTitle} cover art`}
-                      src={coverArtFile}
-                      className="rounded-lg object-cover w-full sm:w-[200px] md:w-[250px] lg:w-[300px]"
-                    />
-                  </div>
-                )}
-                <div className="w-full text-base sm:text-lg">
-                  <p className='text-[#C2EE03]'><strong>Title:</strong> {formData.releaseTitle}</p>
-                  <p className='text-[#C2EE03]'><strong>Artist:</strong> {formData.artistName}</p>
-                  {formData.featuredArtist && <p><strong>Featured:</strong> {formData.featuredArtist}</p>}
-                  <div className='flex items-center gap-3 mt-4'>
-                    <FaRegTrashAlt size={18} className='text-red-700' />
-                    <p className='text-[#C2EE03] text-sm sm:text-base'>Delete Song</p>
-                  </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4"> 
+            <button
+              type="button"
+              className='button-style w-full sm:w-auto px-6 py-2.5' // Reusable button style
+              onClick={triggerCoverArtInput}
+              disabled={isSubmitting}
+            >
+              {coverArtFile ? "Change Cover Art" : "Upload Cover Art"}
+            </button>
+            {coverArtFile && (
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                    <span>✓ Uploaded</span> 
+                    {/* Optionally show file name if needed, but preview is better */}
                 </div>
-              </div>
-            </section>
+            )}
+          </div>
+          {/* Cover Art Preview */}
+           {coverArtFile && (
+                <div className="mt-4 w-32 h-32 sm:w-40 sm:h-40 border border-gray-700 rounded-lg overflow-hidden">
+                  <Image
+                    width={160}
+                    height={160}
+                    alt="Cover art preview"
+                    src={coverArtFile}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+            )}
+        </section>
 
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mt-6 sm:mt-8">
-              <button
-                type="button"
-                className="w-full sm:w-40 py-2 sm:py-3 bg-gray-600 text-white font-bold rounded-3xl hover:bg-gray-700 transition-colors duration-200"
-                onClick={onBack}
-              >
-                Back
-              </button>
-              <button
-                type="submit"
-                className="w-full sm:w-40 py-2 sm:py-3 bg-lime-400 text-gray-900 font-bold rounded-3xl hover:bg-lime-500 transition-colors duration-200"
-              // disabled={!coverArtFile || !musicFile}
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+        {/* Music Upload Section */}
+        <section className="space-y-4">
+           <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-white mb-2">Upload Music</h2>
+              <p className='text-sm text-gray-400'>Stereo WAV (24-bit/192kHz or 16-bit/44.1kHz), MP3, or FLAC.</p>
+           </div>
+
+          <input
+            type="file"
+            ref={musicInputRef}
+            onChange={handleMusicUpload}
+            accept=".wav,.mp3,.flac,audio/wav,audio/mpeg,audio/flac,audio/x-wav"
+            className="hidden"
+            disabled={isSubmitting}
+          />
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <button
+              type="button"
+              className='button-style w-full sm:w-auto px-6 py-2.5'
+              onClick={triggerMusicInput}
+              disabled={isSubmitting}
+            >
+              {musicFile ? "Change Music File" : "Upload Music File"}
+            </button>
+            {musicFile && (
+                <div className="flex items-center gap-2 text-sm text-gray-300 truncate">
+                    <span className="flex-shrink-0">✓</span> 
+                    <span className="truncate" title={musicFile.name}>{musicFile.name}</span>
+                </div>
+            )}
+          </div>
+        </section>
+
+        {/* Release Details Preview (Simplified) */}
+        <section className="mt-6 w-full border-t border-gray-700 pt-6 space-y-3">
+          <h2 className="text-lg font-semibold text-gray-200 mb-3">Summary</h2>
+           {/* Display key details for confirmation */} 
+          <p><strong className="text-gray-400">Title:</strong> <span className="text-gray-100">{completeFormData.releaseTitle}</span></p>
+          <p><strong className="text-gray-400">Artist:</strong> <span className="text-gray-100">{completeFormData.artistName}</span></p>
+          {completeFormData.featuredArtist && <p><strong className="text-gray-400">Featured:</strong> <span className="text-gray-100">{completeFormData.featuredArtist}</span></p>}
+           {/* Removed the delete button and the image preview from here, 
+               image preview is now shown directly under the upload button */}
+        </section>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row justify-between gap-4 pt-6 border-t border-gray-700"> 
+          <button
+            type="button"
+            className="px-6 py-2 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 w-full sm:w-auto"
+            onClick={onBack}
+            disabled={isSubmitting}
+          >
+            Back
+          </button>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-gradient-to-r from-[#FAFEEA] to-[#E7F89D] hover:from-[#E7F89D] hover:to-[#FAFEEA] text-black font-semibold rounded-lg transition duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+            disabled={!musicFile || isSubmitting || status !== 'authenticated'}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit Release'}
+          </button>
         </div>
-      </div>
+      </form>
+      
+      {/* Shared button style */}
+      <style jsx>{`
+        .button-style {
+            background-color: #C2EE03; /* lime-400 approx */
+            color: #1f2937; /* gray-800 approx */
+            font-weight: 600; /* font-semibold */
+            border-radius: 0.5rem; /* rounded-lg */
+            transition: background-color 0.2s ease-in-out;
+            text-align: center;
+        }
+        .button-style:hover {
+            background-color: #a3e635; /* lime-500 approx */
+        }
+         .button-style:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+      `}</style>
     </div>
   );
 };

@@ -1,71 +1,27 @@
-"use client";
-import "./styles/fonts.css"
-import Sec2 from "./components/Sec2";
-import Image from "next/image";
-import DiscoverSection from "./components/DiscoverSection";
-import PricingSection from "./components/PricingSection";
-import Grow from "./components/Grow";
-import Trusted from "./components/Trusted";
-import Download from "./components/Download";
-import Footer from "./components/Footer";
-import NewHero from "./components/NewHero";
-import AudioPlayer from "./components/AudioPlayer";
-export default function Home() {
-  return (
-    <div className="bg-black h-full">
-      <NewHero />
-      <div className="relative top-[20px]nnnnn" id="about">
-        <Sec2 />
-        
-      </div>
-      {/* Container for AlbumPlayer and DiscoverSection with background */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/Group.png"
-            alt="background"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="relative z-10">
-          {/* <AlbumPlayer /> */}
-          <AudioPlayer />
-          <div id="objectives">
-          <DiscoverSection />
-          </div>
-        </div>
-        <PricingSection />
-      </div>
-      {/* Container for Grow and Trusted with diagonal lines */}{" "}
-      <div className="relative">
-        <div
-          className="absolute right-0 top-[-40rem] z-10 w-1/2 overflow-hidden"
-          style={{ height: "100%" }}
-        >
-          <div className="relative w-full h-full">
-            {" "}
-            <Image
-              src="/group2.png"
-              alt="background lines"
-              fill
-              className="object-cover object-right scale-150"
-              style={{ transform: "scale(1.5)" }}
-            />
-          </div>
-        </div>
-        <div className="relative z-10">
-          <Grow />
-          <div id="values">
-          <Trusted />
+import type { Metadata } from 'next';
+import HomeClient from './home-client'; // Import the Client Component
 
-          </div>
-        </div>
-      </div>
-      <Download />
-      <Footer />
+// Define metadata for the index page
+export const metadata: Metadata = {
+  title: 'MySound - Explore New Music & Listen On The Go',
+  description: 'Discover and stream the latest tracks, manage your music, and connect with artists on MySound. Your ultimate music platform.',
+  openGraph: {
+    title: 'MySound - Explore New Music & Listen On The Go',
+    description: 'Discover and stream the latest tracks, manage your music, and connect with artists on MySound.',
+    url: '/',
+    type: 'website',
+    images: [
+      {
+        url: '/auth-logo.svg',
+        width: 1200,
+        height: 630,
+        alt: 'MySound Platform Promotion',
+      },
+    ],
+  },
+};
 
-
-    </div>
-  );
+// This is the Server Component Page
+export default function Page() {
+  return <HomeClient />; // Render the Client Component
 }
